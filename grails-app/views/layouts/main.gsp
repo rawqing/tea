@@ -9,6 +9,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
     <asset:stylesheet src="application.css"/>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <asset:stylesheet src="grails.css"/>    <!-- 这里是有顺序的 , 先bootstrap后grails -->
+    <asset:stylesheet src="main.css"/>
 
     <g:layoutHead/>
 </head>
