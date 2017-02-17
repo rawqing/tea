@@ -8,6 +8,7 @@
     </title>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
+    <asset:link rel="icon" href="tea32X32.ico" type="image/x-ico" />
     <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <asset:stylesheet src="application.css"/>   <!-- 这是必须的 -->
 
@@ -16,7 +17,7 @@
 
 <body>
 
-    <g:pageProperty name="page.header" default="${render(template: "/layouts/header")}"/>
+    <g:pageProperty name="page.header" default="${render(template: "/layouts/header1")}"/>
 
     <g:layoutBody/>
 

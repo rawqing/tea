@@ -5,9 +5,7 @@
 // You're free to add application-wide JavaScript to this file, but it's generally better
 // to create separate JavaScript files as needed.
 //
-//= require jquery-2.2.0.min
-//= require bootstrap
-//= require_tree .
+//#= require_tree .    (这段代码尚不明意思 , 看起来会加载很多的js .如需使用则去掉前面的 # 号 )
 //= require_self
 
 if (typeof jQuery !== 'undefined') {

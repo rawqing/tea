@@ -3,7 +3,7 @@
 <head>
     <meta name="layout" content="my"/>
 
-    <asset:link rel="icon" href="favicon.ico" type="image/x-ico" />
+
 
     <!--external css-->
     <asset:stylesheet src="font-awesome/css/font-awesome.css"/>

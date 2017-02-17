@@ -8,10 +8,10 @@
     </title>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-    <asset:stylesheet src="application.css"/>
-    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-    <asset:stylesheet src="grails.css"/>    <!-- 这里是有顺序的 , 先bootstrap后grails -->
+    <asset:stylesheet src="bootstrap.css"/>
+    <asset:stylesheet src="grails.css"/>
     <asset:stylesheet src="main.css"/>
+    <asset:stylesheet src="application.css"/>
 
     <g:layoutHead/>
 </head>
@@ -48,6 +48,8 @@
         <g:message code="spinner.alt" default="Loading&hellip;"/>
     </div>
 
+    <asset:javascript src="jquery-2.2.0.min.js"/>
+    <asset:javascript src="bootstrap.js"/>
     <asset:javascript src="application.js"/>
 
 </body>
