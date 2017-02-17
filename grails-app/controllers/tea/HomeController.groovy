@@ -2,5 +2,7 @@ package tea
 
 class HomeController {
 
-    def index() { }
+    def index() {
+        [projectName:"Test Engineer Arsenal"]
+    }
 }
