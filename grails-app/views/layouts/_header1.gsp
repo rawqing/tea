@@ -150,7 +150,7 @@
     <div>
         <ul class="top-menu nav_bar">
             <g:each in="${Evn.navigation}" var="bar">
-                <li><a href="#">${bar}</a> </li>
+                <li><a href="${bar.uri}">${bar.name}</a> </li>
             </g:each>
         </ul>
     </div>
