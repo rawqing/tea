@@ -3,8 +3,6 @@
 <head>
     <meta name="layout" content="my"/>
 
-
-
     <!--external css-->
     <asset:stylesheet src="font-awesome/css/font-awesome.css"/>
     <asset:stylesheet src="zabuto_calendar.css"/>

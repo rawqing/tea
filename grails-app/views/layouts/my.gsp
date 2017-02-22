@@ -18,8 +18,9 @@
 <body>
 
     <g:pageProperty name="page.header" default="${render(template: "/layouts/header1")}"/>
-
+    <g:pageProperty name="page.menus" default="${render(template: "/layouts/menus")}"/>
     <g:layoutBody/>
+    <g:pageProperty name="page.footer" default="${render(template: "/layouts/footer")}"/>
 
     <div id="spinner" class="spinner" style="display:none;">
         <g:message code="spinner.alt" default="Loading&hellip;"/>
