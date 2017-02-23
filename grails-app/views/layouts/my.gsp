@@ -11,7 +11,7 @@
     <asset:link rel="icon" href="tea32X32.ico" type="image/x-ico" />
     <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <asset:stylesheet src="application.css"/>   <!-- 这是必须的 -->
-
+    <asset:stylesheet src="custom.css"/>
     <g:layoutHead/>
 </head>
 

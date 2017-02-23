@@ -784,6 +784,7 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
 .ds {
 	background: #ffffff;
 	padding-top: 20px;
+
 }
 
 .ds h4 {
@@ -889,7 +890,10 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
 
 /* MAIN CHART CONFIGURATION */
 .main-chart {
+    background: #ffffff;
 	padding-top: 20px;
+    border-left: 15px solid #f2f2f2;
+    border-right: 8px solid #f2f2f2;
 }
 
 .mleft {
