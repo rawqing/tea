@@ -1,0 +1,11 @@
+.t_action{
+    position: relative;
+    left: 5px;
+    width: 15%;
+}
+.t_table{
+    position: relative;
+    margin-top: 0px;
+    margin-right: 5px;
+    width: 50%;
+}
