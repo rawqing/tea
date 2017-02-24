@@ -1,7 +1,6 @@
 package tea
 
 class T_step {
-    Integer step_id
     String c_step
     String c_expect
     String c_result

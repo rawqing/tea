@@ -1,7 +1,7 @@
 package tea
 
 class User {
-    Integer u_id
+    String id
     String u_name
     String password
     String real_name
@@ -15,5 +15,8 @@ class User {
         u_name(blank: false)
         password(blank: false,password:true)
         team(inList: ["TE","ADMIN","RD","PM"])
+    }
+    static mapping = {
+        id generator: 'uuid'
     }
 }
