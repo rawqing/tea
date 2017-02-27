@@ -13,12 +13,13 @@
     <asset:stylesheet src="style.css"/>
     <asset:stylesheet src="style-responsive.css"/>
 
-    <asset:javascript src="myjs/chart-master/Chart.js"/>
+    %{--<asset:javascript src="myjs/chart-master/Chart.js"/>--}%
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    %{--<script src="https://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>--}%
 
 </head>
 <body>
@@ -34,12 +35,9 @@
                 <span>评审</span>
                 <span>新建</span>
             </div>
-            <div class="row">
-                <div class="col-lg-3 main-chart"></div>
-                <div class="col-lg-9 ds">
-                    <f:table collection="${tea.T_case.list()}" />
-                </div>
-            </div><! --/row -->
+            <p><label><input type="checkbox" name="autosave" id="autosave" checked="checked" autocomplete="off"> Autosave</label></p>
+            <div id="edit_case"></div>
+            <p><button name="save" id="save">Save</button></p>
         </section>
     </section>
 
@@ -47,9 +45,6 @@
 </section>
 
 <!-- js placed at the end of the document so the pages load faster -->
-<asset:javascript src="myjs/jquery.js"/>
-<asset:javascript src="myjs/jquery-1.8.3.min.js"/>
-<asset:javascript src="myjs/bootstrap.min.js"/>
 <asset:javascript src="myjs/jquery.dcjqaccordion.2.7.js"/>
 <asset:javascript src="myjs/jquery.scrollTo.min.js"/>
 <asset:javascript src="myjs/jquery.nicescroll.js" />
@@ -58,7 +53,6 @@
 
 <!--common script for all pages-->
 <asset:javascript src="myjs/common-scripts.js"/>
-
 <asset:javascript src="myjs/gritter/js/jquery.gritter.js"/>
 <asset:javascript src="myjs/gritter-conf.js"/>
 

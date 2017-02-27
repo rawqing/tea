@@ -12,6 +12,25 @@
     <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <asset:stylesheet src="application.css"/>   <!-- 这是必须的 -->
     <asset:stylesheet src="custom.css"/>
+
+    <script src="https://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+    <asset:javascript src="myjs/bootstrap.min.js"/>
+
+    %{--<!-- js placed at the end of the document so the pages load faster -->--}%
+    %{--<asset:javascript src="myjs/jquery.dcjqaccordion.2.7.js"/>--}%
+    %{--<asset:javascript src="myjs/jquery.scrollTo.min.js"/>--}%
+    %{--<asset:javascript src="myjs/jquery.nicescroll.js" />--}%
+    %{--<asset:javascript src="myjs/jquery.sparkline.js"/>--}%
+
+    %{--<!--common script for all pages-->--}%
+    %{--<asset:javascript src="myjs/common-scripts.js"/>--}%
+    %{--<asset:javascript src="myjs/gritter/js/jquery.gritter.js"/>--}%
+    %{--<asset:javascript src="myjs/gritter-conf.js"/>--}%
+
+    %{--<!--script for this page-->--}%
+    %{--<asset:javascript src="myjs/sparkline-chart.js"/>--}%
+    %{--<asset:javascript src="myjs/zabuto_calendar.js"/>--}%
+    %{----}%
     <g:layoutHead/>
 </head>
 

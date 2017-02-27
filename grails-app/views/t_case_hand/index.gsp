@@ -47,9 +47,6 @@
 </section>
 
 <!-- js placed at the end of the document so the pages load faster -->
-<asset:javascript src="myjs/jquery.js"/>
-<asset:javascript src="myjs/jquery-1.8.3.min.js"/>
-<asset:javascript src="myjs/bootstrap.min.js"/>
 <asset:javascript src="myjs/jquery.dcjqaccordion.2.7.js"/>
 <asset:javascript src="myjs/jquery.scrollTo.min.js"/>
 <asset:javascript src="myjs/jquery.nicescroll.js" />
@@ -58,7 +55,6 @@
 
 <!--common script for all pages-->
 <asset:javascript src="myjs/common-scripts.js"/>
-
 <asset:javascript src="myjs/gritter/js/jquery.gritter.js"/>
 <asset:javascript src="myjs/gritter-conf.js"/>
 
