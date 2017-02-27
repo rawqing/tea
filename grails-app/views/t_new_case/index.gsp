@@ -13,20 +13,14 @@
     <asset:stylesheet src="style.css"/>
     <asset:stylesheet src="style-responsive.css"/>
 
-    %{--<asset:javascript src="myjs/chart-master/Chart.js"/>--}%
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-    %{--<script src="https://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>--}%
+    <asset:stylesheet src="hdt/handsontable.full.min.css"/>
+    <asset:javascript src="hdt/handsontable.full.min.js"/>
+    <asset:javascript src="hdt/common.js"/>
+    <asset:javascript src="hdt/highlight.pack.js"/>
 
 </head>
 <body>
 <section id="container" >
-    <!-- **********************************************************************************************************************************************************
-      MAIN CONTENT
-      *********************************************************************************************************************************************************** -->
     <!--main content start-->
     <section id="main-content">
         <section class="wrapper">
@@ -36,8 +30,10 @@
                 <span>新建</span>
             </div>
             <p><label><input type="checkbox" name="autosave" id="autosave" checked="checked" autocomplete="off"> Autosave</label></p>
+            <pre id="example1console" class="console">Click "Load" to load data from server</pre>
             <div id="edit_case"></div>
             <p><button name="save" id="save">Save</button></p>
+
         </section>
     </section>
 
@@ -59,44 +55,52 @@
 <!--script for this page-->
 <asset:javascript src="myjs/sparkline-chart.js"/>
 <asset:javascript src="myjs/zabuto_calendar.js"/>
+<script>
+    var
+        $$ = function(id) {
+            return document.getElementById(id);
+        },
+        container = $$('edit_case'),
+        exampleConsole = $$('example1console'),
+        autosave = $$('autosave'),
+        load = $$('load'),
+        save = $$('save'),
+        autosaveNotification,
+        hot;
 
-<script type="application/javascript">
-    $(document).ready(function () {
-        var dp = $("#date-popover");
-        dp.popover({html: true, trigger: "manual"});
-        dp.hide();
-        dp.click(function (e) {
-            $(this).hide();
-        });
-
-        $("#my-calendar").zabuto_calendar({
-            action: function () {
-                return myDateFunction(this.id, false);
-            },
-            action_nav: function () {
-                return myNavFunction(this.id);
-            },
-            ajax: {
-//                url: "show_data.php?action=1",    //这里设置日历事件 , get该url , 取得事件信息
-                url: "",
-                modal: true
-            },
-            legend: [
-                {type: "text", label: "Special event", badge: "00"},
-                {type: "block", label: "Regular event", }
-            ]
-        });
+    hot = new Handsontable(container, {
+        startRows: 8,
+        startCols: 6,
+        rowHeaders: true,
+        colHeaders: true,
+        minSpareRows: 1,
+        contextMenu: true,
+        afterChange: function (change, source) {
+            if (source === 'loadData') {
+                return; //don't save this change
+            }
+            if (!autosave.checked) {
+                return;
+            }
+            clearTimeout(autosaveNotification);
+            ajax('json/save.json', 'POST', JSON.stringify({data: change}), function (data) {
+                exampleConsole.innerText  = 'Autosaved (' + change.length + ' ' + 'cell' + (change.length > 1 ? 's' : '') + ')';
+                autosaveNotification = setTimeout(function() {
+                    exampleConsole.innerText ='Changes will be autosaved';
+                }, 1000);
+            });
+        }
     });
 
+    jQuery().ready(function () {
 
-    function myNavFunction(id) {
-        $("#date-popover").hide();
-        var nav = $("#" + id).data("navigation");
-        var to = $("#" + id).data("to");
-        console.log('nav ' + nav + ' to: ' + to.month + '/' + to.year);
-    }
+        jQuery("#save").click(function () {
+            jQuery.post("#",JSON.stringify({data:hot.getData()}),function (data) {
+                alert("Data Loaded: " + data);
+            });
+        });
+    })
 </script>
-
 
 </body>
 </html>
