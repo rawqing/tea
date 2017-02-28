@@ -56,7 +56,7 @@
 <asset:javascript src="myjs/sparkline-chart.js"/>
 <asset:javascript src="myjs/zabuto_calendar.js"/>
 <script>
-    var
+ /*   var
         $$ = function(id) {
             return document.getElementById(id);
         },
@@ -69,10 +69,10 @@
         hot;
 
     hot = new Handsontable(container, {
-        startRows: 8,
-        startCols: 6,
+        startRows: 1,
+        startCols: 7,
         rowHeaders: true,
-        colHeaders: true,
+        colHeaders: ['NO.','module','name','step','expect','result','actual'],
         minSpareRows: 1,
         contextMenu: true,
         afterChange: function (change, source) {
@@ -83,19 +83,54 @@
                 return;
             }
             clearTimeout(autosaveNotification);
-            ajax('json/save.json', 'POST', JSON.stringify({data: change}), function (data) {
+            ajax('modified', 'POST', {"data":JSON.stringify( change)}, function (data) {
                 exampleConsole.innerText  = 'Autosaved (' + change.length + ' ' + 'cell' + (change.length > 1 ? 's' : '') + ')';
                 autosaveNotification = setTimeout(function() {
                     exampleConsole.innerText ='Changes will be autosaved';
                 }, 1000);
             });
         }
-    });
+    });*/
 
     jQuery().ready(function () {
+        var container = jQuery("#edit_case"),
+            autosave = jQuery("#autosave"),
+            save = jQuery("save"),
+            hot,
+            cols = 7;
+
+        var settings = {
+            startRows: 1,
+            startCols: cols,
+            rowHeaders: true,
+            colHeaders: ['NO.','module','name','step','expect','result','actual'],
+            minSpareRows: 1,
+            afterChange: function (change, source) {
+                if (source === 'loadData') {
+                    return; //don't save this change
+                }
+                if (!autosave.attr('checked')) {
+                    return;
+                }
+                jQuery.post("modified",{"data":JSON.stringify( change)},function (data) {
+//                    alert("Data Loaded: " + data);
+                });
+            }};
+
+
+
+
+        hot = container.handsontable(settings);
+
+        hot.handsontable("updateSettings",{
+            comments: true, //启用标注功能
+            // 设置右键菜单
+            contextMenu: ['row_above', 'row_below', 'remove_row',"----------",
+                'make_read_only','commentsAddEdit','commentsRemove']
+        });
 
         jQuery("#save").click(function () {
-            jQuery.post("#",JSON.stringify({data:hot.getData()}),function (data) {
+            jQuery.post("ajax",{"case":JSON.stringify(hot.getData())},function (data) {
                 alert("Data Loaded: " + data);
             });
         });
