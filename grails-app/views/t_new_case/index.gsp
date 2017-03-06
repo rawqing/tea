@@ -14,9 +14,10 @@
     <asset:stylesheet src="style-responsive.css"/>
 
     <asset:stylesheet src="hdt/handsontable.full.min.css"/>
-    <asset:javascript src="hdt/handsontable.full.min.js"/>
+    <asset:stylesheet src="hdt/tables.css"/>
     <asset:javascript src="hdt/common.js"/>
     <asset:javascript src="hdt/highlight.pack.js"/>
+    <asset:javascript src="hdt/handsontable.full.min.js"/>
 
 </head>
 <body>
@@ -31,8 +32,12 @@
             </div>
             <p><label><input type="checkbox" name="autosave" id="autosave" checked="checked" autocomplete="off"> Autosave</label></p>
             <pre id="example1console" class="console">Click "Load" to load data from server</pre>
-            <div id="edit_case"></div>
+
+            <g:set var="cc" value="${col}"/>
+            <div id="edit_case" class="handsontable"></div>
+
             <p><button name="save" id="save">Save</button></p>
+            <p><button name="te" id="te">test</button></p>
 
         </section>
     </section>
@@ -56,55 +61,36 @@
 <asset:javascript src="myjs/sparkline-chart.js"/>
 <asset:javascript src="myjs/zabuto_calendar.js"/>
 <script>
- /*   var
-        $$ = function(id) {
-            return document.getElementById(id);
-        },
-        container = $$('edit_case'),
-        exampleConsole = $$('example1console'),
-        autosave = $$('autosave'),
-        load = $$('load'),
-        save = $$('save'),
-        autosaveNotification,
-        hot;
-
-    hot = new Handsontable(container, {
-        startRows: 1,
-        startCols: 7,
-        rowHeaders: true,
-        colHeaders: ['NO.','module','name','step','expect','result','actual'],
-        minSpareRows: 1,
-        contextMenu: true,
-        afterChange: function (change, source) {
-            if (source === 'loadData') {
-                return; //don't save this change
-            }
-            if (!autosave.checked) {
-                return;
-            }
-            clearTimeout(autosaveNotification);
-            ajax('modified', 'POST', {"data":JSON.stringify( change)}, function (data) {
-                exampleConsole.innerText  = 'Autosaved (' + change.length + ' ' + 'cell' + (change.length > 1 ? 's' : '') + ')';
-                autosaveNotification = setTimeout(function() {
-                    exampleConsole.innerText ='Changes will be autosaved';
-                }, 1000);
-            });
-        }
-    });*/
-
     jQuery().ready(function () {
         var container = jQuery("#edit_case"),
             autosave = jQuery("#autosave"),
             save = jQuery("save"),
-            hot,
-            cols = 7;
+            colt = <%= col %>,
+            cols = colt.length,
+
+            w = container.width() - 50,
+            hot;
+
+
 
         var settings = {
             startRows: 1,
             startCols: cols,
             rowHeaders: true,
-            colHeaders: ['NO.','module','name','step','expect','result','actual'],
+            colHeaders: colt,
             minSpareRows: 1,
+            // 允许调整行高列宽
+            manualRowResize: true,
+            manualColumnResize: true,
+            autoWrapRow: true,  //If true, pressing TAB or right arrow in the last column will move to first column in next row
+
+//            stretchH: 'all',
+            colWidths: calc(w,[10,20,10,40,30,5,20,10]),
+//            width: 1260,
+//            autoColumnSize: false,
+            autoRowSize: true,
+            wordWrap:true,
+
             afterChange: function (change, source) {
                 if (source === 'loadData') {
                     return; //don't save this change
@@ -113,7 +99,8 @@
                     return;
                 }
                 jQuery.post("modified",{"data":JSON.stringify( change)},function (data) {
-//                    alert("Data Loaded: " + data);
+                    alert("Data Loaded: " + data);
+
                 });
             }};
 
@@ -133,6 +120,11 @@
             jQuery.post("ajax",{"case":JSON.stringify(hot.getData())},function (data) {
                 alert("Data Loaded: " + data);
             });
+        });
+        jQuery("#te").click(function () {
+            alert(w);
+            alert(calc(w,[10,20,10,40,30,5,20,10]));
+//            alert(calc1(w,[10,10,10,10,10,20,20,10,10]));
         });
     })
 </script>
