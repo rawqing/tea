@@ -8,10 +8,11 @@ class T_case {
     String descr
     String keyword
     String judge
-    String _author
-    Film film
+    String c_author
+//    Film film
     T_module module
     List<T_step> steps
+//    int anInt
 
     Date dateCreated
     Date lastUpdated
@@ -19,13 +20,13 @@ class T_case {
     static constraints = {
         c_name(blank: false)
         precondition(blank: false)
-        _author(blank: false)
+        c_author(blank: false)
 
         judge(blank: true)
         keyword(blank: true)
         descr(blank: true)
     }
-    static hasOne = [film:Film]
+//    static hasOne = [film:Film]
     static hasMany = [steps:T_step]
     static belongsTo = [module:T_module]
     static mapping = {

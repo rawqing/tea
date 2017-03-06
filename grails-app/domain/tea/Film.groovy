@@ -4,6 +4,7 @@ class Film {
     Integer id
     String table_name
     String target_id
+    String uri
 
     static constraints = {
         id generator:'sequence'
