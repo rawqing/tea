@@ -113,3 +113,55 @@ function ajax(url, method, params, callback) {
 
 })();
 
+/**
+ * 根据指定的权重计算每列宽度
+ * @param ori 最大宽度
+ * @param weighted 权重
+ * @returns {*}
+ */
+var calc = function (ori ,weighted) {
+  var ol = [],
+      sum = 0,
+      avg = 0,
+      max = 0,
+      maxIndex = 0,
+      olSum = 0,
+      short = 0;
+      len = weighted.length;
+  weighted.forEach(function (value, index, array) {
+      sum += value;
+      if(max < value){
+          max = value;
+          maxIndex = index;
+      }
+  });
+  if(len < 1) return ori;
+  if(len > 1){
+    avg = ori / sum;  //求出加权平均数
+    for(var i=0;i< len ;i++){
+      ol[i] = parseInt(avg * weighted[i]);
+      olSum += ol[i];
+    }
+    short = ori - olSum;
+    if(short != 0){
+        ol[maxIndex] += short;
+    }
+    return ol;
+  }else{
+    return parseInt(avg * weighted);
+  }
+};
+
+// var calc1 = function (ori ,percent) {
+//     var ol = [];
+//     var max = percent.length;
+//     if(max < 1) return;
+//     if(max > 1){
+//         for(var i=0;i< max ;i++){
+//             ol[i] = ori * percent[i] / 100;
+//         }
+//         return ol;
+//     }else{
+//         return ori * percent / 100;
+//     }
+// };

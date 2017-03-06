@@ -9,6 +9,8 @@ class User {
     Boolean valid
     String tel
     String u_mail
+    Date dateCreated
+    Date lastUpdated
 
 
     static constraints = {

@@ -73,7 +73,7 @@ grails:
             htmlcodec: xml
             codecs:
                 expression: html
-                scriptlets: html
+                scriptlets: none
                 taglib: none
                 staticparts: none
 endpoints:

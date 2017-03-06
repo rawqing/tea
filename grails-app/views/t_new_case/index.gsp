@@ -117,7 +117,7 @@
         });
 
         jQuery("#save").click(function () {
-            jQuery.post("ajax",{"case":JSON.stringify(hot.getData())},function (data) {
+            jQuery.post("ajax",{"case":JSON.stringify(hot.handsontable("getData"))},function (data) {
                 alert("Data Loaded: " + data);
             });
         });

@@ -1,2 +1,7 @@
-数据库插入中文失败  V
-无法自动换行
+1. 数据库插入中文失败   V --- 修改数据库为 utf8-bin
+2. 无法自动换行         V --- 使用css样式 :
+                            .handsontable table tbody td {
+                                 word-wrap:break-word;
+                                 white-space: pre-line;
+                             }
+3.
