@@ -1,13 +1,19 @@
 package tea
 
 class T_step {
-    String c_step
-    String c_expect
-    String c_result
-    String c_actual
+    String id
+    String s_step
+    String s_expect
+    String s_author
+
+    Date dateCreated
+    Date lastUpdated
 
     static constraints = {
     }
 
     static belongsTo = [t_case:T_case]
+    static mapping = {
+        id generator: 'uuid'
+    }
 }

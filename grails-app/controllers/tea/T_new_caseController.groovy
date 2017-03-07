@@ -3,11 +3,11 @@ package tea
 import grails.converters.JSON
 
 class T_new_caseController {
-
+    T_caseService cs = new T_caseService()
     def index() {
-        List<String> column_title = ["module","name","precondition","steps","expectation","prio","descr","keyword"]
+//        List<String> column_title = ["module","name","precondition","steps","expectation","prio","descr","keyword"]
 
-        [col:column_title as JSON]
+        [col:cs.caseTitle as JSON]
     }
 
     def ajax(){

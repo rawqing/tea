@@ -4,9 +4,8 @@ class T_module {
     String id
     String m_name=""
     Product product
-//    Film film
     String descr
-    String _author
+    String m_author
     Date dateCreated
     Date lastUpdated
 

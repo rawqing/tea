@@ -99,7 +99,7 @@
                     return;
                 }
                 jQuery.post("modified",{"data":JSON.stringify( change)},function (data) {
-                    alert("Data Loaded: " + data);
+//                    alert("Data Loaded: " + data);
 
                 });
             }};
