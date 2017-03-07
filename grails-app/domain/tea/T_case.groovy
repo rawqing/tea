@@ -10,7 +10,7 @@ class T_case {
     String keyword
     String judge
     String c_author
-    List<T_step> steps
+//    List<T_step> steps
 
     Date dateCreated
     Date lastUpdated
@@ -20,9 +20,9 @@ class T_case {
         precondition(blank: false)
         c_author(blank: false)
 
-        judge(blank: true)
-        keyword(blank: true)
-        descr(blank: true)
+        judge(blank: true,nullable: true)
+        keyword(blank: true,nullable: true)
+        descr(blank: true,nullable: true)
     }
 //    static hasOne = [film:Film]
     static hasMany = [steps:T_step]

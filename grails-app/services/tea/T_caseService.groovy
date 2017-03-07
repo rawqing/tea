@@ -37,14 +37,17 @@ class T_caseService {
         }
 
         T_module t_module = T_module.findByM_name(cMap["module"])
-        return new T_case(module_id: t_module.getId(),
+        T_case t_case = new T_case(module_id: t_module.getId(),
                 c_name: cMap["name"],
                 precondition: cMap["precondition"],
                 prio: cMap["prio"] as Integer,
                 descr: cMap["descr"],
                 keyword: cMap["keyword"],
-                steps: createSteps(cMap["steps"],cMap["expectation"],mUser),
-                c_author: mUser)
+                c_author: mUser);
+        for(T_step t_step : createSteps(cMap["steps"],cMap["expectation"],mUser)){
+            t_case.addToSteps(t_step)
+        }
+        return t_case
     }
     def createSteps(String step_desc ,String expectation ,String user){
         def sd = step_desc.split("\n")
