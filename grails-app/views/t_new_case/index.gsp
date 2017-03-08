@@ -69,12 +69,13 @@
             cols = colt.length,
 
             w = container.width() - 50,
+            h = jQuery(document).height(),
             hot;
 
 
 
         var settings = {
-            startRows: 1,
+            startRows: 10,
             startCols: cols,
             rowHeaders: true,
             colHeaders: colt,
@@ -83,15 +84,17 @@
             manualRowResize: true,
             manualColumnResize: true,
             autoWrapRow: true,  //If true, pressing TAB or right arrow in the last column will move to first column in next row
-
+            manualColumnFreeze: true,
+            manualRowMove: true,
 //            stretchH: 'all',
             colWidths: calc(w,[10,20,10,40,30,5,20,10]),
-//            width: 1260,
-//            autoColumnSize: false,
+            height: 450,
             autoRowSize: true,
             wordWrap:true,
+            columns:<%= columns %>,
 
             afterChange: function (change, source) {
+//                alert(h)
                 if (source === 'loadData') {
                     return; //don't save this change
                 }

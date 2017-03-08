@@ -11,7 +11,9 @@ class T_new_caseController {
     def t_moduleService
 
     def index() {
-        [title:t_caseService.caseTitle as JSON]
+        [title:t_caseService.caseTitle as JSON ,
+         columns:t_caseService.createColumns()
+        ]
     }
 
     @Transactional
@@ -24,7 +26,10 @@ class T_new_caseController {
     @Transactional
     def modified(){
 //        println(params.data)
-        println(t_moduleService.getModulesMap())
+        def mo = t_moduleService.getModulesMap()
+        println(mo)
+        println(t_caseService.createColumns())
+
         render "changed"
     }
 }

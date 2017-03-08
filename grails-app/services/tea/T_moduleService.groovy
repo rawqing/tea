@@ -12,11 +12,7 @@ class T_moduleService {
 
     }
     def getModulesMap(){
-        println(T_module.findByM_name("m1"))
         def modules = T_module.findAll()
-        println(modules.class)
-//        println(modules[0].getM_name())
-//        println(modules[0].getId())
         def mMap = [:]
         for(def tm : modules){
             mMap += [(tm.getM_name()):tm.getId()]
