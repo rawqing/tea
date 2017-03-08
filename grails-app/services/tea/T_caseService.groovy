@@ -5,6 +5,7 @@ import groovy.json.JsonSlurper
 
 @Transactional
 class T_caseService {
+    def t_moduleService
     def caseTitle= ["module","name","precondition","steps","expectation","prio","descr","keyword"]
     String mUser = "admin"
 
@@ -12,11 +13,24 @@ class T_caseService {
 
     }
     def saveCase(T_case t_case){
-        t_case.save()
+        if(t_case == null){
+            transactionStatus.setRollbackOnly()
+            notFound()
+            return
+        }
+        if(t_case.hasErrors()){
+            transactionStatus.setRollbackOnly()
+            respond(t_case.errors)
+            return
+        }
+        t_case.save(flush:true)
+        def c_id = t_case.getId()
+        println(c_id)
+        return c_id
     }
     def saveAllCases(List<T_case> t_cases){
         for(T_case tc : t_cases){
-            tc.save()
+            saveCase(tc)
         }
     }
     def spitCases(String caseStr){
@@ -36,8 +50,9 @@ class T_caseService {
             cMap += [(caseTitle[i]):data[i]]
         }
 
-        T_module t_module = T_module.findByM_name(cMap["module"])
-        T_case t_case = new T_case(module_id: t_module.getId(),
+//        T_module t_module = T_module.findByM_name(cMap["module"])
+        String mId = t_moduleService.modulesMap[cMap["module"]]
+        T_case t_case = new T_case(module_id: mId,
                 c_name: cMap["name"],
                 precondition: cMap["precondition"],
                 prio: cMap["prio"] as Integer,
