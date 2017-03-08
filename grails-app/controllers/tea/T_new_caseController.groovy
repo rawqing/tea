@@ -1,17 +1,20 @@
 package tea
 
 import grails.converters.JSON
+import grails.transaction.Transactional
 
 
 class T_new_caseController {
-    T_caseService cs = new T_caseService()
+    def t_caseService
+
     def index() {
-        [col:cs.caseTitle as JSON]
+        [title:t_caseService.caseTitle as JSON]
     }
 
+    @Transactional
     def ajax(){
         String pc = params.case
-        def t_cases = cs.spitCases(pc)
+        def t_cases = t_caseService.spitCases(pc)
         for(T_case tc : t_cases){
             if (tc.hasErrors()) {
                 println("has errors")

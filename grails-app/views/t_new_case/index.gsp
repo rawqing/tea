@@ -65,7 +65,7 @@
         var container = jQuery("#edit_case"),
             autosave = jQuery("#autosave"),
             save = jQuery("save"),
-            colt = <%= col %>,
+            colt = <%= title%>,
             cols = colt.length,
 
             w = container.width() - 50,

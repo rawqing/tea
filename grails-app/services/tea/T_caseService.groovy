@@ -3,7 +3,7 @@ package tea
 import grails.transaction.Transactional
 import groovy.json.JsonSlurper
 
-//@Transactional
+@Transactional
 class T_caseService {
     def caseTitle= ["module","name","precondition","steps","expectation","prio","descr","keyword"]
     String mUser = "admin"
