@@ -58,9 +58,11 @@ class T_caseService {
         for (int i = 0; i < data.size(); i++) {
             cMap += [(caseTitle[i]):data[i]]
         }
-
-        String mId = t_moduleService.modulesMap[cMap["module"]]
-        T_case t_case = new T_case(module_id: mId,
+        if(cMap["name"]==null || "" == cMap["name"]){
+            return
+        }
+        def m = t_moduleService.modulesMap[cMap["module"]]
+        T_case t_case = new T_case(
                 c_name: cMap["name"],
                 precondition: cMap["precondition"],
                 prio: cMap["prio"] as Integer,
@@ -70,6 +72,7 @@ class T_caseService {
         for(T_step t_step : createSteps(cMap["steps"],cMap["expectation"],mUser)){
             t_case.addToSteps(t_step)
         }
+        t_case.setT_module(m)
         return t_case
     }
     def createSteps(String step_desc ,String expectation ,String user){

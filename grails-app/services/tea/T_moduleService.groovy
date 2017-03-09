@@ -15,7 +15,7 @@ class T_moduleService {
         def modules = T_module.findAll()
         def mMap = [:]
         for(def tm : modules){
-            mMap += [(tm.getM_name()):tm.getId()]
+            mMap += [(tm.getM_name()):tm]
         }
         return mMap
     }

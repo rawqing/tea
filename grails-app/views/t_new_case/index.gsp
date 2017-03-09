@@ -13,6 +13,8 @@
     <asset:stylesheet src="style.css"/>
     <asset:stylesheet src="style-responsive.css"/>
 
+    <asset:stylesheet src="widget/select.css"/>
+    <asset:javascript src="widget/select.js"/>
     <asset:stylesheet src="hdt/handsontable.full.min.css"/>
     <asset:stylesheet src="hdt/tables.css"/>
     <asset:javascript src="hdt/common.js"/>
@@ -29,6 +31,23 @@
                 <span>产品</span>
                 <span>评审</span>
                 <span>新建</span>
+            </div>
+            <div class="product_select">
+                <select>
+                    <option value="">月份</option>
+                    <option value="一月" disabled>一月（禁用）</option>
+                    <option value="二月">二月</option>
+                    <option value="三月">三月</option>
+                    <option value="四月">四月</option>
+                    <option value="五月" selected>五月（默认选中）</option>
+                    <option value="六月">六月</option>
+                    <option value="七月">七月</option>
+                    <option value="八月">八月</option>
+                    <option value="九月">九月</option>
+                    <option value="十月">十月</option>
+                    <option value="十一月">十一月</option>
+                    <option value="十二月">十二月</option>
+                </select>
             </div>
             <p><label><input type="checkbox" name="autosave" id="autosave" checked="checked" autocomplete="off"> Autosave</label></p>
             <pre id="example1console" class="console">Click "Load" to load data from server</pre>
@@ -62,6 +81,8 @@
 <asset:javascript src="myjs/zabuto_calendar.js"/>
 <script>
     jQuery().ready(function () {
+        jQuery('select').comboSelect();
+
         var container = jQuery("#edit_case"),
             autosave = jQuery("#autosave"),
             save = jQuery("save"),
@@ -69,16 +90,17 @@
             cols = colt.length,
 
             w = container.width() - 50,
-            h = jQuery(document).height(),
+//            h = jQuery(document).height(),
             hot;
 
 
 
         var settings = {
-            startRows: 10,
+            startRows: 1,
             startCols: cols,
             rowHeaders: true,
             colHeaders: colt,
+            //最小剩余行必须最小为1 , 否则将不能继续下一行输入
             minSpareRows: 1,
             // 允许调整行高列宽
             manualRowResize: true,
@@ -88,7 +110,7 @@
             manualRowMove: true,
 //            stretchH: 'all',
             colWidths: calc(w,[10,20,10,40,30,5,20,10]),
-            height: 450,
+//            height: 450,
             autoRowSize: true,
             wordWrap:true,
             columns:<%= columns %>,

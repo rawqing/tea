@@ -3,7 +3,7 @@ package tea
 class T_module {
     String id
     String m_name=""
-    Product product
+//    Product product
     String descr
     String m_author
     Date dateCreated
@@ -12,6 +12,7 @@ class T_module {
     static constraints = {
     }
     static hasMany = [t_case:T_case]
+    static belongsTo = [product:Product]
     static mapping = {
         id generator: 'uuid'
     }

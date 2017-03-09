@@ -2,7 +2,7 @@ package tea
 
 class T_case {
     String id
-    String module_id
+//    String module_id
     String c_name=""
     String precondition
     Integer prio
@@ -26,6 +26,7 @@ class T_case {
     }
 //    static hasOne = [film:Film]
     static hasMany = [steps:T_step]
+    static belongsTo = [t_module:T_module]
     static mapping = {
         id generator: 'uuid'
     }
