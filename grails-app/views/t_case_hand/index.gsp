@@ -14,8 +14,10 @@
     <asset:stylesheet src="style-responsive.css"/>
     <asset:javascript src="myjs/chart-master/Chart.js"/>
 
-    <asset:stylesheet src="widget/treemenu.css"/>
-    <asset:javascript src="widget/treemenu.js"/>
+    <asset:javascript src="widget/treeview.js"/>
+    <asset:javascript src="widget/treeview.css"/>
+    <asset:stylesheet src="widget/select.css"/>
+    <asset:javascript src="widget/select.js"/>
 
 </head>
 <body>
@@ -23,32 +25,19 @@
     <section id="main-content">
         <section class="wrapper">
             <div class="t_action">
-                <span>产品</span>
+                <span>
+                    <div id="product_select">
+                        <select>
+                            <option value="" disabled>- 请选择所属产品 -</option>
+                        </select>
+                    </div>
+                </span>
                 <span>评审</span>
                 <span>新建</span>
             </div>
             <div class="row">
                 <div class="col-lg-3 main-chart">
-                    <ul class="tree">
-                        <li><a href="">全部</a></li>
-                        <li><span>模块</span>
-                            <ul>
-                                <li><a href="#">jQuery</a></li>
-                                <li><a href="#">JavaScript</a></li>
-                                <li><a href="#">Golang</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="#about">计划</a>
-                            <ul>
-                                <li><a href="#">Contact</a></li>
-                                <li><a href="#">Blog</a></li>
-                                <li><a href="#">Jobs</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="#">suite</a>
-
-                        </li>
-                    </ul>
+                    <div id="treeview7" class=""></div>
                 </div>
                 <div class="col-lg-9 ds">
                     <f:table collection="${tea.T_case.list()}" />
@@ -76,8 +65,63 @@
 
 <script>
     $(function(){
-        $(".tree").treemenu({delay:300});
+        var products = <%= products %>,
+            sel = $('#product_select'),
+            selectedProduct;
+
+        sel.find('select').append(function () {
+            var selects ="";
+            for(var i=0;i< products.length;i++){
+                if(i == 0){
+                    selects += "<option value='"+products[i]+"' selected>"+products[i]+"</option>";
+                    continue;
+                }
+                selects += "<option value='"+products[i]+"'>"+products[i]+"</option>";
+            }
+            return selects;
+        });
+        selectedProduct = $.trim($(sel.find('select')).val());
+
+        $('select').comboSelect();
+        /**
+         * 按产品名称查找模块名 , 并update 表格设置
+         */
+        sel.find('select').change(function () {
+            selectedProduct = $.trim($(this).val());
+            if(isEmpty(selectedProduct)){
+                return;
+            }
+            loadModule();
+        });
+//        loadModule();
+        var newData = changeData(defaultData ,"module",["m1","M2"]);
+        $('#treeview7').treeview({
+            color: "#428bca",
+            showBorder: false,
+            data: newData
+        });
+        function loadModule() {
+            $.post("<g:createLink action='loadModule'/>",{"product":selectedProduct},function (data,status) {
+                if(status == "success"){
+                    addElements($('#module > ul') ,data)
+                    
+                }
+            });
+        }
+        function addElements($ele ,datas) {
+            $ele.append(function () {
+                var lis ="";
+                for(var i=0;i< datas.length;i++){
+                    lis += "<li >"+datas[i]+"</li>";
+                }
+                return lis;
+            });
+        }
+
+
+
     });
+
 </script>
 
 </body>
