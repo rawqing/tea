@@ -9,6 +9,7 @@ class T_caseService {
     def t_moduleService
     def filmService
     def caseTitle= ["module","name","precondition","steps","expectation","prio","descr","keyword"]
+    def nullableColumn = [2,6,7]
     String mUser = "admin"
     String showCase = "t_case_hand"
 
@@ -92,8 +93,8 @@ class T_caseService {
         return steps
     }
 
-    def createColumns(){
-        def modulesNames = t_moduleService.getModulesMap().keySet()
+    def createColumns(Product product){
+        def modulesNames = t_moduleService.getModulesMapByProduct(product).keySet()
         def columns = []
         for (int i = 0; i < caseTitle.size(); i++) {
             def col = [:]

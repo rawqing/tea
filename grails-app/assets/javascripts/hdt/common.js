@@ -151,17 +151,38 @@ var calc = function (ori ,weighted) {
     return parseInt(avg * weighted);
   }
 };
+/**
+ * 校验所有数据是否符合验证
+ * @param instance
+ * @param excludeColumns
+ * @returns {[*]}
+ */
+function qualifiedData(instance,excludeColumns) {
+    var invalid = [-1,-1];
+    var data = instance.handsontable("getData");
+    for(var r=0; r<data.length -1; r++){
+        var rowData = data[r];
+        for (var i = 0; i < rowData.length; i++) {
+            if(excludeColumns.indexOf(i) != -1){
+                continue;
+            }
+            if (rowData[i] === null || rowData[i] == "") {
+                return invalid = [r,i];
+            }
+        }
+    }
+    return invalid;
+}
 
-// var calc1 = function (ori ,percent) {
-//     var ol = [];
-//     var max = percent.length;
-//     if(max < 1) return;
-//     if(max > 1){
-//         for(var i=0;i< max ;i++){
-//             ol[i] = ori * percent[i] / 100;
-//         }
-//         return ol;
-//     }else{
-//         return ori * percent / 100;
-//     }
-// };
+function isEmpty(val) {
+    return val == null || val == "" || val == " ";
+}
+
+var classRenderer = function(instance, td, row, col, prop, value, cellProperties) {
+    Handsontable.renderers.TextRenderer.apply(this, arguments);
+    td.className = 'error_border';
+};
+var backgroundRenderer = function(instance, td, row, col, prop, value, cellProperties) {
+    Handsontable.renderers.TextRenderer.apply(this, arguments);
+    td.style.background = '#ffc1c3';
+};

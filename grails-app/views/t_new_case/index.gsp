@@ -32,28 +32,22 @@
                 <span>评审</span>
                 <span>新建</span>
             </div>
-            <div class="product_select">
+            <div id="product_select">
                 <select>
-                    <option value="">月份</option>
-                    <option value="一月" disabled>一月（禁用）</option>
-                    <option value="二月">二月</option>
-                    <option value="三月">三月</option>
-                    <option value="四月">四月</option>
-                    <option value="五月" selected>五月（默认选中）</option>
-                    <option value="六月">六月</option>
-                    <option value="七月">七月</option>
-                    <option value="八月">八月</option>
-                    <option value="九月">九月</option>
-                    <option value="十月">十月</option>
-                    <option value="十一月">十一月</option>
-                    <option value="十二月">十二月</option>
+                    <option value="">- 请选择所属产品 -</option>
+
                 </select>
             </div>
             <p><label><input type="checkbox" name="autosave" id="autosave" checked="checked" autocomplete="off"> Autosave</label></p>
-            <pre id="example1console" class="console">Click "Load" to load data from server</pre>
+            <p>请选一个产品</p>
 
             <g:set var="cc" value="${col}"/>
             <div id="edit_case" class="handsontable"></div>
+            <p>注: step 和 expectation 填写时,多个步骤请用 alt + enter 换行分开 ; step 和 expectation 必须相对应 , 如:</p>
+            <table class="hint_table">
+                <tr><td>step</td><td>expectation</td></tr>
+                <tr><td>1. 输入"xxx" <br /> 2. 点击[xxx]按钮 </td><td>1. 可正常输入 <br /> 2. 跳转至"xxx"页面 </td></tr>
+            </table>
 
             <p><button name="save" id="save">Save</button></p>
             <p><button name="te" id="te">test</button></p>
@@ -81,16 +75,27 @@
 <asset:javascript src="myjs/zabuto_calendar.js"/>
 <script>
     jQuery().ready(function () {
+        var products = <%= products %>,
+            sel = jQuery('#product_select'),
+            selectedProduct = "";
+
+        sel.find('select').append(function () {
+            var selects ="";
+            for(var i=0;i< products.length;i++){
+                selects += "<option value='"+products[i]+"'>"+products[i]+"</option>";
+            }
+            return selects;
+        });
         jQuery('select').comboSelect();
 
         var container = jQuery("#edit_case"),
             autosave = jQuery("#autosave"),
             save = jQuery("save"),
             colt = <%= title%>,
+            nullableCol = <%= nullable %>,
             cols = colt.length,
-
             w = container.width() - 50,
-//            h = jQuery(document).height(),
+            column_settings ,
             hot;
 
 
@@ -108,21 +113,20 @@
             autoWrapRow: true,  //If true, pressing TAB or right arrow in the last column will move to first column in next row
             manualColumnFreeze: true,
             manualRowMove: true,
-//            stretchH: 'all',
             colWidths: calc(w,[10,20,10,40,30,5,20,10]),
-//            height: 450,
             autoRowSize: true,
             wordWrap:true,
-            columns:<%= columns %>,
+            readOnly:true,
 
             afterChange: function (change, source) {
-//                alert(h)
                 if (source === 'loadData') {
                     return; //don't save this change
                 }
                 if (!autosave.attr('checked')) {
                     return;
                 }
+//                var aaa = isQualifiedRows(hot,getChangeRows(change),nullableCol);
+//                alert(aaa);
                 jQuery.post("modified",{"data":JSON.stringify( change)},function (data) {
 //                    alert("Data Loaded: " + data);
 
@@ -134,14 +138,62 @@
 
         hot = container.handsontable(settings);
 
+
+
+
+
+        var hint = ["m1","hello"];
+        /**
+         * 更新handsontable设置
+         */
         hot.handsontable("updateSettings",{
             comments: true, //启用标注功能
             // 设置右键菜单
             contextMenu: ['row_above', 'row_below', 'remove_row',"----------",
-                'make_read_only','commentsAddEdit','commentsRemove']
+                'make_read_only','commentsAddEdit','commentsRemove'],
+            customBorders: [
+                {row: 0, col: 0, left: {width: 2, color: 'red'},
+                    right: {width: 1, color: 'green'}, top: '', bottom: ''}
+            ]
+
+        });
+
+
+        /**
+         * 按产品名称查找模块名 , 并update 表格设置
+         */
+        sel.find('select').change(function () {
+            selectedProduct = jQuery.trim(jQuery(this).val());
+            if(isEmpty(selectedProduct)){
+                return;
+            }
+
+            jQuery.post("productChange",{"product":selectedProduct},function (data,status) {
+                if(status == "success"){
+                    column_settings = data;
+                    hot.handsontable("updateSettings",{
+                        //从后台数据更新列设置
+                        columns:column_settings,
+                        readOnly:false
+                    });
+                }
+            });
         });
 
         jQuery("#save").click(function () {
+            var eCell = qualifiedData(hot,nullableCol);
+            if(eCell[0] >= 0 && eCell[1] >= 0) {
+                hot.handsontable("updateSettings", {
+                    cells: function (row, col, prop) {
+                        var cellProperties = {};
+                        if (row === eCell[0] && col === eCell[1]) {
+                            cellProperties.renderer = backgroundRenderer;
+                        }
+                        return cellProperties;
+                    }
+                });
+                return;
+            }
             jQuery.post("ajax",{"case":JSON.stringify(hot.handsontable("getData"))},function (data) {
                 alert("Data Loaded: " + data);
             });
@@ -151,7 +203,9 @@
             alert(calc(w,[10,20,10,40,30,5,20,10]));
 //            alert(calc1(w,[10,10,10,10,10,20,20,10,10]));
         });
-    })
+
+    });
+
 </script>
 
 </body>

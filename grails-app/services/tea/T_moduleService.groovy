@@ -19,4 +19,13 @@ class T_moduleService {
         }
         return mMap
     }
+
+    def getModulesMapByProduct(Product product){
+        def modules = T_module.findAllByProduct(product)
+        def mMap = [:]
+        for(def tm : modules){
+            mMap += [(tm.getM_name()):tm]
+        }
+        return mMap
+    }
 }

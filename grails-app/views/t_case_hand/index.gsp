@@ -12,21 +12,14 @@
     <!-- Custom styles for this template -->
     <asset:stylesheet src="style.css"/>
     <asset:stylesheet src="style-responsive.css"/>
-
     <asset:javascript src="myjs/chart-master/Chart.js"/>
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+
+    <asset:stylesheet src="widget/treemenu.css"/>
+    <asset:javascript src="widget/treemenu.js"/>
 
 </head>
 <body>
 <section id="container" >
-    <!-- **********************************************************************************************************************************************************
-      MAIN CONTENT
-      *********************************************************************************************************************************************************** -->
-    <!--main content start-->
     <section id="main-content">
         <section class="wrapper">
             <div class="t_action">
@@ -35,15 +28,34 @@
                 <span>新建</span>
             </div>
             <div class="row">
-                <div class="col-lg-3 main-chart"></div>
+                <div class="col-lg-3 main-chart">
+                    <ul class="tree">
+                        <li><a href="">全部</a></li>
+                        <li><span>模块</span>
+                            <ul>
+                                <li><a href="#">jQuery</a></li>
+                                <li><a href="#">JavaScript</a></li>
+                                <li><a href="#">Golang</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#about">计划</a>
+                            <ul>
+                                <li><a href="#">Contact</a></li>
+                                <li><a href="#">Blog</a></li>
+                                <li><a href="#">Jobs</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">suite</a>
+
+                        </li>
+                    </ul>
+                </div>
                 <div class="col-lg-9 ds">
                     <f:table collection="${tea.T_case.list()}" />
                 </div>
-            </div><! --/row -->
+            </div>
         </section>
     </section>
-
-    <!--main content end-->
 </section>
 
 <!-- js placed at the end of the document so the pages load faster -->
@@ -62,43 +74,11 @@
 <asset:javascript src="myjs/sparkline-chart.js"/>
 <asset:javascript src="myjs/zabuto_calendar.js"/>
 
-<script type="application/javascript">
-    $(document).ready(function () {
-        var dp = $("#date-popover");
-        dp.popover({html: true, trigger: "manual"});
-        dp.hide();
-        dp.click(function (e) {
-            $(this).hide();
-        });
-
-        $("#my-calendar").zabuto_calendar({
-            action: function () {
-                return myDateFunction(this.id, false);
-            },
-            action_nav: function () {
-                return myNavFunction(this.id);
-            },
-            ajax: {
-//                url: "show_data.php?action=1",    //这里设置日历事件 , get该url , 取得事件信息
-                url: "",
-                modal: true
-            },
-            legend: [
-                {type: "text", label: "Special event", badge: "00"},
-                {type: "block", label: "Regular event", }
-            ]
-        });
+<script>
+    $(function(){
+        $(".tree").treemenu({delay:300});
     });
-
-
-    function myNavFunction(id) {
-        $("#date-popover").hide();
-        var nav = $("#" + id).data("navigation");
-        var to = $("#" + id).data("to");
-        console.log('nav ' + nav + ' to: ' + to.month + '/' + to.year);
-    }
 </script>
-
 
 </body>
 </html>

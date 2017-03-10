@@ -2,3 +2,17 @@
     word-wrap:break-word;
     white-space: pre-line;
 }
+.error_border{
+    background-color: #ffc1c3;
+    /*transition:border linear .2s,box-shadow linear .5s;*/
+    /*-moz-transition:border linear .2s,-moz-box-shadow linear .5s;*/
+    /*-webkit-transition:border linear .2s,-webkit-box-shadow linear .5s;*/
+    /*outline:none;border-color: rgba(242, 24, 36, 0.75);*/
+    /*box-shadow:0 0 8px rgba(241, 24, 41, 0.5);*/
+    /*-moz-box-shadow:0 0 8px rgba(241, 25, 37, 0.74);*/
+    /*-webkit-box-shadow:0 0 8px rgb(241, 25, 37);*/
+
+}
+.hint_table{
+
+}
