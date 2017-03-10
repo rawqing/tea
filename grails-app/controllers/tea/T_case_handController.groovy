@@ -6,6 +6,6 @@ class T_case_handController {
 
     def index() {
 
-        respond T_case.list(), model:[userCount: User.count()]
+//        respond T_case.list(), model:[userCount: User.count()]
     }
 }
