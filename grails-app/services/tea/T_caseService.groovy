@@ -45,15 +45,20 @@ class T_caseService {
             saveCase(tc)
         }
     }
-    def spitCases(String caseStr){
+    /**
+     * 将字符串case 转化为case对象
+     * @param caseStr
+     * @return
+     */
+    def spitCases(String caseStr , String productName){
         def c = new JsonSlurper().parseText(caseStr) as List
         def cases = []
         for(int i=0; i < c.size()-1;i++){
-            cases += createCase(c[i] as List)
+            cases += createCase(c[i] as List ,productName)
         }
         return cases
     }
-    def createCase(List<String> data){
+    def createCase(List<String> data ,String productName){
         Map<?,String> cMap = [:]
         if(data.size() != caseTitle.size()){
             return
@@ -64,7 +69,8 @@ class T_caseService {
         if(cMap["name"]==null || "" == cMap["name"]){
             return
         }
-        def m = t_moduleService.modulesMap[cMap["module"]]
+//        def m = t_moduleService.modulesMap[cMap["module"]]
+        def m = t_moduleService.getModulesMapByProductName(productName)[cMap["module"]]
         T_case t_case = new T_case(
                 c_name: cMap["name"],
                 precondition: cMap["precondition"],

@@ -34,7 +34,7 @@
             </div>
             <div id="product_select">
                 <select>
-                    <option value="">- 请选择所属产品 -</option>
+                    <option value="" disabled>- 请选择所属产品 -</option>
 
                 </select>
             </div>
@@ -137,7 +137,7 @@
 
 
         hot = container.handsontable(settings);
-
+        updateHandsontableWithModule(sel.find('select'));
 
 
 
@@ -163,7 +163,14 @@
          * 按产品名称查找模块名 , 并update 表格设置
          */
         sel.find('select').change(function () {
-            selectedProduct = jQuery.trim(jQuery(this).val());
+            updateHandsontableWithModule(jQuery(this));
+        });
+        /**
+         * 按产品名称加载模块名
+         * @param $element
+         */
+        function updateHandsontableWithModule($element) {
+            selectedProduct = jQuery.trim($element.val());
             if(isEmpty(selectedProduct)){
                 return;
             }
@@ -178,9 +185,13 @@
                     });
                 }
             });
-        });
+        }
 
         jQuery("#save").click(function () {
+            var hotData = hot.handsontable("getData");
+            if(isEmpty(selectedProduct) || hotData.length < 2){
+                return;
+            }
             var eCell = qualifiedData(hot,nullableCol);
             if(eCell[0] >= 0 && eCell[1] >= 0) {
                 hot.handsontable("updateSettings", {
@@ -194,7 +205,7 @@
                 });
                 return;
             }
-            jQuery.post("ajax",{"case":JSON.stringify(hot.handsontable("getData"))},function (data) {
+            jQuery.post("ajax",{"case":JSON.stringify(hotData),"product":selectedProduct},function (data) {
                 alert("Data Loaded: " + data);
             });
         });

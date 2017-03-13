@@ -7,10 +7,8 @@ import grails.transaction.Transactional
  * module 最大数量不能超过100个 (多了也看不过来)
  */
 class T_moduleService {
+    def productService
 
-    def serviceMethod() {
-
-    }
     def getModulesMap(){
         def modules = T_module.findAll()
         def mMap = [:]
@@ -27,5 +25,9 @@ class T_moduleService {
             mMap += [(tm.getM_name()):tm]
         }
         return mMap
+    }
+
+    def getModulesMapByProductName(String name){
+        return getModulesMapByProduct(productService.getEnabledProductByName(name))
     }
 }

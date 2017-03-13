@@ -74,10 +74,11 @@
         sel.find('select').append(function () {
             var selects ="";
             for(var i=0;i< products.length;i++){
-                if(i == 0){
-                    selects += "<option value='"+products[i]+"' selected>"+products[i]+"</option>";
-                    continue;
-                }
+                //将提示语 disabled 后第一条则为默认selected
+//                if(i == 0){
+//                    selects += "<option value='"+products[i]+"' selected>"+products[i]+"</option>";
+//                    continue;
+//                }
                 selects += "<option value='"+products[i]+"'>"+products[i]+"</option>";
             }
             return selects;

@@ -22,7 +22,8 @@ class T_new_caseController {
     @Transactional
     def ajax(){
         String pc = params.case
-        def t_cases = t_caseService.spitCases(pc)
+        String p_name = params.product
+        def t_cases = t_caseService.spitCases(pc,p_name)
         if(!t_caseService.saveAllCases(t_cases)) {
             render "data saved"
         }else{

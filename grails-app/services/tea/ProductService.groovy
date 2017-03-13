@@ -31,4 +31,7 @@ class ProductService {
         return pMap
     }
 
+    def getEnabledProductByName(String name){
+        return Product.findByP_name(name)
+    }
 }
