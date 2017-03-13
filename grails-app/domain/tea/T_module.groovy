@@ -3,9 +3,9 @@ package tea
 class T_module {
     String id
     String m_name=""
-//    Product product
     String descr
     String m_author
+
     Date dateCreated
     Date lastUpdated
 

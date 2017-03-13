@@ -67,8 +67,10 @@
     $(function(){
         var products = <%= products %>,
             sel = $('#product_select'),
-            selectedProduct;
+            selectedProduct,
+            modules = [];
 
+        // 设置产品下拉选项
         sel.find('select').append(function () {
             var selects ="";
             for(var i=0;i< products.length;i++){
@@ -80,9 +82,30 @@
             }
             return selects;
         });
+        $('select').comboSelect();
         selectedProduct = $.trim($(sel.find('select')).val());
 
-        $('select').comboSelect();
+        var loadModules = function (){
+            $.post("<g:createLink action='loadModule'/>",{"product":selectedProduct},function (data,status) {
+                if(status == "success"){
+                    return data;
+                }
+            });
+        };
+        var loadPlans = function (){
+            $.post("<g:createLink action='loadModule'/>",{"product":selectedProduct},function (data,status) {
+                if(status == "success"){
+                    return data;
+                }
+            });
+        };
+        var loadSuites = function (){
+            $.post("<g:createLink action='loadModule'/>",{"product":selectedProduct},function (data,status) {
+                if(status == "success"){
+                    return data;
+                }
+            });
+        };
         /**
          * 按产品名称查找模块名 , 并update 表格设置
          */
@@ -94,20 +117,14 @@
             loadModule();
         });
 //        loadModule();
-        var newData = changeData(defaultData ,"module",["m1","M2"]);
-        $('#treeview7').treeview({
-            color: "#428bca",
-            showBorder: false,
-            data: newData
-        });
-        function loadModule() {
-            $.post("<g:createLink action='loadModule'/>",{"product":selectedProduct},function (data,status) {
-                if(status == "success"){
-                    addElements($('#module > ul') ,data)
-                    
-                }
-            });
-        }
+        var newData = changeData(defaultData ,{"module":["m1","M2"],"suite":["s1","s2"],"plan":["p1","p2"]});
+        treeRefresh($('#treeview7'),newData);
+//        $('#treeview7').treeview({
+//            color: "#428bca",
+//            showBorder: false,
+//            data: newData
+//        });
+
         function addElements($ele ,datas) {
             $ele.append(function () {
                 var lis ="";

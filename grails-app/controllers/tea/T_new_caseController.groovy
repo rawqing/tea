@@ -23,7 +23,7 @@ class T_new_caseController {
     def ajax(){
         String pc = params.case
         def t_cases = t_caseService.spitCases(pc)
-        if(t_caseService.saveAllCases(t_cases)) {
+        if(!t_caseService.saveAllCases(t_cases)) {
             render "data saved"
         }else{
             render("data not saved")

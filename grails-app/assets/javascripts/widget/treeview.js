@@ -30,8 +30,8 @@
 	_default.settings = {
 
 		injectStyle: true,
-
-		levels: 1,
+        // 默认展示级别
+		levels: 2,
 
 		expandIcon: 'glyphicon glyphicon-plus',
 		collapseIcon: 'glyphicon glyphicon-minus',
@@ -1248,7 +1248,7 @@
 
 })(jQuery, window, document);
 
-var dataMapping = {'module':1,'plan':2,'suite':3};
+var dataMapping = [['module','plan','suite'],[1,2,3]];
 var defaultData = [
     {text: '全部'},
 	{
@@ -1264,11 +1264,39 @@ var defaultData = [
         nodes: [  ]
     }
 ];
-function changeData(data ,field ,nodesNames) {
-	var index = dataMapping[field];
-	for(var i=0;i<nodesNames.length;i++){
-		var c = {text:nodesNames[i]};
-		data[index].nodes.push(c);
-	}
-	return  data;
+/**
+ * 用于更改{@link defaultData}中nodes的内容
+ * @param data 如 defaultData
+ * @param nodes 如:'{"module":["m1","M2"],"suite":["s1","s2"],"plan":["p1","p2"]}'
+ * @returns {*}
+ */
+function changeData(data , nodes) {
+
+    for(var key in nodes){
+        var index;
+        switch (key){
+            case dataMapping[0][0]:
+                index = dataMapping[1][0];
+                break;
+            case dataMapping[0][1]:
+                index = dataMapping[1][1];
+                break;
+            case dataMapping[0][2]:
+                index = dataMapping[1][2];
+                break;
+        }
+        var nodesNames = nodes[key];
+        for(var i=0;i<nodesNames.length;i++){
+            var c = {text:nodesNames[i]};
+            data[index].nodes.push(c);
+        }
+    }
+    return  data;
+}
+function treeRefresh($obj ,newData) {
+    $obj.treeview({
+        color: "#428bca",
+        showBorder: false,
+        data: newData
+    });
 }

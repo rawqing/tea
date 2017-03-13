@@ -199,9 +199,16 @@
             });
         });
         jQuery("#te").click(function () {
-            alert(w);
-            alert(calc(w,[10,20,10,40,30,5,20,10]));
-//            alert(calc1(w,[10,10,10,10,10,20,20,10,10]));
+            var map = {
+                "name" : "华仔",
+                "realname":"刘德华"
+            };
+            var m = {"m":"n"};
+            alert(m[0]);
+//            for (var key in map) {
+//                alert("map["+key+"]"+map[key]);
+//            }
+
         });
 
     });

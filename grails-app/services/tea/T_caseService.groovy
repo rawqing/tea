@@ -32,7 +32,9 @@ class T_caseService {
             respond(t_case.errors)
             return
         }
-        t_case.save(flush:true)
+        if(!t_case.save(flush:true)){
+            println(t_case.errors)
+        }
         def c_id = t_case.getId()
         filmService.saveFilm(filmService.createFilm("t_case",c_id ,showCase))
         println(c_id)
