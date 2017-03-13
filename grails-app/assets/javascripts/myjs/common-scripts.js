@@ -117,3 +117,8 @@ var Script = function () {
 
 
 }();
+
+
+function isEmpty(val) {
+    return val == null || val == "" || val == " ";
+}

@@ -1271,7 +1271,6 @@ var defaultData = [
  * @returns {*}
  */
 function changeData(data , nodes) {
-
     for(var key in nodes){
         var index;
         switch (key){
@@ -1284,6 +1283,8 @@ function changeData(data , nodes) {
             case dataMapping[0][2]:
                 index = dataMapping[1][2];
                 break;
+            default:
+                return defaultData;
         }
         var nodesNames = nodes[key];
         for(var i=0;i<nodesNames.length;i++){
@@ -1292,11 +1293,4 @@ function changeData(data , nodes) {
         }
     }
     return  data;
-}
-function treeRefresh($obj ,newData) {
-    $obj.treeview({
-        color: "#428bca",
-        showBorder: false,
-        data: newData
-    });
 }

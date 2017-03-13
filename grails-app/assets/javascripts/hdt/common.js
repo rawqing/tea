@@ -174,10 +174,6 @@ function qualifiedData(instance,excludeColumns) {
     return invalid;
 }
 
-function isEmpty(val) {
-    return val == null || val == "" || val == " ";
-}
-
 var classRenderer = function(instance, td, row, col, prop, value, cellProperties) {
     Handsontable.renderers.TextRenderer.apply(this, arguments);
     td.className = 'error_border';

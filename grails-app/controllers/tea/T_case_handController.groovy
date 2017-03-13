@@ -7,6 +7,7 @@ class T_case_handController {
 
     def t_moduleService
     def productService
+    def t_planService
 
     def index() {
         [
@@ -14,12 +15,15 @@ class T_case_handController {
         ]
     }
 
-    def loadModule(){
+    def loadByProduct(){
+        def data = [:]
         def productName = params.product
         def pMap = productService.getEnabledProductMap()
 
-        def m = t_moduleService.getModulesMapByProduct(pMap[productName]).keySet() as JSON
-        println(m)
-        render(m)
+        def modules = t_moduleService.getModulesMapByProduct(pMap[productName]).keySet()
+        def plans = t_planService.getPlanNameByProduct(pMap[productName])
+        data = [module:modules ,plan:plans] as JSON
+        println(data)
+        render(data)
     }
 }

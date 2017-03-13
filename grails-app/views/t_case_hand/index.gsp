@@ -66,47 +66,39 @@
 <script>
     $(function(){
         var products = <%= products %>,
-            sel = $('#product_select'),
-            selectedProduct,
-            modules = [];
+            sel = $('#product_select');
 
         // 设置产品下拉选项
         sel.find('select').append(function () {
             var selects ="";
             for(var i=0;i< products.length;i++){
                 //将提示语 disabled 后第一条则为默认selected
-//                if(i == 0){
-//                    selects += "<option value='"+products[i]+"' selected>"+products[i]+"</option>";
-//                    continue;
-//                }
                 selects += "<option value='"+products[i]+"'>"+products[i]+"</option>";
             }
             return selects;
         });
         $('select').comboSelect();
-        selectedProduct = $.trim($(sel.find('select')).val());
+    /**        下拉选框设置完毕       **/
 
-        var loadModules = function (){
-            $.post("<g:createLink action='loadModule'/>",{"product":selectedProduct},function (data,status) {
+        /**        功能菜单 start       **/
+        var loadMenu = function (productName){
+            $.post("<g:createLink action='loadByProduct'/>",{"product":productName},function (data, status) {
                 if(status == "success"){
-                    return data;
+                    var newData = changeData(jQuery.extend(true, {}, defaultData) ,data);
+                    treeRefresh($('#treeview7'),newData);
                 }
             });
         };
-        var loadPlans = function (){
-            $.post("<g:createLink action='loadModule'/>",{"product":selectedProduct},function (data,status) {
-                if(status == "success"){
-                    return data;
-                }
+        var treeRefresh = function($obj ,newData) {
+            $obj.treeview({
+                color: "#428bca",
+                showBorder: false,
+                data: newData
             });
         };
-        var loadSuites = function (){
-            $.post("<g:createLink action='loadModule'/>",{"product":selectedProduct},function (data,status) {
-                if(status == "success"){
-                    return data;
-                }
-            });
-        };
+        var selectedProduct = $.trim($(sel.find('select')).val());
+        loadMenu(selectedProduct);
+
         /**
          * 按产品名称查找模块名 , 并update 表格设置
          */
@@ -115,28 +107,9 @@
             if(isEmpty(selectedProduct)){
                 return;
             }
-            loadModule();
+            loadMenu(selectedProduct);
         });
-//        loadModule();
-        var newData = changeData(defaultData ,{"module":["m1","M2"],"suite":["s1","s2"],"plan":["p1","p2"]});
-        treeRefresh($('#treeview7'),newData);
-//        $('#treeview7').treeview({
-//            color: "#428bca",
-//            showBorder: false,
-//            data: newData
-//        });
-
-        function addElements($ele ,datas) {
-            $ele.append(function () {
-                var lis ="";
-                for(var i=0;i< datas.length;i++){
-                    lis += "<li >"+datas[i]+"</li>";
-                }
-                return lis;
-            });
-        }
-
-
+        /**        功能菜单 End       **/
 
     });
 
