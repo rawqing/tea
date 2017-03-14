@@ -1,7 +1,7 @@
 package tea
 
 class T_plan {
-    String id;
+    int id;
     String p_name;
     Date predictStart;
     Date predictStop;
@@ -29,7 +29,7 @@ class T_plan {
     static belongsTo = [product:Product]
 
     static mapping = {
-        id generator: 'uuid'
+        id generator:'identity'
     }
 
     String toString(){

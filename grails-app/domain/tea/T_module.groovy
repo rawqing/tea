@@ -1,7 +1,7 @@
 package tea
 
 class T_module {
-    String id
+    int id
     String m_name=""
     String descr
     String m_author
@@ -14,7 +14,7 @@ class T_module {
     static hasMany = [t_case:T_case]
     static belongsTo = [product:Product]
     static mapping = {
-        id generator: 'uuid'
+        id generator:'identity'
     }
 
     String toString(){

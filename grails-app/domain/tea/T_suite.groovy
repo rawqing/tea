@@ -1,7 +1,7 @@
 package tea
 
 class T_suite {
-    String id
+    int id
     String s_name
     String caseSuites
     String descr
@@ -18,7 +18,7 @@ class T_suite {
     static belongsTo = [product:Product]
 
     static mapping = {
-        id generator: 'uuid'
+        id generator:'identity'
     }
 
     String toString(){

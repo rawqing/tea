@@ -1,7 +1,7 @@
 package tea
 
 class T_case {
-    String id
+    int id
     String c_name=""
     String precondition
     Integer prio
@@ -25,7 +25,7 @@ class T_case {
     static hasMany = [steps:T_step]
     static belongsTo = [t_module:T_module]
     static mapping = {
-        id generator: 'uuid'
+        id generator:'identity'
     }
 
     String toString(){

@@ -1,7 +1,7 @@
 package tea
 
 class T_step {
-    String id
+    int id
     String s_step
     String s_expect
     String s_author
@@ -14,6 +14,6 @@ class T_step {
 
     static belongsTo = [t_case:T_case]
     static mapping = {
-        id generator: 'uuid'
+        id generator:'identity'
     }
 }

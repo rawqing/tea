@@ -7,8 +7,10 @@ class Film {
     String uri
 
     static constraints = {
-        id generator:'sequence'
         table_name blank: false
         target_id blank: false
+    }
+    static mapping = {
+        id generator:'identity'
     }
 }

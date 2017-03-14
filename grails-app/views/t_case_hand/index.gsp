@@ -37,7 +37,7 @@
             </div>
             <div class="row">
                 <div class="col-lg-3 main-chart">
-                    <div id="treeview7" class=""></div>
+                    <div id="treeview" class=""></div>
                 </div>
                 <div class="col-lg-9 ds">
                     <f:table collection="${tea.T_case.list()}" />
@@ -65,10 +65,10 @@
 
 <script>
     $(function(){
+        /**** 设置产品下拉选项  ****/
         var products = <%= products %>,
             sel = $('#product_select');
 
-        // 设置产品下拉选项
         sel.find('select').append(function () {
             var selects ="";
             for(var i=0;i< products.length;i++){
@@ -81,11 +81,12 @@
     /**        下拉选框设置完毕       **/
 
         /**        功能菜单 start       **/
+        var $treeview = $('#treeview');
         var loadMenu = function (productName){
             $.post("<g:createLink action='loadByProduct'/>",{"product":productName},function (data, status) {
                 if(status == "success"){
                     var newData = changeData(jQuery.extend(true, {}, defaultData) ,data);
-                    treeRefresh($('#treeview7'),newData);
+                    treeRefresh($treeview,newData);
                 }
             });
         };
@@ -93,7 +94,10 @@
             $obj.treeview({
                 color: "#428bca",
                 showBorder: false,
-                data: newData
+                data: newData,
+                onNodeSelected:function(event, node) {
+                    eventSelected(event,node);
+                }
             });
         };
         var selectedProduct = $.trim($(sel.find('select')).val());
@@ -110,6 +114,18 @@
             loadMenu(selectedProduct);
         });
         /**        功能菜单 End       **/
+        
+        /**        selected event start     **/
+        var eventSelected = function (event, node) {
+            if(node.parentId == null){
+                // 1 级节点被选择
+                $treeview.treeview('toggleNodeExpanded',[node]);
+            }else{
+                var parent = $treeview.treeview('getParent',node);
+                var pText = parent.text;
+                alert(pText)
+            }
+        };
 
     });
 
