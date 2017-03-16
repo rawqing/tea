@@ -28,33 +28,62 @@ class T_case_handController {
         def plans = t_planService.getPlanNamesByProduct(currentProduct)
         def suites = t_suiteService.getSuitesNamesByProduct(currentProduct)
 
-        def mm = t_moduleService.getModule([product: currentProduct ,name: "m1"])
-        println("mm >>> "+ mm)
-
         data = [module:modules ,plan:plans ,suite:suites] as JSON
         println(data)
         render(data)
     }
 
     def loadCase(){
+        def caseList,
+             caseCount;
         int max = Integer.parseInt(params.length)
         params.max = Math.min(max ?: 10, 100)
         params.offset = Integer.parseInt(params.start)
-        //
-//        t_suiteService.getCasesId("s1")
-        def c = t_caseService.getCaseBySuiteName("s2",productService.getProductByName("p1"),params)
-        println("c :"+ (c as JSON))
-
-//        def m = ["case_":[1,2,3],"suite_":[1]]
-//        def sm = m as JSON
-//        println(sm)
-        //
-        def caseList = T_case.list(params)
-        def caseCount = T_case.count
+        def pName = params.t_product
+        def action = params.t_action
+        def name = params.t_name
+        def product = pName?productService.getEnabledProductByName(pName):Product.get(2)
+        if(action){
+            switch (action){
+                case "all":
+                    caseList = t_caseService.getCases(product ,params)
+                    caseCount = t_caseService.getCount(product)
+                    break
+                case "module":
+                    if(name){
+                        def tmp = t_caseService.getCaseByModuleName(name ,product ,params)
+                        caseList = tmp.case
+                        caseCount = tmp.count
+                    }
+                    break
+                case "plan":
+                    if(name){
+                        def tmp = t_caseService.getCaseByPlanName(name ,product ,params)
+                        caseList = tmp.case
+                        caseCount = tmp.count
+                    }
+                    break
+                case "suite":
+                    if(name){
+                        def tmp = t_caseService.getCaseBySuiteName(name ,product ,params)
+                        caseList = tmp.case
+                        caseCount = tmp.count
+                    }
+                    break
+                default:
+                    caseList = t_caseService.getCases(product ,params)
+                    caseCount = t_caseService.getCount(product)
+            }
+        }else {
+            caseList = t_caseService.getCases(product ,params)
+            caseCount = t_caseService.getCount(product)
+        }
         def res = [recordsTotal: caseCount,
                    recordsFiltered: caseCount,
                    data: caseList
             ]
-        render res as JSON
+        def t = res as JSON
+        println(t)
+        render t
     }
 }

@@ -90,8 +90,33 @@
             return selects;
         });
         $('select').comboSelect();
-    /**        下拉选框设置完毕       **/
-
+        /**        下拉选框设置完毕       **/
+        /**       初始化表格      **/
+        var table = $('#show_case').DataTable({
+            "processing": true,
+            "serverSide": true,
+            "ajax": {
+                "url": "loadCase?t_product="+$.trim($(sel.find('select')).val()),
+                "dataSrc": "data"
+//                "data": {
+//                    "t_product":$.trim($(sel.find('select')).val())
+//                }
+            },
+            "columns": [
+                {"data": "id"},
+                {"data": "c_name"},
+                {"data": "judge"},
+                {"data": "prio"},
+                {"data": "lastUpdated"},
+                {"data": ""}
+            ],
+            "columnDefs": [{
+                "targets": -1,
+                "data": null,
+                "defaultContent": "<button>Edit!</button>"
+            }]
+        });
+        /**        表格初始化完毕       **/
         /**        功能菜单 start       **/
         var $treeview = $('#treeview');
         var loadMenu = function (productName){
@@ -116,7 +141,7 @@
         loadMenu(selectedProduct);
 
         /**
-         * 按产品名称查找模块名 , 并update 表格设置
+         * 按产品名称查找模块名
          */
         sel.find('select').change(function () {
             selectedProduct = $.trim($(this).val());
@@ -124,44 +149,33 @@
                 return;
             }
             loadMenu(selectedProduct);
+            reloadCases(selectedProduct,"" ,"")
         });
         /**        功能菜单 End       **/
         
         /**        selected event start     **/
-        %{--var list = <%= t_caseList %>;--}%
         var eventSelected = function (event, node) {
+            var product = $.trim($(sel.find('select')).val()),
+                action,
+                cName;
             if(node.parentId == null){
                 // 1 级节点被选择
-                $treeview.treeview('toggleNodeExpanded',[node]);
+                if(node.text == dataMapping[2][3]) {
+                    action = findMapping(node.text)
+                }
             }else{
                 var parent = $treeview.treeview('getParent',node);
-                var pText = parent.text;
-                alert(pText)
+                action = findMapping(parent.text);
+                cName = node.text;
+            }
+            if(! isEmpty(action)){
+                reloadCases(product ,action ,cName)
             }
         };
 
-
-        $('#show_case').dataTable( {
-//            "processing": true,
-            "serverSide": true,
-            "ajax": {
-                "url": "loadCase",
-                "dataSrc": "data"
-            },
-            "columns": [
-                { "data": "id" },
-                { "data": "c_name" },
-                { "data": "judge" },
-                { "data": "prio" },
-                { "data": "lastUpdated" },
-                { "data": "" }
-            ],
-            "columnDefs": [ {
-                "targets": -1,
-                "data": null,
-                "defaultContent": "<button>Edit!</button>"
-            } ]
-        } );
+        function reloadCases(product ,action ,cName) {
+            table.ajax.url("loadCase?t_product="+product+"&t_action="+action+"&t_name="+cName).load();
+        }
 
 
     });

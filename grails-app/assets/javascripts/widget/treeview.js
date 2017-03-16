@@ -1248,19 +1248,19 @@
 
 })(jQuery, window, document);
 
-var dataMapping = [['module','plan','suite'],[1,2,3]];
+var dataMapping = [['module','plan','suite','all'],[1,2,3,0],['模块','计划','系列','全部']];
 var defaultData = [
-    {text: '全部'},
+    {text: dataMapping[2][3]},
 	{
-        text: '模块',
+        text: dataMapping[2][0],
         nodes: [  ]
     },
     {
-        text: '计划',
+        text: dataMapping[2][1],
         nodes: [  ]
     },
     {
-        text: '系列',
+        text: dataMapping[2][2],
         nodes: [  ]
     }
 ];
@@ -1293,4 +1293,13 @@ function changeData(data , nodes) {
         }
     }
     return  data;
+}
+
+function findMapping(text) {
+	for(var j = 0;j<dataMapping[0].length ;j++){
+		if (text == dataMapping[2][j]){
+			return dataMapping[0][j]
+		}
+	}
+	return ""
 }

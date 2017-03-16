@@ -136,15 +136,27 @@ class T_caseService {
 
     def getCaseBySuiteName(String t_suiteName ,Product product ,settings){
         def cIds = t_suiteService.getCasesId(t_suiteName ,product)
-        return T_case.findAllByIdInList(cIds ,settings)
+        return [count: cIds.size(),case:T_case.findAllByIdInList(cIds ,settings)]
     }
     def getCaseByModuleName(String t_moduleName ,Product product ,settings){
-//        def t_module = t_moduleService.getModuleByName(t_moduleName)
-        T_module t_module = t_moduleService.getModule([product: product,name: t_moduleName])
-        return T_case.findAllByT_module(t_module,settings)
+        T_module t_module = t_moduleService.getModule(t_moduleName ,product)
+
+        return [count: T_case.countByT_module(t_module),
+                case:T_case.findAllByT_module(t_module,settings)
+        ]
     }
     def getCaseByPlanName(String planName ,Product product ,settings){
         def cIds = t_planService.getCasesIdByPlanName(planName ,product)
-        return T_case.findAllByIdInList(cIds ,settings)
+        return [count: cIds.size(),case:T_case.findAllByIdInList(cIds ,settings)]
+    }
+
+    def getCases(Product product ,setting){
+        return T_case.findAllByProduct(product ,setting)
+    }
+    def getCount(){
+        return T_case.getCount()
+    }
+    def getCount(Product product){
+        return T_case.countByProduct(product)
     }
 }

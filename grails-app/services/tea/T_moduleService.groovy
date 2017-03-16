@@ -13,26 +13,7 @@ class T_moduleService {
         return modules*.getM_name()
     }
 
-    def getModule(Map m){
-        if(m.id){
-            return T_module.get(m.id)
-        }
-        def a = T_module.createCriteria()
-        def c = a.list {
-            def sql = ""
-            def value = []
-            if(m.product){
-                sql += "product_id = ?"
-                value += m.product.getId()
-            }
-            if(m.name){
-                sql += sql?" AND ":""
-                sql += "m_name = ?"
-                value += m.name
-            }
-            println(sql)
-            sqlRestriction sql ,value
-        }
-        return c
+    def getModule(String name ,Product product ){
+        return T_module.findByM_nameAndProduct(name ,product)
     }
 }
