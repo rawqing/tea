@@ -34,11 +34,18 @@ class T_case_handController {
     }
 
     def loadCase(){
+        println(params)
+        println(params["order*"])
+
         def caseList,
              caseCount;
         int max = Integer.parseInt(params.length)
+        def sortColumn= params["order[0][column]"]
+        def sortTitle = t_caseService.showCaseTitle[sortColumn].get(0)
         params.max = Math.min(max ?: 10, 100)
         params.offset = Integer.parseInt(params.start)
+        params.sort = sortTitle ?: "id"
+        params.order = params["order[0][dir]"] ?: "asc"
         def pName = params.t_product
         def action = params.t_action
         def name = params.t_name

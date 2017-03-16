@@ -12,6 +12,8 @@ class T_caseService {
     def t_planService
     def productService
     def caseTitle= ["module","name","precondition","steps","expectation","prio","descr","keyword"]
+    def showCaseTitle = ["0":["id","id"] ,"1":["c_name","名称"] ,"2":["judge","评审结果"] ,
+                         "3":["prio","优先级"] ,"4":["lastUpdated","最后更新"],"5":["","操作"]]
     def nullableColumn = [2,6,7]
     String mUser = "admin"
     String showCase = "t_case_hand"

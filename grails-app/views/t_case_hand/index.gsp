@@ -47,7 +47,7 @@
                             <th>Id</th>
                             <th>名称</th>
                             <th>评审结果</th>
-                            <th>优先级.</th>
+                            <th>优先级</th>
                             <th>最后更新</th>
                             <th>Salary</th>
                         </tr>
