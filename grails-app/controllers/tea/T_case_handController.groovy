@@ -41,7 +41,7 @@ class T_case_handController {
         params.max = Math.min(max ?: 10, 100)
         params.offset = Integer.parseInt(params.start)
         //
-//        t_suiteService.getCasesIdBySuiteName("s1")
+//        t_suiteService.getCasesId("s1")
         def c = t_caseService.getCaseBySuiteName("s2",productService.getProductByName("p1"),params)
         println("c :"+ (c as JSON))
 

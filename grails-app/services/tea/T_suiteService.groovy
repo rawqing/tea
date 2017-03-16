@@ -11,12 +11,11 @@ class T_suiteService {
         def suites = T_suite.findAllByProduct(product)
         return suites*.getS_name()
     }
-    def getCasesIdBySuiteName(String suiteName){
-        def cList = []
-        def suite = T_suite.findByS_name(suiteName)
-        return getCasesIdBySuite(suite)
+    def getCasesId(String suiteName, Product product){
+        def suite = getSuite(suiteName ,product)
+        return getCasesId(suite)
     }
-    def getCasesIdBySuite(T_suite suite){
+    def getCasesId(T_suite suite){
         def cList = []
         def caseSet = suite.getCaseSuites()
         def cases = new JsonSlurper().parseText(caseSet) as Map
@@ -27,14 +26,20 @@ class T_suiteService {
         def sSet = cases[SUITE.suite_.name()] ?: null
         for(def sId : sSet){
             def childSuite = T_suite.get(sId)
-            cList += getCasesIdBySuite(childSuite)
+            cList += getCasesId(childSuite)
         }
         def oCList = cList.unique()
         println("OcList: "+oCList)
         return oCList
     }
 
-    def getSuiteById(int id){
+    def getSuite(int id){
         return T_suite.get(id)
+    }
+    def getSuite(String name ,Product product){
+        return T_suite.findByS_nameAndProduct(name ,product)
+    }
+    def getSuites(List<Integer> ids ){
+        return T_suite.findAllByIdInList(ids)
     }
 }

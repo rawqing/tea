@@ -16,6 +16,6 @@ class T_moduleServiceSpec extends Specification {
     }
 
     void "test something"() {
-       println(new T_moduleService().getModulesMap())
+
     }
 }

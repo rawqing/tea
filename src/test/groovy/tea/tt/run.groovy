@@ -10,7 +10,5 @@ class run {
         t()
 
     }
-   static def t={
-        println(t_moduleService.getModulesMap())
-    }
+
 }

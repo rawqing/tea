@@ -108,7 +108,8 @@ class T_caseService {
     }
 
     def createColumns(Product product){
-        def modulesNames = t_moduleService.getModulesMapByProduct(product).keySet()
+//        def modulesNames = t_moduleService.getModulesMapByProduct(product).keySet()
+        def modulesNames = t_moduleService.getModuleNamesByProduct(product)
         def columns = []
         for (int i = 0; i < caseTitle.size(); i++) {
             def col = [:]
@@ -134,15 +135,16 @@ class T_caseService {
     }
 
     def getCaseBySuiteName(String t_suiteName ,Product product ,settings){
-        def cIds = t_suiteService.getCasesIdBySuiteName(t_suiteName)
-        return T_case.findAllByIdInListAndProduct(cIds, product ,settings)
+        def cIds = t_suiteService.getCasesId(t_suiteName ,product)
+        return T_case.findAllByIdInList(cIds ,settings)
     }
     def getCaseByModuleName(String t_moduleName ,Product product ,settings){
-        def t_module = t_moduleService.getModuleByName(t_moduleName)
-        return T_case.findByT_moduleAndProduct(t_module ,product ,settings)
+//        def t_module = t_moduleService.getModuleByName(t_moduleName)
+        T_module t_module = t_moduleService.getModule([product: product,name: t_moduleName])
+        return T_case.findAllByT_module(t_module,settings)
     }
     def getCaseByPlanName(String planName ,Product product ,settings){
-        def cIds = t_planService.getCasesIdByPlanName(planName)
-        return T_case.findAllByIdInListAndProduct(cIds ,product,settings)
+        def cIds = t_planService.getCasesIdByPlanName(planName ,product)
+        return T_case.findAllByIdInList(cIds ,settings)
     }
 }

@@ -14,7 +14,7 @@ class T_new_caseController {
 
     def index() {
         [title:t_caseService.caseTitle as JSON ,
-         products:productService.getEnabledProductMap().keySet() as JSON,
+         products:productService.getEnabledProductNames() as JSON,
          nullable:t_caseService.nullableColumn as JSON
         ]
     }
@@ -42,9 +42,8 @@ class T_new_caseController {
 
     def productChange(){
         def productName = params.product
-        def pMap = productService.getEnabledProductMap()
-
-        def col =  t_caseService.createColumns(pMap[productName])
+        def product = productService.getEnabledProductByName(productName)
+        def col =  t_caseService.createColumns(product)
         println(col)
         render(col)
     }

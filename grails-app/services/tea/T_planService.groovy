@@ -13,8 +13,8 @@ class T_planService {
         return plans*.getP_name()
     }
 
-    def getCasesIdByPlanName(String name){
-        def plan = T_plan.findByP_name(name)
+    def getCasesIdByPlanName(String name , Product product){
+        def plan = getPlan(name ,product)
         return getCasesIdByPlan(plan)
     }
     def getCasesIdByPlan(T_plan t_plan){
@@ -23,12 +23,19 @@ class T_planService {
         def suites = new JsonSlurper().parseText(suiteSet) as Map
 
         def sSet = suites[SUITE.suite_.name()] ?: null
-        for(def sId : sSet){
-            def childSuite = t_suiteService.getSuiteById(sId)
-            cList += t_suiteService.getCasesIdBySuite(childSuite)
+        def sList = t_suiteService.getSuites(sSet)
+        for(def childSuite : sList){
+            cList += t_suiteService.getCasesId(childSuite)
         }
         def oCList = cList.unique()
         println("OcList: "+oCList)
         return oCList
+    }
+
+    def getPlan(String name){
+        return T_plan.findByP_name(name)
+    }
+    def getPlan(String name ,Product product){
+        return T_plan.findByP_nameAndProduct(name,product)
     }
 }
