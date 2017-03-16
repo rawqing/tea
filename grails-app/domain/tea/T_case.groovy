@@ -23,7 +23,7 @@ class T_case {
         descr(blank: true,nullable: true)
     }
     static hasMany = [steps:T_step]
-    static belongsTo = [t_module:T_module]
+    static belongsTo = [t_module:T_module ,product:Product]
     static mapping = {
         id generator:'identity'
     }

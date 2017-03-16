@@ -18,7 +18,8 @@
     <asset:javascript src="widget/treeview.css"/>
     <asset:stylesheet src="widget/select.css"/>
     <asset:javascript src="widget/select.js"/>
-
+    <asset:stylesheet src="widget/jquery.dataTables-1.10.13.css"/>
+    <asset:javascript src="widget/jquery.dataTables-1.10.13.js"/>
 </head>
 <body>
 <section id="container" >
@@ -40,7 +41,18 @@
                     <div id="treeview" class=""></div>
                 </div>
                 <div class="col-lg-9 ds">
-                    <f:table collection="${tea.T_case.list()}" />
+                    <table id="show_case" class="display" cellspacing="0" width="100%">
+                        <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>名称</th>
+                            <th>评审结果</th>
+                            <th>优先级.</th>
+                            <th>最后更新</th>
+                            <th>Salary</th>
+                        </tr>
+                        </thead>
+                    </table>
                 </div>
             </div>
         </section>
@@ -116,6 +128,7 @@
         /**        功能菜单 End       **/
         
         /**        selected event start     **/
+        %{--var list = <%= t_caseList %>;--}%
         var eventSelected = function (event, node) {
             if(node.parentId == null){
                 // 1 级节点被选择
@@ -126,6 +139,30 @@
                 alert(pText)
             }
         };
+
+
+        $('#show_case').dataTable( {
+//            "processing": true,
+            "serverSide": true,
+            "ajax": {
+                "url": "loadCase",
+                "dataSrc": "data"
+            },
+            "columns": [
+                { "data": "id" },
+                { "data": "c_name" },
+                { "data": "judge" },
+                { "data": "prio" },
+                { "data": "lastUpdated" },
+                { "data": "" }
+            ],
+            "columnDefs": [ {
+                "targets": -1,
+                "data": null,
+                "defaultContent": "<button>Edit!</button>"
+            } ]
+        } );
+
 
     });
 

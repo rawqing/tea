@@ -6,13 +6,26 @@ import grails.transaction.Transactional
 @Transactional
 class ProductService {
 
-    def getProductMap(){
-        def product = Product.findAll()
-        def pMap = [:]
-        for(def tp : product){
-            pMap += [(tp.getP_name()):tp]
+
+    def getProductByName(String name){
+        return Product.findByP_name(name)
+    }
+    def getEnabledProductByName(String name){
+        println(name)
+        def query = Product.where {
+            p_name == name && p_status != STATUS.disabled.name()
         }
-        return pMap
+//        return Product.findByP_nameAndP_statusNotEqual(name ,STATUS.disabled.name())
+        return query.find()
+    }
+    def getEnabledProductNames(){
+        def query = Product.where {
+            p_status != STATUS.disabled.name()
+        }
+//        def pn = Product.findByP_statusNotEqual(STATUS.disabled.name())*.getP_name()
+        def pn = query.findAll()*.getP_name()
+        println("pn >>>>> "+pn)
+        return pn
     }
 
     /**
@@ -31,7 +44,4 @@ class ProductService {
         return pMap
     }
 
-    def getEnabledProductByName(String name){
-        return Product.findByP_name(name)
-    }
 }

@@ -30,4 +30,33 @@ class T_moduleService {
     def getModulesMapByProductName(String name){
         return getModulesMapByProduct(productService.getEnabledProductByName(name))
     }
+
+    def getModuleNamesByProduct(Product product){
+        def modules = T_module.findAllByProduct(product)
+        return modules*.getM_name()
+    }
+
+    def getModuleByName(String name){
+        return T_module.findAllByM_name(name)
+    }
+
+    def getModule(Map m){
+        def a = T_module.createCriteria()
+        def c = a.list {
+            def sql = ""
+            def value = []
+            if(m.product){
+                sql += "product_id = ?"
+                value += m.product.getId()
+            }
+            if(m.name){
+                sql += sql?" AND ":""
+                sql += "m_name = ?"
+                value += m.name
+            }
+            println(sql)
+            sqlRestriction sql ,value
+        }
+        return c
+    }
 }

@@ -8,6 +8,9 @@ import groovy.json.JsonSlurper
 class T_caseService {
     def t_moduleService
     def filmService
+    def t_suiteService
+    def t_planService
+    def productService
     def caseTitle= ["module","name","precondition","steps","expectation","prio","descr","keyword"]
     def nullableColumn = [2,6,7]
     String mUser = "admin"
@@ -69,8 +72,10 @@ class T_caseService {
         if(cMap["name"]==null || "" == cMap["name"]){
             return
         }
+        def product = productService.getEnabledProductByName(productName)
+        def module = T_module.findByProductAndM_name(product ,cMap["module"])
 //        def m = t_moduleService.modulesMap[cMap["module"]]
-        def m = t_moduleService.getModulesMapByProductName(productName)[cMap["module"]]
+//        def m = t_moduleService.getModulesMapByProductName(productName)[cMap["module"]]
         T_case t_case = new T_case(
                 c_name: cMap["name"],
                 precondition: cMap["precondition"],
@@ -81,7 +86,8 @@ class T_caseService {
         for(T_step t_step : createSteps(cMap["steps"],cMap["expectation"],mUser)){
             t_case.addToSteps(t_step)
         }
-        t_case.setT_module(m)
+        t_case.setT_module(module)
+        t_case.setProduct(product)
         return t_case
     }
     def createSteps(String step_desc ,String expectation ,String user){
@@ -125,5 +131,18 @@ class T_caseService {
             columns += col
         }
         return columns as JSON
+    }
+
+    def getCaseBySuiteName(String t_suiteName ,Product product ,settings){
+        def cIds = t_suiteService.getCasesIdBySuiteName(t_suiteName)
+        return T_case.findAllByIdInListAndProduct(cIds, product ,settings)
+    }
+    def getCaseByModuleName(String t_moduleName ,Product product ,settings){
+        def t_module = t_moduleService.getModuleByName(t_moduleName)
+        return T_case.findByT_moduleAndProduct(t_module ,product ,settings)
+    }
+    def getCaseByPlanName(String planName ,Product product ,settings){
+        def cIds = t_planService.getCasesIdByPlanName(planName)
+        return T_case.findAllByIdInListAndProduct(cIds ,product,settings)
     }
 }
