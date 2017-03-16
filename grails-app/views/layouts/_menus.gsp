@@ -33,9 +33,8 @@
                     <span>测试计划</span>
                 </a>
                 <ul class="sub">
-                    <li><a  href="calendar.html">Calendar</a></li>
-                    <li><a  href="gallery.html">Gallery</a></li>
-                    <li><a  href="todo_list.html">Todo List</a></li>
+                    <li><a  href="calendar.html">计划日程</a></li>
+                    <li><a  href="gallery.html">系列维护</a></li>
                 </ul>
             </li>
             <li class="sub-menu">
@@ -44,9 +43,8 @@
                     <span>执行测试</span>
                 </a>
                 <ul class="sub">
-                    <li><a  href="blank.html">Blank Page</a></li>
-                    <li><a  href="login.html">Login</a></li>
-                    <li><a  href="lock_screen.html">Lock Screen</a></li>
+                    <li><a  href="blank.html">测试版本</a></li>
+                    <li><a  href="login.html">执行状态</a></li>
                 </ul>
             </li>
             <li class="sub-menu">
