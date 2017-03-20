@@ -34,9 +34,6 @@ class T_case_handController {
     }
 
     def loadCase(){
-        println(params)
-        println(params["order*"])
-
         def caseList,
              caseCount;
         int max = Integer.parseInt(params.length)

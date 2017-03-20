@@ -43,7 +43,7 @@
                     <span>执行测试</span>
                 </a>
                 <ul class="sub">
-                    <li><a  href="blank.html">测试版本</a></li>
+                    <li><a  href="/versioning">测试版本</a></li>
                     <li><a  href="login.html">执行状态</a></li>
                 </ul>
             </li>

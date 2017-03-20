@@ -14,8 +14,6 @@
     <asset:stylesheet src="style-responsive.css"/>
     <asset:javascript src="myjs/chart-master/Chart.js"/>
 
-    <asset:javascript src="widget/treeview.js"/>
-    <asset:javascript src="widget/treeview.css"/>
     <asset:stylesheet src="widget/select.css"/>
     <asset:javascript src="widget/select.js"/>
     <asset:stylesheet src="widget/jquery.dataTables-1.10.13.css"/>
@@ -34,22 +32,20 @@
                     </div>
                 </span>
                 <span>评审</span>
-                <span>新建</span>
+                <span><g:link action="create">新建</g:link></span>
             </div>
             <div class="row">
-                <div class="col-lg-3 main-chart">
-                    <div id="treeview" class=""></div>
-                </div>
-                <div class="col-lg-9 ds">
+
+                <div style=" margin-left: 18px;width: 98%;">
                     <table id="show_case" class="display" cellspacing="0" width="100%">
                         <thead>
                         <tr>
                             <th>Id</th>
-                            <th>名称</th>
-                            <th>评审结果</th>
-                            <th>优先级</th>
-                            <th>最后更新</th>
-                            <th>Salary</th>
+                            <th>platform</th>
+                            <th>edition</th>
+                            <th>version</th>
+                            <th>release time</th>
+                            <th>operate</th>
                         </tr>
                         </thead>
                     </table>
@@ -59,21 +55,21 @@
     </section>
 </section>
 
-<!-- js placed at the end of the document so the pages load faster -->
-<asset:javascript src="myjs/jquery.dcjqaccordion.2.7.js"/>
-<asset:javascript src="myjs/jquery.scrollTo.min.js"/>
-<asset:javascript src="myjs/jquery.nicescroll.js" />
-<asset:javascript src="myjs/jquery.sparkline.js"/>
+%{--<!-- js placed at the end of the document so the pages load faster -->--}%
+%{--<asset:javascript src="myjs/jquery.dcjqaccordion.2.7.js"/>--}%
+%{--<asset:javascript src="myjs/jquery.scrollTo.min.js"/>--}%
+%{--<asset:javascript src="myjs/jquery.nicescroll.js" />--}%
+%{--<asset:javascript src="myjs/jquery.sparkline.js"/>--}%
 
 
-<!--common script for all pages-->
-<asset:javascript src="myjs/common-scripts.js"/>
-<asset:javascript src="myjs/gritter/js/jquery.gritter.js"/>
-<asset:javascript src="myjs/gritter-conf.js"/>
+%{--<!--common script for all pages-->--}%
+%{--<asset:javascript src="myjs/common-scripts.js"/>--}%
+%{--<asset:javascript src="myjs/gritter/js/jquery.gritter.js"/>--}%
+%{--<asset:javascript src="myjs/gritter-conf.js"/>--}%
 
-<!--script for this page-->
-<asset:javascript src="myjs/sparkline-chart.js"/>
-<asset:javascript src="myjs/zabuto_calendar.js"/>
+%{--<!--script for this page-->--}%
+%{--<asset:javascript src="myjs/sparkline-chart.js"/>--}%
+%{--<asset:javascript src="myjs/zabuto_calendar.js"/>--}%
 
 <script>
     $(function(){
@@ -96,9 +92,7 @@
             "processing": true,
             "serverSide": true,
             "ajax": {
-//                "url": "loadCase?t_product="+$.trim($(sel.find('select')).val()),
-
-                "url": <g:createLink action="loadCase" params=[:]/> ,
+                "url": "loadVersioning?t_product="+$.trim($(sel.find('select')).val()),
                 "dataSrc": "data"
 //                "data": {
 //                    "t_product":$.trim($(sel.find('select')).val())
@@ -106,10 +100,10 @@
             },
             "columns": [
                 {"data": "id"},
-                {"data": "c_name"},
-                {"data": "judge"},
-                {"data": "prio"},
-                {"data": "lastUpdated"},
+                {"data": "platform"},
+                {"data": "edition"},
+                {"data": "version"},
+                {"data": "releaseTime"},
                 {"data": ""}
             ],
             "columnDefs": [{
@@ -120,27 +114,8 @@
         });
         /**        表格初始化完毕       **/
         /**        功能菜单 start       **/
-        var $treeview = $('#treeview');
-        var loadMenu = function (productName){
-            $.post("<g:createLink action='loadByProduct'/>",{"product":productName},function (data, status) {
-                if(status == "success"){
-                    var newData = changeData(jQuery.extend(true, {}, defaultData) ,data);
-                    treeRefresh($treeview,newData);
-                }
-            });
-        };
-        var treeRefresh = function($obj ,newData) {
-            $obj.treeview({
-                color: "#428bca",
-                showBorder: false,
-                data: newData,
-                onNodeSelected:function(event, node) {
-                    eventSelected(event,node);
-                }
-            });
-        };
+
         var selectedProduct = $.trim($(sel.find('select')).val());
-        loadMenu(selectedProduct);
 
         /**
          * 按产品名称查找模块名
@@ -150,33 +125,13 @@
             if(isEmpty(selectedProduct)){
                 return;
             }
-            loadMenu(selectedProduct);
-            reloadCases(selectedProduct,"" ,"")
+//            reloadCases(selectedProduct,"" ,"")
         });
         /**        功能菜单 End       **/
         
-        /**        selected event start     **/
-        var eventSelected = function (event, node) {
-            var product = $.trim($(sel.find('select')).val()),
-                action,
-                cName;
-            if(node.parentId == null){
-                // 1 级节点被选择
-                if(node.text == dataMapping[2][3]) {
-                    action = findMapping(node.text)
-                }
-            }else{
-                var parent = $treeview.treeview('getParent',node);
-                action = findMapping(parent.text);
-                cName = node.text;
-            }
-            if(! isEmpty(action)){
-                reloadCases(product ,action ,cName)
-            }
-        };
 
-        function reloadCases(product ,action ,cName) {
-            table.ajax.url("loadCase?t_product="+product+"&t_action="+action+"&t_name="+cName).load();
+        function reloadCases(product ,plan) {
+            table.ajax.url("loadVersioning?t_product="+product+"&t_plan="+plan).load();
         }
 
 
