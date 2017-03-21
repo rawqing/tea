@@ -20,7 +20,7 @@ class T_new_caseController {
     }
 
     @Transactional
-    def ajax(){
+    def saveCases(){
         String pc = params.case
         String p_name = params.product
         def t_cases = t_caseService.spitCases(pc,p_name)

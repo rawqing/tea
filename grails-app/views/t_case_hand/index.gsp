@@ -34,7 +34,7 @@
                     </div>
                 </span>
                 <span>评审</span>
-                <span>新建</span>
+                <span><g:link controller="t_new_case" action="index">新建</g:link></span>
             </div>
             <div class="row">
                 <div class="col-lg-3 main-chart">
@@ -59,22 +59,6 @@
     </section>
 </section>
 
-<!-- js placed at the end of the document so the pages load faster -->
-<asset:javascript src="myjs/jquery.dcjqaccordion.2.7.js"/>
-<asset:javascript src="myjs/jquery.scrollTo.min.js"/>
-<asset:javascript src="myjs/jquery.nicescroll.js" />
-<asset:javascript src="myjs/jquery.sparkline.js"/>
-
-
-<!--common script for all pages-->
-<asset:javascript src="myjs/common-scripts.js"/>
-<asset:javascript src="myjs/gritter/js/jquery.gritter.js"/>
-<asset:javascript src="myjs/gritter-conf.js"/>
-
-<!--script for this page-->
-<asset:javascript src="myjs/sparkline-chart.js"/>
-<asset:javascript src="myjs/zabuto_calendar.js"/>
-
 <script>
     $(function(){
         /**** 设置产品下拉选项  ****/
@@ -96,9 +80,7 @@
             "processing": true,
             "serverSide": true,
             "ajax": {
-//                "url": "loadCase?t_product="+$.trim($(sel.find('select')).val()),
-
-                "url": <g:createLink action="loadCase" params=[:]/> ,
+                "url": "${createLink(action: "loadCase")}?t_product="+$.trim($(sel.find('select')).val()),
                 "dataSrc": "data"
 //                "data": {
 //                    "t_product":$.trim($(sel.find('select')).val())
@@ -176,7 +158,7 @@
         };
 
         function reloadCases(product ,action ,cName) {
-            table.ajax.url("loadCase?t_product="+product+"&t_action="+action+"&t_name="+cName).load();
+            table.ajax.url("${createLink(action: "loadCase")}?t_product="+product+"&t_action="+action+"&t_name="+cName).load();
         }
 
 
