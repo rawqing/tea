@@ -1,4 +1,4 @@
-package versioning
+package tea
 
 import grails.transaction.Transactional
 import tea.Product

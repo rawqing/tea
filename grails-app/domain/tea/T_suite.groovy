@@ -6,8 +6,6 @@ class T_suite {
     String caseSuites
     String descr
 
-    String s_author
-
     Date dateCreated
     Date lastUpdated
     static constraints = {
@@ -15,7 +13,7 @@ class T_suite {
         descr(nullable: true)
     }
 
-    static belongsTo = [product:Product]
+    static belongsTo = [product:Product ,mAuthor:User]
 
     static mapping = {
         id generator:'identity'

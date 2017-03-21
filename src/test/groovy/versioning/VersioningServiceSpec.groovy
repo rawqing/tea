@@ -2,6 +2,7 @@ package versioning
 
 import grails.test.mixin.TestFor
 import spock.lang.Specification
+import tea.VersioningService
 
 /**
  * See the API for {@link grails.test.mixin.services.ServiceUnitTestMixin} for usage instructions

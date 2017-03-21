@@ -9,9 +9,8 @@ class T_plan {
     Date realityStop;
     //新建时状态为new , 其他时刻记录该plan的执行状态
     String p_status;
-    String hasSuites;
+//    String hasSuites; //计划不直接关联用例 , 而是分摊到每个版本
     String descr;
-    String p_author
 
     Date dateCreated
     Date lastUpdated
@@ -22,11 +21,10 @@ class T_plan {
         predictStop(nullable: true)
         realityStart(nullable: true)
         realityStop(nullable: true)
-        hasSuites(nullable: true)
         descr(nullable: true)
 
     }
-    static belongsTo = [product:Product]
+    static belongsTo = [product:Product ,mAuthor:User]
 
     static mapping = {
         id generator:'identity'

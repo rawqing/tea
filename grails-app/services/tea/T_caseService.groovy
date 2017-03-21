@@ -15,7 +15,7 @@ class T_caseService {
     def showCaseTitle = ["0":["id","id"] ,"1":["c_name","名称"] ,"2":["judge","评审结果"] ,
                          "3":["prio","优先级"] ,"4":["lastUpdated","最后更新"],"5":["","操作"]]
     def nullableColumn = [2,6,7]
-    String mUser = "admin"
+    User mUser = User.get(1)
     String showCase = "t_case_hand"
 
     def serviceMethod() {
@@ -83,16 +83,16 @@ class T_caseService {
                 precondition: cMap["precondition"],
                 prio: cMap["prio"] as Integer,
                 descr: cMap["descr"],
-                keyword: cMap["keyword"],
-                c_author: mUser);
+                keyword: cMap["keyword"]);
         for(T_step t_step : createSteps(cMap["steps"],cMap["expectation"],mUser)){
             t_case.addToSteps(t_step)
         }
         t_case.setT_module(module)
         t_case.setProduct(product)
+        t_case.setmAuthor(mUser)
         return t_case
     }
-    def createSteps(String step_desc ,String expectation ,String user){
+    def createSteps(String step_desc ,String expectation ,User user){
         def sd = step_desc.split("\n")
         def es = expectation.split("\n")
         def steps = []
@@ -103,7 +103,7 @@ class T_caseService {
             }catch(ArrayIndexOutOfBoundsException a){
                 ex = ""
             }catch(Exception e){e.printStackTrace()}
-            T_step step = new T_step(s_step:sd[i],s_expect: ex ,s_author: user)
+            T_step step = new T_step(s_step:sd[i],s_expect: ex ,mAuthor: user)
             steps += step
         }
         return steps

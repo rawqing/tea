@@ -8,22 +8,21 @@ class T_case {
     String descr
     String keyword
     String judge
-    String c_author
 
     Date dateCreated
     Date lastUpdated
 
     static constraints = {
         c_name(blank: false)
-        c_author(blank: false)
 
         precondition(blank: true,nullable: true)
         judge(blank: true,nullable: true)
         keyword(blank: true,nullable: true)
         descr(blank: true,nullable: true)
+        versioning(nullable: true)
     }
     static hasMany = [steps:T_step]
-    static belongsTo = [t_module:T_module ,product:Product]
+    static belongsTo = [t_module:T_module ,product:Product ,versioning:Versioning ,mAuthor:User]
     static mapping = {
         id generator:'identity'
     }

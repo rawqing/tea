@@ -4,7 +4,6 @@ class T_step {
     int id
     String s_step
     String s_expect
-    String s_author
 
     Date dateCreated
     Date lastUpdated
@@ -12,7 +11,7 @@ class T_step {
     static constraints = {
     }
 
-    static belongsTo = [t_case:T_case]
+    static belongsTo = [t_case:T_case ,mAuthor:User]
     static mapping = {
         id generator:'identity'
     }

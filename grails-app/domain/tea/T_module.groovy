@@ -4,7 +4,6 @@ class T_module {
     int id
     String m_name=""
     String descr
-    String m_author
 
     Date dateCreated
     Date lastUpdated
@@ -12,7 +11,7 @@ class T_module {
     static constraints = {
     }
     static hasMany = [t_case:T_case]
-    static belongsTo = [product:Product]
+    static belongsTo = [product:Product ,mAuthor:User]
     static mapping = {
         id generator:'identity'
     }
