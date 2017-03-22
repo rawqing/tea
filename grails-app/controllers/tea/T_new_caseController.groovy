@@ -10,6 +10,7 @@ class T_new_caseController {
     def t_caseService
     def t_moduleService
     def productService
+    def versioningService
 
 
     def index() {
@@ -36,7 +37,7 @@ class T_new_caseController {
 //        def mo = t_moduleService.getModulesMap()
 //        println(mo)
 //        println(t_caseService.createColumns())
-
+        versioningService.getVersioningNames()
         render "changed"
     }
 

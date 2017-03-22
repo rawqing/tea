@@ -11,11 +11,12 @@ class T_caseService {
     def t_suiteService
     def t_planService
     def productService
+    def versioningService
     def caseTitle= ["module","name","precondition","steps","expectation","prio","descr","keyword"]
     def showCaseTitle = ["0":["id","id"] ,"1":["c_name","名称"] ,"2":["judge","评审结果"] ,
                          "3":["prio","优先级"] ,"4":["lastUpdated","最后更新"],"5":["","操作"]]
     def nullableColumn = [2,6,7]
-    User mUser = User.get(1)
+
     String showCase = "t_case_hand"
 
     def serviceMethod() {
@@ -76,6 +77,7 @@ class T_caseService {
         }
         def product = productService.getEnabledProductByName(productName)
         def module = T_module.findByProductAndM_name(product ,cMap["module"])
+        def mUser = User.get(1)
 //        def m = t_moduleService.modulesMap[cMap["module"]]
 //        def m = t_moduleService.getModulesMapByProductName(productName)[cMap["module"]]
         T_case t_case = new T_case(
@@ -138,18 +140,18 @@ class T_caseService {
 
     def getCaseBySuiteName(String t_suiteName ,Product product ,settings){
         def cIds = t_suiteService.getCasesId(t_suiteName ,product)
-        return [count: cIds.size(),case:T_case.findAllByIdInList(cIds ,settings)]
+        return [count: cIds.size(),case:T_case.findAllByIdInList(cIds ,settings)?:[]]
     }
     def getCaseByModuleName(String t_moduleName ,Product product ,settings){
         T_module t_module = t_moduleService.getModule(t_moduleName ,product)
 
         return [count: T_case.countByT_module(t_module),
-                case:T_case.findAllByT_module(t_module,settings)
+                case:T_case.findAllByT_module(t_module,settings)?:[]
         ]
     }
-    def getCaseByPlanName(String planName ,Product product ,settings){
-        def cIds = t_planService.getCasesIdByPlanName(planName ,product)
-        return [count: cIds.size(),case:T_case.findAllByIdInList(cIds ,settings)]
+    def getCasesByVersionName(String verName ,Product product ,settings){
+        def ver = versioningService.getVersioning(product ,verName)
+        return [count: T_case.countByVersioning(ver),case: T_case.findByVersioning(ver ,settings)?:[]]
     }
 
     def getCases(Product product ,setting){

@@ -86,7 +86,7 @@
                 {"data": "id"},
                 {"data": "platform"},
                 {"data": "edition"},
-                {"data": "version"},
+                {"data": "t_version"},
                 {"data": "releaseTime"},
                 {"data": ""}
             ],

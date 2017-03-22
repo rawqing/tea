@@ -29,19 +29,17 @@ class VersioningController {
         params.order = params["order[0][dir]"] ?: "asc"
 
         if(pName && planName){
-
+            def product = productService.getEnabledProductByName(pName)
+            def plan = t_planService.getPlan(planName ,product)
+            def tmp = versioningService.getAllVersioning(plan , params)
+            versionList = tmp.versions
+            versionCount = tmp.count
         }else{
             if(pName){
                 def product = productService.getEnabledProductByName(pName)
 
                 println("pr >>>"+ product)
-                def tmp = versioningService.getVersioning(product ,params)
-                versionList = tmp.versions
-                versionCount = tmp.count
-            }
-            if(planName){
-                def plan = t_planService.getPlan(planName)
-                def tmp = versioningService.getVersioning(plan , params)
+                def tmp = versioningService.getAllVersioning(product ,params)
                 versionList = tmp.versions
                 versionCount = tmp.count
             }

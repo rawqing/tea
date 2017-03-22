@@ -5,14 +5,12 @@ class Versioning {
     String platform
     String edition
     String t_version
+
     Date releaseTime
-
-    String author
-
     Date dateCreated
 
     static constraints = {
-
+        plan(nullable: true)
     }
 
     static mapping = {

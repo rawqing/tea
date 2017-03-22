@@ -195,16 +195,10 @@
             });
         });
         jQuery("#te").click(function () {
-            var map = {
-                "name" : "华仔",
-                "realname":"刘德华"
-            };
-            var m = {"m":"n"};
-            alert(m[0]);
-//            for (var key in map) {
-//                alert("map["+key+"]"+map[key]);
-//            }
+            jQuery.post("${createLink(action: "modified")}",{"data":"hello"},function (data) {
+//                    alert("Data Loaded: " + data);
 
+            });
         });
 
     });

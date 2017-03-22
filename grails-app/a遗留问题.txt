@@ -4,4 +4,5 @@
                                  word-wrap:break-word;
                                  white-space: pre-line;
                              }
-3.
+3. A different object with the same identifier value was already associated with the session
+                        V --- 不能使用成员变量来从数据库获取数据  , 这样将不在一个事务里

@@ -1248,7 +1248,7 @@
 
 })(jQuery, window, document);
 
-var dataMapping = [['module','plan','suite','all'],[1,2,3,0],['模块','计划','系列','全部']];
+var dataMapping = [['module','ver','suite','all'],[1,2,3,0],['模块','版本','系列','全部']];
 var defaultData = [
     {text: dataMapping[2][3]},
 	{
@@ -1267,7 +1267,7 @@ var defaultData = [
 /**
  * 用于更改{@link defaultData}中nodes的内容
  * @param data 如 defaultData
- * @param nodes 如:'{"module":["m1","M2"],"suite":["s1","s2"],"plan":["p1","p2"]}'
+ * @param nodes 如:'{"module":["m1","M2"],"suite":["s1","s2"],"ver":["p1","p2"]}'
  * @returns {*}
  */
 function changeData(data , nodes) {

@@ -10,6 +10,7 @@ class T_case_handController {
     def t_planService
     def t_suiteService
     def t_caseService
+    def versioningService
 
     def index(Integer max) {
         [
@@ -26,9 +27,10 @@ class T_case_handController {
 
         def modules = t_moduleService.getModuleNamesByProduct(currentProduct)
         def plans = t_planService.getPlanNamesByProduct(currentProduct)
+        def ver = versioningService.getVersioningNames()
         def suites = t_suiteService.getSuitesNamesByProduct(currentProduct)
 
-        data = [module:modules ,plan:plans ,suite:suites] as JSON
+        data = [module:modules ,ver:ver ,suite:suites] as JSON
         println(data)
         render(data)
     }
@@ -60,9 +62,9 @@ class T_case_handController {
                         caseCount = tmp.count
                     }
                     break
-                case "plan":
+                case "ver":
                     if(name){
-                        def tmp = t_caseService.getCaseByPlanName(name ,product ,params)
+                        def tmp = t_caseService.getCasesByVersionName(name ,product ,params)
                         caseList = tmp.case
                         caseCount = tmp.count
                     }
