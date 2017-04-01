@@ -28,6 +28,7 @@ class T_plan {
 
     static mapping = {
         id generator:'identity'
+        descr type: "text"
     }
 
     String toString(){

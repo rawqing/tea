@@ -17,6 +17,8 @@ class T_suite {
 
     static mapping = {
         id generator:'identity'
+        descr type: "text"
+        caseSuites type: "text"
     }
 
     String toString(){

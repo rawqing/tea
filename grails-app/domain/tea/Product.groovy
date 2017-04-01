@@ -17,6 +17,7 @@ class Product {
 
     static mapping = {
         id generator:'identity'
+        descr type: "text"
     }
 
     String toString(){

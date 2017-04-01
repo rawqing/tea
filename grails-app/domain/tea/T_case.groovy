@@ -25,6 +25,8 @@ class T_case {
     static belongsTo = [t_module:T_module ,product:Product ,versioning:Versioning ,mAuthor:User]
     static mapping = {
         id generator:'identity'
+        descr type: "text"
+
     }
 
     String toString(){

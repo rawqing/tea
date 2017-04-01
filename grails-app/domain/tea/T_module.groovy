@@ -14,6 +14,7 @@ class T_module {
     static belongsTo = [product:Product ,mAuthor:User]
     static mapping = {
         id generator:'identity'
+        descr type: "text"
     }
 
     String toString(){

@@ -5,6 +5,7 @@ class Versioning {
     String platform
     String edition
     String t_version
+    String descr
 
     Date releaseTime
     Date dateCreated
@@ -15,6 +16,7 @@ class Versioning {
 
     static mapping = {
         id generator:'identity'
+        descr type: "text"
     }
 
     static belongsTo = [plan:T_plan ,product:Product ,mAuthor:User]
