@@ -54,6 +54,6 @@ class VersioningController {
     }
 
     def create(){
-
+//        render products:productService.getEnabledProductNames() as JSON
     }
 }
