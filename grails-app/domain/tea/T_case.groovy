@@ -19,10 +19,9 @@ class T_case {
         judge(blank: true,nullable: true)
         keyword(blank: true,nullable: true)
         descr(blank: true,nullable: true)
-        versioning(nullable: true)
     }
     static hasMany = [steps:T_step]
-    static belongsTo = [t_module:T_module ,product:Product ,versioning:Versioning ,mAuthor:User]
+    static belongsTo = [product:Product ,mAuthor:User]
     static mapping = {
         id generator:'identity'
         descr type: "text"
