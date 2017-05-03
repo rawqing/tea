@@ -6,7 +6,7 @@ import groovy.json.JsonSlurper
 
 @Transactional
 class T_caseService {
-    def t_moduleService
+    def moduleService
     def filmService
     def t_suiteService
     def t_planService
@@ -76,10 +76,11 @@ class T_caseService {
             return
         }
         def product = productService.getEnabledProductByName(productName)
-        def module = T_module.findByProductAndM_name(product ,cMap["module"])
+        def module = Module.findByProductAndM_name(product ,cMap["module"])
+        //如果module不存在则创建
         def mUser = User.get(1)
-//        def m = t_moduleService.modulesMap[cMap["module"]]
-//        def m = t_moduleService.getModulesMapByProductName(productName)[cMap["module"]]
+//        def m = moduleService.modulesMap[cMap["module"]]
+//        def m = moduleService.getModulesMapByProductName(productName)[cMap["module"]]
         T_case t_case = new T_case(
                 c_name: cMap["name"],
                 precondition: cMap["precondition"],
@@ -89,7 +90,7 @@ class T_caseService {
         for(T_step t_step : createSteps(cMap["steps"],cMap["expectation"],mUser)){
             t_case.addToSteps(t_step)
         }
-        t_case.setT_module(module)
+        t_case.setModule(module)
         t_case.setProduct(product)
         t_case.setmAuthor(mUser)
         return t_case
@@ -112,8 +113,8 @@ class T_caseService {
     }
 
     def createColumns(Product product){
-//        def modulesNames = t_moduleService.getModulesMapByProduct(product).keySet()
-        def modulesNames = t_moduleService.getModuleNamesByProduct(product)
+//        def modulesNames = moduleService.getModulesMapByProduct(product).keySet()
+        def modulesNames = moduleService.getModuleNamesByProduct(product)
         def columns = []
         for (int i = 0; i < caseTitle.size(); i++) {
             def col = [:]
@@ -142,11 +143,11 @@ class T_caseService {
         def cIds = t_suiteService.getCasesId(t_suiteName ,product)
         return [count: cIds.size(),case:T_case.findAllByIdInList(cIds ,settings)?:[]]
     }
-    def getCaseByModuleName(String t_moduleName ,Product product ,settings){
-        T_module t_module = t_moduleService.getModule(t_moduleName ,product)
+    def getCaseByModuleName(String moduleName ,Product product ,settings){
+        Module module = moduleService.getModule(moduleName ,product)
 
-        return [count: T_case.countByT_module(t_module),
-                case:T_case.findAllByT_module(t_module,settings)?:[]
+        return [count: T_case.countByModule(module),
+                case:T_case.findAllByModule(module,settings)?:[]
         ]
     }
     def getCasesByVersionName(String verName ,Product product ,settings){

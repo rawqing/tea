@@ -132,3 +132,7 @@ environments:
 grails:
     gorm:
         failOnError: true
+    controllers:
+        upload:
+        maxFileSize: 26214400
+        maxRequestSize: 26214400

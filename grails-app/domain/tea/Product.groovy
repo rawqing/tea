@@ -14,6 +14,7 @@ class Product {
     }
 
     static belongsTo = [mAuthor:User]
+//    static hasOne = [film:Film]
 
     static mapping = {
         id generator:'identity'

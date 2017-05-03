@@ -2,7 +2,9 @@ package tea
 
 class Module {
     int id
-    String m_name=""
+    String m_name
+    String path
+    String pathMapping
     String descr
 
     Date dateCreated
@@ -10,9 +12,11 @@ class Module {
 
     static constraints = {
         m_name(blank: false)
+        path(nullable: true)
+        pathMapping(nullable: true)
+        descr(nullable: true)
     }
-    static hasMany = [submodule:Module ,t_case:T_case]
-    static mappedBy = [ submodule: "submodule" ]
+    static hasMany = [t_case:T_case]
     static belongsTo = [product:Product ,mAuthor:User]
 
     static mapping = {

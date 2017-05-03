@@ -1,6 +1,6 @@
 <%@ page import="tea.T_case" %>
 <!doctype html>
-<html>
+<html xmlns="http://www.w3.org/1999/html">
 <head>
     <meta name="layout" content="my"/>
 
@@ -31,6 +31,13 @@
                 <span>产品</span>
                 <span>评审</span>
                 <span>新建</span>
+            </div>
+            <div>
+                <g:uploadForm action="upload" method="post">
+                    请选择文件 :<input type="file" id="cases_file" name="cases_file"/>
+                    <input type="submit" value="上传">
+                <p>
+                </g:uploadForm>
             </div>
             <div id="product_select">
                 <select>
