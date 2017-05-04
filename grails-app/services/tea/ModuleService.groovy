@@ -2,6 +2,7 @@ package tea
 
 import constant.Common
 import grails.transaction.Transactional
+import utils.Gadget
 
 @Transactional
 class ModuleService {
@@ -17,15 +18,11 @@ class ModuleService {
             respond(module.errors)
             return
         }
-        if(!module.save(flush:true)){
-            println(module.errors)
-        }
-        def m_id = module.getId()
+        module.save(flush:true)
     }
     def saveInitModule(Module module){
         def mName = module.getM_name()
-        def mid = saveModule(module)
-        Module cModule = Module.get(mid)
+        Module cModule = saveModule(module)
         cModule.setPath(mid.toString())
         cModule.setPathMapping(mName)
         updateModule(cModule)
@@ -44,26 +41,55 @@ class ModuleService {
         }
         module.save flush: true
     }
-    def cascadeSave(String moduleName){
-        String[] ms = moduleName.split(Common.cascade_separator)
-        if(ms.length == 1){
-            return saveModule(new Module(m_name: ms[0]))
-        }
-        Module parent = new Module(m_name: ms[0])
-        for(int i=1; i<ms.length ; i++){
-            parent = parent.setSubmodule()
+    def cascadeSave(String pathMapping , Product product){
+        Module module1 = Module.findByPathMapping(pathMapping)
+        if(module1) return module1
+        def ls = Gadget.subStringCrowdWith(pathMapping ,Common.cascade_separator)
+        if(ls.size() == 1){
+            Module m = Module.findByPathMapping(ls[0])
+            if(! m){
+                Module newM = new Module(m_name: ls[0] ,product: product ,mAuthor: User.get(1))
+                return saveInitModule(newM)
+            }
+            return m
+        }else{
+            String path = ""
+            Module m = null
+            for(String s : ls){
+                m = Module.findByPathMapping(s)
+                if(!m) {
+                    //不带分隔符, 表示该module为元模块
+                    if (s.indexOf(Common.cascade_separator) < 0) {
+                        Module newM = new Module(m_name: s ,product: product ,mAuthor: User.get(1))
+                        path = saveInitModule(newM).getPath()
+                    }else{
+                        Module newM = new Module(m_name: Gadget.subEndStringWith(s,Common.cascade_separator)[1] ,
+                                product: product ,mAuthor: User.get(1) ,pathMapping: s)
+                        def sModule = saveModule(newM)
+                        //拼接path , 并更新path的值
+                        path = Gadget.separateAdd(path ,sModule.getId() ,Common.cascade_separator)
+                        sModule.setPath(path)
+                        m = updateModule(sModule)
+                    }
+                }else{
+                    path = m.getPath()
+                }
+            }
+            return m
         }
     }
 
-    def getModuleNamesByProduct(Product product){
+
+
+    def getModuleMappingsByProduct(Product product){
 
         def modules = Module.findAllByProduct(product)
         println("<<>>>>> modules"+modules)
-        return modules*.getM_name()
+        return modules*.getPathMapping()
     }
 
-    def getModule(String name ,Product product ){
-        return Module.findByM_nameAndProduct(name ,product)
+    def getModule(String mapping ,Product product ){
+        return Module.findByPathMappingAndProduct(mapping ,product)
     }
 
 }

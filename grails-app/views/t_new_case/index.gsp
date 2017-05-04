@@ -119,10 +119,10 @@
                 }
 //                var aaa = isQualifiedRows(hot,getChangeRows(change),nullableCol);
 //                alert(aaa);
-                jQuery.post("${createLink(action: "modified")}",{"data":JSON.stringify( change)},function (data) {
-//                    alert("Data Loaded: " + data);
+                %{--jQuery.post("${createLink(action: "modified")}",{"data":JSON.stringify( change)},function (data) {--}%
+%{--//                    alert("Data Loaded: " + data);--}%
 
-                });
+                %{--});--}%
             }};
 
 

@@ -76,11 +76,13 @@ class T_caseService {
             return
         }
         def product = productService.getEnabledProductByName(productName)
-        def module = Module.findByProductAndM_name(product ,cMap["module"])
+        def module = moduleService.getModule(cMap["module"] ,product)
+
         //如果module不存在则创建
+        if(!module){
+           module = moduleService.cascadeSave(cMap["module"] ,product)
+        }
         def mUser = User.get(1)
-//        def m = moduleService.modulesMap[cMap["module"]]
-//        def m = moduleService.getModulesMapByProductName(productName)[cMap["module"]]
         T_case t_case = new T_case(
                 c_name: cMap["name"],
                 precondition: cMap["precondition"],
@@ -113,15 +115,15 @@ class T_caseService {
     }
 
     def createColumns(Product product){
-//        def modulesNames = moduleService.getModulesMapByProduct(product).keySet()
-        def modulesNames = moduleService.getModuleNamesByProduct(product)
+//        def mPathMapping = moduleService.getModulesMapByProduct(product).keySet()
+        def mPathMapping = moduleService.getModuleMappingsByProduct(product)
         def columns = []
         for (int i = 0; i < caseTitle.size(); i++) {
             def col = [:]
             switch (caseTitle[i]){
                 case "module":
                     col = [type: 'autocomplete',
-                           source:modulesNames,
+                           source:mPathMapping,
                            strict: true,
                            allowInvalid: false
                     ]

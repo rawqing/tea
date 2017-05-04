@@ -41,9 +41,14 @@ class T_new_caseController {
     @Transactional
     def modified(){
         println(params.data)
-        Module m = new Module(m_name: "m1" ,mAuthor: User.get(1), product: Product.get(1))
-        moduleService.saveInitModule(m)
-
+        def product = Product.get(1)
+//        Module m = new Module(m_name: "m1" ,mAuthor: User.get(1), product: Product.get(1))
+//        Module mm = moduleService.saveInitModule(m)
+//        int mid = mm.getId()
+//        println("mid : "+ mid)
+        String pMapping = "m1/m2/m3/m5"
+        def m = moduleService.cascadeSave(pMapping ,product)
+        println(m.getId())
         render "changed"
     }
 
