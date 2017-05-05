@@ -93,7 +93,7 @@ class T_caseService {
         for(T_step t_step : createSteps(cMap["steps"],cMap["expectation"],mUser)){
             t_case.addToSteps(t_step)
         }
-        if(cMap["prio"]) t_case.setPrio(cMap["prio"] as Integer)
+        if(cMap["prio"] && cMap["prio"].isInteger()) t_case.setPrio(cMap["prio"] as Integer)
         t_case.setModule(module)
         t_case.setProduct(product)
         t_case.setmAuthor(mUser)
