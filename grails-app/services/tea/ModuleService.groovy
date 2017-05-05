@@ -23,7 +23,7 @@ class ModuleService {
     def saveInitModule(Module module){
         def mName = module.getM_name()
         Module cModule = saveModule(module)
-        cModule.setPath(mid.toString())
+        cModule.setPath(cModule.getId() as String)
         cModule.setPathMapping(mName)
         updateModule(cModule)
     }

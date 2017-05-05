@@ -13,8 +13,11 @@ class Upload {
 
     def initCaseData(String path){
         ExcelHandle eh = new ExcelHandle(path)
-        for(def oneCase : eh.getAllData()){
+        def allData = eh.getAllCases()
+        for(def oneCase : allData){
+//            println(oneCase)
 
         }
+        eh.close()
     }
 }

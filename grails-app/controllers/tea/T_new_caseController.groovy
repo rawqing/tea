@@ -1,6 +1,7 @@
 package tea
 
 import grails.converters.JSON
+import upAndDown.Upload
 import utils.ExcelHandle
 import utils.FileRW
 import grails.transaction.Transactional
@@ -60,6 +61,7 @@ class T_new_caseController {
         render(col)
     }
 
+    @Transactional
     def upload(){
         def req = request
         def p = params
@@ -76,8 +78,13 @@ class T_new_caseController {
         def path = rw.writeTempFile(uploadedFile)
         println(path)
         ExcelHandle eh = new ExcelHandle(path)
-        def out = eh.getTitle()
+        def allData = eh.getAllCases()
+        def cases = []
+        for(def data : allData){
+            cases.add(t_caseService.createCase(data ,"p1"))
+        }
+        t_caseService.saveAllCases(cases)
         eh.close()
-        render(out)
+        render("hello")
     }
 }

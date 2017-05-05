@@ -1,5 +1,6 @@
 package tea
 
+import constant.Conf
 import grails.converters.JSON
 import grails.transaction.Transactional
 import groovy.json.JsonSlurper
@@ -15,7 +16,7 @@ class T_caseService {
     def caseTitle= ["module","name","precondition","steps","expectation","prio","descr","keyword"]
     def showCaseTitle = ["0":["id","id"] ,"1":["c_name","名称"] ,"2":["judge","评审结果"] ,
                          "3":["prio","优先级"] ,"4":["lastUpdated","最后更新"],"5":["","操作"]]
-    def nullableColumn = [2,6,7]
+    def nullableColumn = Conf.nullableColumns
 
     String showCase = "t_case_hand"
 
@@ -86,12 +87,13 @@ class T_caseService {
         T_case t_case = new T_case(
                 c_name: cMap["name"],
                 precondition: cMap["precondition"],
-                prio: cMap["prio"] as Integer,
+//                prio: cMap["prio"] as Integer,
                 descr: cMap["descr"],
                 keyword: cMap["keyword"]);
         for(T_step t_step : createSteps(cMap["steps"],cMap["expectation"],mUser)){
             t_case.addToSteps(t_step)
         }
+        if(cMap["prio"]) t_case.setPrio(cMap["prio"] as Integer)
         t_case.setModule(module)
         t_case.setProduct(product)
         t_case.setmAuthor(mUser)

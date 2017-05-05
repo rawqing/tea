@@ -16,6 +16,7 @@ class T_case {
         c_name(blank: false)
 
         precondition(blank: true,nullable: true)
+        prio(blank: true,nullable: true)
         judge(blank: true,nullable: true)
         keyword(blank: true,nullable: true)
         descr(blank: true,nullable: true)

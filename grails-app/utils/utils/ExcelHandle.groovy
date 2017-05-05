@@ -1,5 +1,7 @@
 package utils
 
+import constant.Common
+import constant.Conf
 import org.apache.poi.ss.usermodel.Cell
 import org.apache.poi.ss.usermodel.DataFormatter
 import org.apache.poi.ss.usermodel.Row
@@ -29,7 +31,7 @@ class ExcelHandle {
          wb = WorkbookFactory.create(new File(excelPath))
          sheet = wb.getSheetAt(0)
          rowStart = Math.min(15,sheet.getFirstRowNum())
-         rowEnd = Math.max(1400,sheet.getLastRowNum())
+         rowEnd = Math.min(2000,sheet.getLastRowNum())
          lastColumn = Math.max(sheet.getRow(0).getLastCellNum(),5)
     }
 
@@ -46,19 +48,51 @@ class ExcelHandle {
     }
     def getRowText(int rowNumber){
         Row row = sheet.getRow(rowNumber)
+        return getRowText(row)
+    }
+    def getRowText(Row row){
         def rowText = []
         for(int i=0; i<lastColumn ; i++){
-            rowText += row.getCell(i ,Row.MissingCellPolicy.RETURN_BLANK_AS_NULL)
+            Cell cell = row?.getCell(i ,Row.MissingCellPolicy.RETURN_BLANK_AS_NULL)
+            rowText += formatter.formatCellValue(cell)
         }
         return rowText
     }
+
     def getAllData(){
         def allData = []
-        for(int i = rowStart +1 ;i < rowEnd ;i++){
-            allData += getRowText(i)
+        for(int i = rowStart +1 ;i <= rowEnd ;i++){
+            allData.add(getRowText(i))
         }
         return allData
     }
+    def getAllCases(){
+        def allData = []
+        def module = getRowText(rowStart+1).get(0)?:Common.default_module_name
+        for(int i = rowStart +1 ;i <= rowEnd ;i++){
+            def row = getRowText(i)
+            if(row.get(0)){
+                module = row.get(0)
+            }else{
+                row[0] = module
+            }
+            //校验一行中不能为空的数据
+            for(int j=0;j<row.size() ; j++){
+                if (!(j in Conf.nullableColumns)) {
+                    if(!row[j]){
+                        println("row : ${row} 第 ${j+1} 列数据为空 ,将不再继续读取 !")
+                        return allData
+                    }
+                }
+            }
+            allData.add(row)
+        }
+//        for(int i = rowStart +1 ;i <= rowEnd ;i++){
+//
+//        }
+        return allData
+    }
+
 
     def read(){
         Row row = sheet.getRow(0)
