@@ -4,6 +4,7 @@ class T_step {
     int id
     String s_step
     String s_expect
+    int site
 
     Date dateCreated
     Date lastUpdated

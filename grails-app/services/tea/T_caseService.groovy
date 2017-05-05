@@ -100,8 +100,8 @@ class T_caseService {
         return t_case
     }
     def createSteps(String step_desc ,String expectation ,User user){
-        def sd = step_desc.split("\n")
-        def es = expectation.split("\n")
+        def sd = step_desc.split(Conf.stepSeparate)
+        def es = expectation.split(Conf.stepSeparate)
         def steps = []
         for (int i = 0; i < sd.size(); i++) {
             String ex
@@ -110,7 +110,7 @@ class T_caseService {
             }catch(ArrayIndexOutOfBoundsException a){
                 ex = ""
             }catch(Exception e){e.printStackTrace()}
-            T_step step = new T_step(s_step:sd[i],s_expect: ex ,mAuthor: user)
+            T_step step = new T_step(s_step:sd[i],s_expect: ex ,mAuthor: user ,site: i+1)
             steps += step
         }
         return steps
