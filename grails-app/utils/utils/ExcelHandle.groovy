@@ -25,6 +25,7 @@ class ExcelHandle {
     int rowStart
     int rowEnd
     int lastColumn
+    boolean isWrite = false
 
      ExcelHandle(String excelPath){
         this.excelPath = excelPath
@@ -34,10 +35,27 @@ class ExcelHandle {
          rowEnd = Math.min(2000,sheet.getLastRowNum())
          lastColumn = Math.max(sheet.getRow(0).getLastCellNum(),5)
     }
-
+    ExcelHandle(String excelPath , boolean isWrite){
+        this.isWrite = isWrite
+        this.excelPath = excelPath
+        wb = new XSSFWorkbook()
+        sheet = wb.createSheet()
+    }
+    /**
+     * 格式化单元格数据 , 这里格式化为String
+     * @param cell
+     * @return String
+     */
     def readCellText(Cell cell){
         formatter.formatCellValue(cell)
     }
+
+    /****************************************  read data  *****************************************/
+
+    /**
+     * 获得表头
+     * @return
+     */
     def getTitle(){
         Row row = sheet.getRow(0)
         def titles = []
@@ -46,6 +64,11 @@ class ExcelHandle {
         }
         return titles
     }
+    /**
+     * 获得一行数据
+     * @param rowNumber
+     * @return
+     */
     def getRowText(int rowNumber){
         Row row = sheet.getRow(rowNumber)
         return getRowText(row)
@@ -54,11 +77,15 @@ class ExcelHandle {
         def rowText = []
         for(int i=0; i<lastColumn ; i++){
             Cell cell = row?.getCell(i ,Row.MissingCellPolicy.RETURN_BLANK_AS_NULL)
-            rowText += formatter.formatCellValue(cell)
+            rowText += readCellText(cell)
         }
         return rowText
     }
 
+    /**
+     * 单纯的获取xlsx表中的所有数据
+     * @return
+     */
     def getAllData(){
         def allData = []
         for(int i = rowStart +1 ;i <= rowEnd ;i++){
@@ -66,6 +93,10 @@ class ExcelHandle {
         }
         return allData
     }
+    /**
+     * 获取xlsx文件中的所有 {@link tea.T_case}
+     * @return List cases 数据 , 而不是实际的 T_case 对象
+     */
     def getAllCases(){
         def allData = []
         def module = getRowText(rowStart+1).get(0)?:Common.default_module_name
@@ -87,20 +118,33 @@ class ExcelHandle {
             }
             allData.add(row)
         }
-//        for(int i = rowStart +1 ;i <= rowEnd ;i++){
-//
-//        }
         return allData
     }
 
-
-    def read(){
-        Row row = sheet.getRow(0)
-        Cell cell = row.getCell(0)
-        cell.getCellTypeEnum()
-        String text = formatter.formatCellValue(cell)
+    /****************************************  write data  *****************************************/
+    def writeRow(Row row , List data){
+        for(int i = 0 ; i < data.size() ; i++){
+            row.createCell(i).setCellValue(data.get(i))
+        }
+    }
+    def writeRow(int rowNumber , List data){
+        writeRow(sheet.createRow(rowNumber) ,data)
     }
 
+    def writeTitle(){
+        writeRow(0 ,Conf.tpCaseTitle)
+    }
+
+    def writeAllData(List<List> data){
+        int i = 0
+        for(def rd : data){
+            ++i
+            writeRow(i , data)
+        }
+    }
+
+
+    /****************************************  close res *****************************************/
     def close(){
         wb.close()
     }

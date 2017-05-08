@@ -6,3 +6,5 @@
                              }
 3. A different object with the same identifier value was already associated with the session
                         V --- 不能使用成员变量来从数据库获取数据  , 这样将不在一个事务里
+
+设立检查事件 , 触发检查TP上是否有删除或增加的Case : 获取tp case id列表 , 对比数据库 , 内容更新, 延后处理

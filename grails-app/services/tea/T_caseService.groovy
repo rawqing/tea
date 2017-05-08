@@ -20,9 +20,6 @@ class T_caseService {
 
     String showCase = "t_case_hand"
 
-    def serviceMethod() {
-
-    }
     /**
      * 保存一个case , 并将其注册到 Film
      * @param t_case
@@ -142,6 +139,28 @@ class T_caseService {
         }
         return columns as JSON
     }
+
+    /************************** UPDATE ************************/
+    def updateCase(T_case tCase){
+        if (tCase == null) {
+            transactionStatus.setRollbackOnly()
+            notFound()
+            return
+        }
+        if (tCase.hasErrors()) {
+            transactionStatus.setRollbackOnly()
+            respond tCase.errors, view: 'edit'
+            return
+        }
+        tCase.save flush: true
+    }
+    def updateOuterId(T_case tCase ,def outerId){
+        def oid = (outerId as JSON).toString()
+        tCase.setOuterId(oid)
+        updateCase(tCase)
+    }
+
+    /*********************** GET ********************/
 
     def getCaseBySuiteName(String t_suiteName ,Product product ,settings){
         def cIds = t_suiteService.getCasesId(t_suiteName ,product)

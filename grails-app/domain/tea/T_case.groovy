@@ -8,6 +8,7 @@ class T_case {
     String descr
     String keyword
     String judge
+    String outerId
 
     Date dateCreated
     Date lastUpdated
@@ -20,6 +21,7 @@ class T_case {
         judge(blank: true,nullable: true)
         keyword(blank: true,nullable: true)
         descr(blank: true,nullable: true)
+        outerId(blank: true,nullable: true)
     }
     static hasMany = [steps:T_step]
     static belongsTo = [product:Product ,mAuthor:User , module:Module]
@@ -29,6 +31,9 @@ class T_case {
 
     }
 
+    def getModuleMapping(){
+        return this.module.getPathMapping()
+    }
     String toString(){
         return "${c_name}"
     }
