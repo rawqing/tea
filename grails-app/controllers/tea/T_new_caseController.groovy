@@ -52,21 +52,25 @@ class T_new_caseController {
 //        T_case t_case = new T_case(module: Module.get(10) ,mAuthor: user,c_name: "case01" ,product: product)
 //        t_case.setOuterId(([tp:"0031" ,zentao:"123"] as JSON).toString())
 //        t_caseService.saveCase(t_case)
-        def c = T_case.get(4)
+//        def c = T_case.get(4)
 //        def o = c.getOuterId()
 //        def oid = new JsonSlurper().parseText(o) as Map
 //        println("oid class = "+oid.getClass())
 //        def os = oid["tp"]
 //        println("os = "+os)
 
-        def tpc = new CasesHandle().createTpCase(c ,3514) as JSON
-        println(tpc)
-//
-        def oh = new OuterHttp("https://trubuzz.tpondemand.com/api/v1/testCases?resultInclude=[Id]")
+//        def tpc = new CasesHandle().createTpCase(c ,3514) as JSON
+//        println(tpc)
+////
+//        def oh = new OuterHttp("https://trubuzz.tpondemand.com/api/v1/testCases?resultInclude=[Id]")
 //        oh.doPost(tpc.toString())
 //        def oh = new OuterHttp("https://trubuzz.tpondemand.com/api/v1/testCases/6357")
 //        def oh = new OuterHttp("http://www.baidu.com")
 //        oh.doGet()
+
+        def cases = t_caseService.getCases(product ,OUTER.TP,params)
+        println cases.size()
+        println cases
         render "changed"
     }
 
@@ -108,12 +112,25 @@ class T_new_caseController {
     def pushTp(T_case tCase , int pid){
         def tpCasePath = "/testCases?resultInclude=[Id]"
         def callBack = { resp ,reader ->
-            def tid = reader.attributes()["Id"]
+            def tid = reader?.attributes()["Id"]
             t_caseService.updateOuterId(tCase ,["${OUTER.TP}":tid])
         }
         OuterHttp oh = new OuterHttp(Conf.tp_serverurl + tpCasePath )
         def tpc = new CasesHandle().createTpCase(tCase ,pid) as JSON
         oh.doPost(tpc.toString() ,callBack)
     }
-
+    def pushAll(){
+        def tpProjectId = params.tpProjectId
+        def pName = "p1"
+        int n = 0
+        def product = productService.getEnabledProductByName(pName)
+        if(tpProjectId && tpProjectId.isInteger()){
+            int tppid = tpProjectId as Integer
+            for(T_case tCase: t_caseService.getCases(product ,OUTER.TP ,params)){
+                pushTp(tCase ,tppid)
+                n++
+            }
+        }
+        render("push succeeded ${n} items")
+    }
 }

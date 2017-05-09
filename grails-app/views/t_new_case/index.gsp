@@ -40,7 +40,7 @@
                 </g:uploadForm>
             </div>
             <div>
-                <g:form action="pushTp" method="post">
+                <g:form action="pushAll" method="post">
                     project id :<input type="text" id="tpProjectId" name="tpProjectId" />
                     <input type="submit" value="push">
                 </g:form>

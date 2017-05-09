@@ -1,5 +1,8 @@
 package tea
 
+import constant.OUTER
+import groovy.json.JsonSlurper
+
 class T_case {
     int id
     String c_name=""
@@ -33,6 +36,11 @@ class T_case {
 
     def getModuleMapping(){
         return this.module.getPathMapping()
+    }
+    def getOuterId(OUTER outer){
+        if(this.outerId)    return
+        def oidMap = new JsonSlurper().parseText(this.outerId) as Map
+        return oidMap["${outer}"]
     }
     String toString(){
         return "${c_name}"

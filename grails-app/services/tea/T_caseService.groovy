@@ -1,6 +1,7 @@
 package tea
 
 import constant.Conf
+import constant.OUTER
 import grails.converters.JSON
 import grails.transaction.Transactional
 import groovy.json.JsonSlurper
@@ -180,6 +181,21 @@ class T_caseService {
 
     def getCases(Product product ,setting){
         return T_case.findAllByProduct(product ,setting)
+    }
+    def getCases(Product product ,OUTER outer ,setting){
+        def  c=T_case.createCriteria()
+        def res = c.list {
+            eq("product" ,product)
+            or {
+                isNull("outerId")
+                not {
+                    like("outerId" ,"%${outer.name()}%")
+                }
+            }
+
+            order("id" ,"asc")
+        }
+        return res
     }
     def getCount(){
         return T_case.getCount()
