@@ -12,5 +12,7 @@ class UrlMappings {
         "/"(view:"/index")
         "500"(view:'/error')
         "404"(view:'/notFound')
+        "/mock/**"(controller: "mockService",action: "index")
+        "/mock/_admin"(view: "_admin")
     }
 }

@@ -6,8 +6,8 @@ import spock.lang.Specification
 /**
  * See the API for {@link grails.test.mixin.web.ControllerUnitTestMixin} for usage instructions
  */
-@TestFor(T_moduleController)
-class T_moduleControllerSpec extends Specification {
+@TestFor(AutotestReportController)
+class AutotestReportControllerSpec extends Specification {
 
     def setup() {
     }

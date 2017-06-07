@@ -1,0 +1,12 @@
+{
+  "request": {
+    "method": "GET"
+  },
+  "response": {
+    "headers": {
+      "Content-Type": "text/json"
+    },
+    "status": 200,
+    "text": ""
+  }
+}

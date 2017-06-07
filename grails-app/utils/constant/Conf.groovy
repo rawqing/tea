@@ -12,4 +12,6 @@ class Conf {
 
     public static final tp_serverurl = "https://trubuzz.tpondemand.com/api/v1"
     public static final tp_authorization = 'Basic emhhby5kZW5nQGp1Y2FpZGFvLmNvbTphQTEyMzMyMQ=='
+
+    public static final  report_initially = "jcd_json_report"
 }

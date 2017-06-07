@@ -1,0 +1,14 @@
+说明:
+    作为mock server使用
+样例:
+    统一使用 json 格式,file也在json文件中定义 并指定文件位置(文件需放置在 _file 目录下)
+
+
+
+事项:
+    1. send starts and message
+        render("starts":404 ,"text":"page not found!")
+        这里的 text 字段充当了 message 的功能
+    2. request 中没有 method 字段 , 则表示匹配所有method
+    3. response 中的 text 字段只预设两种格式: json 和 String 其他格式延后处理
+        xml 格式使用 String 处理

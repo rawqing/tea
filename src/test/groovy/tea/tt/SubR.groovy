@@ -1,5 +1,7 @@
 package tea.tt
 
+import groovy.json.JsonSlurper
+
 /**
  * Created by king on 17/5/8.
  */
@@ -10,12 +12,17 @@ class SubR {
 
 
     def run(){
-        def c = {
-            def b = 'tea'
-            a + ' and ' + b //a refers to the variable a outside the closure,
-            //and is remembered by the closure
+       def path = "E:\\data\\workspace\\grails\\tea\\src\\main\\webapp\\mock\\hello.json"
+        File file = new File(path)
+        def jl = file.text
+        def json = new JsonSlurper().parseText(jl)
+        def hs = (json.rep.headers)
+        println(hs.getClass())
+        for(def h: hs){
+            println h.key
+            println h.value
         }
-        pc(c)
+        println "${json.req.metho == null}"
     }
     def pc(def c){
         println(c())

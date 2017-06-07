@@ -24,7 +24,7 @@ class T_new_caseController {
     def moduleService
     def productService
     def versioningService
-
+    def productName = "聚财道"
 
     def index() {
         [title:t_caseService.caseTitle as JSON ,
@@ -48,26 +48,6 @@ class T_new_caseController {
     def modified(){
         println(params.data)
         def product = Product.get(1)
-        def user = User.get(1)
-//        T_case t_case = new T_case(module: Module.get(10) ,mAuthor: user,c_name: "case01" ,product: product)
-//        t_case.setOuterId(([tp:"0031" ,zentao:"123"] as JSON).toString())
-//        t_caseService.saveCase(t_case)
-//        def c = T_case.get(4)
-//        def o = c.getOuterId()
-//        def oid = new JsonSlurper().parseText(o) as Map
-//        println("oid class = "+oid.getClass())
-//        def os = oid["tp"]
-//        println("os = "+os)
-
-//        def tpc = new CasesHandle().createTpCase(c ,3514) as JSON
-//        println(tpc)
-////
-//        def oh = new OuterHttp("https://trubuzz.tpondemand.com/api/v1/testCases?resultInclude=[Id]")
-//        oh.doPost(tpc.toString())
-//        def oh = new OuterHttp("https://trubuzz.tpondemand.com/api/v1/testCases/6357")
-//        def oh = new OuterHttp("http://www.baidu.com")
-//        oh.doGet()
-
         def cases = t_caseService.getCases(product ,OUTER.TP,params)
         println cases.size()
         println cases
@@ -101,11 +81,11 @@ class T_new_caseController {
         def allData = eh.getAllCases()
         def cases = []
         for(def data : allData){
-            cases.add(t_caseService.createCase(data ,"p1"))
+            cases.add(t_caseService.createCase(data ,productName))
         }
         t_caseService.saveAllCases(cases)
         eh.close()
-        render("hello")
+        render("upload succeeded")
     }
 
     @Transactional(readOnly = true)
@@ -121,7 +101,7 @@ class T_new_caseController {
     }
     def pushAll(){
         def tpProjectId = params.tpProjectId
-        def pName = "p1"
+        def pName = productName
         int n = 0
         def product = productService.getEnabledProductByName(pName)
         if(tpProjectId && tpProjectId.isInteger()){

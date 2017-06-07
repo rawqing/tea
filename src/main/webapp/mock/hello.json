@@ -1,0 +1,15 @@
+{
+  "request": {
+    "method": "GET",
+    "path": "/xxx/xx"
+  },
+  "response": {
+    "headers": {
+      "X_xx": "12333",
+      "x_ww":"qqq",
+      "x_we":"qqq"
+    },
+    "contentType": "text/xml",
+    "text": "<people><person firstName=\"John\" lastName=\"Doe\"/><person firstName=\"Jane\" lastName=\"Williams\"/></people>"
+  }
+}

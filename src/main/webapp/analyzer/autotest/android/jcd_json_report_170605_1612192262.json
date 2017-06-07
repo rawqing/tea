@@ -1,0 +1,116 @@
+{
+	"deviceDesc" : {
+		"cpu_abi" : "x86",
+		"device" : "generic_x86",
+		"model" : "Android SDK built for x86",
+		"product" : "sdk_phone_x86",
+		"release" : "6.0",
+		"sdk_version" : 23,
+		"serial" : "unknown"
+	},
+	"reportName" : "聚财道 app 2.0 Android 自动化测试报告",
+	"spendTime" : 16847,
+	"suiteBean" : {
+		"childSuites" : [{
+				"spendTime" : 5842,
+				"suiteClassName" : "class com.trubuzz.trubuzz.suite.SuiteA",
+				"suiteName" : "login test ",
+				"testClasses" : [{
+						"spendTime" : 5842,
+						"status_count" : {
+							"SKIPPED" : 0,
+							"SUCCEEDED" : 5,
+							"FAILED" : 1
+						},
+						"testCases" : [{
+								"caseName" : "invalid_login[0]",
+								"spendTime" : 5790,
+								"testResult" : "SUCCEEDED",
+								"useData" : {
+									"user" : "abc@abc.com",
+									"pwd" : "aA123321",
+									"expect" : "失败"
+								}
+							}
+						],
+						"testClassName" : "com.trubuzz.trubuzz.test.LoginTest"
+					},
+					{
+						"spendTime" : 5842,
+						"status_count" : {
+							"SKIPPED" : 0,
+							"SUCCEEDED" : 5,
+							"FAILED" : 1
+						},
+						"testCases" : [{
+								"caseName" : "invalid_login[0]",
+								"spendTime" : 5790,
+								"testResult" : "SUCCEEDED",
+								"useData" : {
+									"user" : "abc@abc.com",
+									"pwd" : "aA123321",
+									"expect" : "失败"
+								}
+							}
+						],
+						"testClassName" : "com.trubuzz.trubuzz.test.LoginTest"
+					}
+				]
+			}, {
+				"spendTime" : 11836,
+				"suiteClassName" : "class com.trubuzz.trubuzz.suite.SuiteB",
+				"suiteName" : "sign up test",
+				"testClasses" : [{
+						"spendTime" : 11836,
+						"status_count" : {
+							"SKIPPED" : 0,
+							"SUCCEEDED" : 5,
+							"FAILED" : 1
+						},
+						"testCases" : [{
+								"caseName" : "signUpDefaultCheck",
+								"spendTime" : 3266,
+								"testResult" : "SUCCEEDED"
+							},
+							{
+								"caseName" : "signUpDefaultCheck",
+								"spendTime" : 3266,
+								"testResult" : "skipped",
+								"errorMsg" : "No views in hierarchy found matching: (with res-name that is \"signup\" and with text: is \"请邮箱或手机快速注册登录\" and is displayed on the screen to the user)\n\nView Hierarchy:\n+>DecorView{id=-1, visibility=VISIBLE, width=1080, height=1920, has-focus=false, has-focusable=false, has-window-focus=true, is-clickable=false, is-enabled=true, is-focused=false, is-focusable=false, is-layout-requested=false, is-selected=false, root-is-layout-requested=false, has-input-connection=false, x=0.0, y=0.0, child-count=3} \n|\n+->LinearLayout{id=-1, visibility=VISIBLE, width=1080, height=1776, has-focus=false, has-focusable=false, has-window-focus=true, is-clickable=false, is-enabled=true, is-focused=false, is-focusable=false, is-layout-requested=false, is-selected=false, root-is-layout-requested=false, has-input-connection=false, x=0.0, y=0.0, child-count=2} \n|\n+-->ViewStub{id=16909225, res-name=action_mode_bar_stub, visibility=GONE, width=0, height=0, has-focus=false, has-focusable=false, has-window-focus=true, is-clickable=false, is-enabled=true, is-focused=false, is-focusable=false, is-layout-requested=true, is-selected=false, root-is-layout-requested=false, has-input-connection=false, x=0.0, y=0.0} \n|\n+-->FrameLayout{id=-1, visibility=VISIBLE, width=1080, height=1704, has-focus=false, has-focusable=false, has-window-focus=true, is-clickable=false, is-enabled=true, is-focused=false, is-focusable=false, is-layout-requested=false, is-selected=false, root-is-layout-requested=false, has-input-connection=false, x=0.0, y=72.0, child-count=1} \n|\n+--->FitWindowsLinearLayout{id=2131755105, res-name=action_bar_root, visibility=VISIBLE, width=1080, height=1704, has-focus=false, has-focusable=false, has-window-focus=true, is-clickable=false, is-enabled=true, is-focused=false, is-focusable=false, is-layout-requested=false, is-selected=false, root-is-layout-requested=false, has-input-connection=false, x=0.0, y=0.0, child-count=2} \n|\n+---->ViewStubCompat{id=2131755106, res-name=action_mode_bar_stub, visibility=GONE, width=0, height=0, has-focus=false, has-focusable=false, has-window-focus=true, is-clickable=false, is-enabled=true, is-focused=false, is-focusable=false, is-layout-requested=true, is-selected=false, root-is-layout-requested=false, has-input-connection=false, x=0.0, y=0.0} \n|\n+---->ContentFrameLayout{id=16908290, res-name=content, visibility=VISIBLE, width=1080, height=1704, has-focus=false, has-focusable=false, has-window-focus=true, is-clickable=false, is-enabled=true, is-focused=false, is-focusable=false, is-layout-requested=false, is-selected=false, root-is-layout-requested=false, has-input-connection=false, x=0.0, y=0.0, child-count=1} \n|\n+----->FrameLayout{id=-1, visibility=VISIBLE, width=1080, height=1704, has-focus=false, has-focusable=false, has-window-focus=true, is-clickable=false, is-enabled=true, is-focused=false, is-focusable=false, is-layout-requested=false, is-selected=false, root-is-layout-requested=false, has-input-connection=false, x=0.0, y=0.0, child-count=1} \n|\n+------>AppCompatImageView{id=-1, visibility=VISIBLE, width=1080, height=1704, has-focus=false, has-focusable=false, has-window-focus=true, is-clickable=false, is-enabled=true, is-focused=false, is-focusable=false, is-layout-requested=false, is-selected=false, root-is-layout-requested=false, has-input-connection=false, x=0.0, y=0.0} \n|\n+->View{id=16908336, res-name=navigationBarBackground, visibility=VISIBLE, width=1080, height=144, has-focus=false, has-focusable=false, has-window-focus=true, is-clickable=false, is-enabled=true, is-focused=false, is-focusable=false, is-layout-requested=false, is-selected=false, root-is-layout-requested=false, has-input-connection=false, x=0.0, y=1776.0} \n|\n+->View{id=16908335, res-name=statusBarBackground, visibility=VISIBLE, width=1080, height=72, has-focus=false, has-focusable=false, has-window-focus=true, is-clickable=false, is-enabled=true, is-focused=false, is-focusable=false, is-layout-requested=false, is-selected=false, root-is-layout-requested=false, has-input-connection=false, x=0.0, y=0.0} \n|"
+							},
+							 {
+								"caseName" : "invalid_sign_up_with_email",
+								"errorMsg" : "No views in hierarchy found matching: (with res-name that is \"signup\" and with text: is \"请邮箱或手机快速注册登录\" and is displayed on the screen to the user)\n\nView Hierarchy:\n+>DecorView{id=-1, visibility=VISIBLE, width=1080, height=1920, has-focus=false, has-focusable=false, has-window-focus=true, is-clickable=false, is-enabled=true, is-focused=false, is-focusable=false, is-layout-requested=false, is-selected=false, root-is-layout-requested=false, has-input-connection=false, x=0.0, y=0.0, child-count=3} \n|\n+->LinearLayout{id=-1, visibility=VISIBLE, width=1080, height=1776, has-focus=false, has-focusable=false, has-window-focus=true, is-clickable=false, is-enabled=true, is-focused=false, is-focusable=false, is-layout-requested=false, is-selected=false, root-is-layout-requested=false, has-input-connection=false, x=0.0, y=0.0, child-count=2} \n|\n+-->ViewStub{id=16909225, res-name=action_mode_bar_stub, visibility=GONE, width=0, height=0, has-focus=false, has-focusable=false, has-window-focus=true, is-clickable=false, is-enabled=true, is-focused=false, is-focusable=false, is-layout-requested=true, is-selected=false, root-is-layout-requested=false, has-input-connection=false, x=0.0, y=0.0} \n|\n+-->FrameLayout{id=-1, visibility=VISIBLE, width=1080, height=1704, has-focus=false, has-focusable=false, has-window-focus=true, is-clickable=false, is-enabled=true, is-focused=false, is-focusable=false, is-layout-requested=false, is-selected=false, root-is-layout-requested=false, has-input-connection=false, x=0.0, y=72.0, child-count=1} \n|\n+--->FitWindowsLinearLayout{id=2131755105, res-name=action_bar_root, visibility=VISIBLE, width=1080, height=1704, has-focus=false, has-focusable=false, has-window-focus=true, is-clickable=false, is-enabled=true, is-focused=false, is-focusable=false, is-layout-requested=false, is-selected=false, root-is-layout-requested=false, has-input-connection=false, x=0.0, y=0.0, child-count=2} \n|\n+---->ViewStubCompat{id=2131755106, res-name=action_mode_bar_stub, visibility=GONE, width=0, height=0, has-focus=false, has-focusable=false, has-window-focus=true, is-clickable=false, is-enabled=true, is-focused=false, is-focusable=false, is-layout-requested=true, is-selected=false, root-is-layout-requested=false, has-input-connection=false, x=0.0, y=0.0} \n|\n+---->ContentFrameLayout{id=16908290, res-name=content, visibility=VISIBLE, width=1080, height=1704, has-focus=false, has-focusable=false, has-window-focus=true, is-clickable=false, is-enabled=true, is-focused=false, is-focusable=false, is-layout-requested=false, is-selected=false, root-is-layout-requested=false, has-input-connection=false, x=0.0, y=0.0, child-count=1} \n|\n+----->FrameLayout{id=-1, visibility=VISIBLE, width=1080, height=1704, has-focus=false, has-focusable=false, has-window-focus=true, is-clickable=false, is-enabled=true, is-focused=false, is-focusable=false, is-layout-requested=false, is-selected=false, root-is-layout-requested=false, has-input-connection=false, x=0.0, y=0.0, child-count=1} \n|\n+------>AppCompatImageView{id=-1, visibility=VISIBLE, width=1080, height=1704, has-focus=false, has-focusable=false, has-window-focus=true, is-clickable=false, is-enabled=true, is-focused=false, is-focusable=false, is-layout-requested=false, is-selected=false, root-is-layout-requested=false, has-input-connection=false, x=0.0, y=0.0} \n|\n+->View{id=16908336, res-name=navigationBarBackground, visibility=VISIBLE, width=1080, height=144, has-focus=false, has-focusable=false, has-window-focus=true, is-clickable=false, is-enabled=true, is-focused=false, is-focusable=false, is-layout-requested=false, is-selected=false, root-is-layout-requested=false, has-input-connection=false, x=0.0, y=1776.0} \n|\n+->View{id=16908335, res-name=statusBarBackground, visibility=VISIBLE, width=1080, height=72, has-focus=false, has-focusable=false, has-window-focus=true, is-clickable=false, is-enabled=true, is-focused=false, is-focusable=false, is-layout-requested=false, is-selected=false, root-is-layout-requested=false, has-input-connection=false, x=0.0, y=0.0} \n|",
+								"imageName" : "/data/jcd_161028_072432566_ps_invalid_sign_up_with_phone.png",
+								"localizedMessage" : "No views in hierarchy found matching: (with res-name that is \"signup\" and with text: is \"请邮箱或手机快速注册登录\" and is displayed on the screen to the user)\n\nView Hierarchy:\n+>DecorView{id=-1, visibility=VISIBLE, width=1080, height=1920, has-focus=false, has-focusable=false, has-window-focus=true, is-clickable=false, is-enabled=true, is-focused=false, is-focusable=false, is-layout-requested=false, is-selected=false, root-is-layout-requested=false, has-input-connection=false, x=0.0, y=0.0, child-count=3} \n|\n+->LinearLayout{id=-1, visibility=VISIBLE, width=1080, height=1776, has-focus=false, has-focusable=false, has-window-focus=true, is-clickable=false, is-enabled=true, is-focused=false, is-focusable=false, is-layout-requested=false, is-selected=false, root-is-layout-requested=false, has-input-connection=false, x=0.0, y=0.0, child-count=2} \n|\n+-->ViewStub{id=16909225, res-name=action_mode_bar_stub, visibility=GONE, width=0, height=0, has-focus=false, has-focusable=false, has-window-focus=true, is-clickable=false, is-enabled=true, is-focused=false, is-focusable=false, is-layout-requested=true, is-selected=false, root-is-layout-requested=false, has-input-connection=false, x=0.0, y=0.0} \n|\n+-->FrameLayout{id=-1, visibility=VISIBLE, width=1080, height=1704, has-focus=false, has-focusable=false, has-window-focus=true, is-clickable=false, is-enabled=true, is-focused=false, is-focusable=false, is-layout-requested=false, is-selected=false, root-is-layout-requested=false, has-input-connection=false, x=0.0, y=72.0, child-count=1} \n|\n+--->FitWindowsLinearLayout{id=2131755105, res-name=action_bar_root, visibility=VISIBLE, width=1080, height=1704, has-focus=false, has-focusable=false, has-window-focus=true, is-clickable=false, is-enabled=true, is-focused=false, is-focusable=false, is-layout-requested=false, is-selected=false, root-is-layout-requested=false, has-input-connection=false, x=0.0, y=0.0, child-count=2} \n|\n+---->ViewStubCompat{id=2131755106, res-name=action_mode_bar_stub, visibility=GONE, width=0, height=0, has-focus=false, has-focusable=false, has-window-focus=true, is-clickable=false, is-enabled=true, is-focused=false, is-focusable=false, is-layout-requested=true, is-selected=false, root-is-layout-requested=false, has-input-connection=false, x=0.0, y=0.0} \n|\n+---->ContentFrameLayout{id=16908290, res-name=content, visibility=VISIBLE, width=1080, height=1704, has-focus=false, has-focusable=false, has-window-focus=true, is-clickable=false, is-enabled=true, is-focused=false, is-focusable=false, is-layout-requested=false, is-selected=false, root-is-layout-requested=false, has-input-connection=false, x=0.0, y=0.0, child-count=1} \n|\n+----->FrameLayout{id=-1, visibility=VISIBLE, width=1080, height=1704, has-focus=false, has-focusable=false, has-window-focus=true, is-clickable=false, is-enabled=true, is-focused=false, is-focusable=false, is-layout-requested=false, is-selected=false, root-is-layout-requested=false, has-input-connection=false, x=0.0, y=0.0, child-count=1} \n|\n+------>AppCompatImageView{id=-1, visibility=VISIBLE, width=1080, height=1704, has-focus=false, has-focusable=false, has-window-focus=true, is-clickable=false, is-enabled=true, is-focused=false, is-focusable=false, is-layout-requested=false, is-selected=false, root-is-layout-requested=false, has-input-connection=false, x=0.0, y=0.0} \n|\n+->View{id=16908336, res-name=navigationBarBackground, visibility=VISIBLE, width=1080, height=144, has-focus=false, has-focusable=false, has-window-focus=true, is-clickable=false, is-enabled=true, is-focused=false, is-focusable=false, is-layout-requested=false, is-selected=false, root-is-layout-requested=false, has-input-connection=false, x=0.0, y=1776.0} \n|\n+->View{id=16908335, res-name=statusBarBackground, visibility=VISIBLE, width=1080, height=72, has-focus=false, has-focusable=false, has-window-focus=true, is-clickable=false, is-enabled=true, is-focused=false, is-focusable=false, is-layout-requested=false, is-selected=false, root-is-layout-requested=false, has-input-connection=false, x=0.0, y=0.0} \n|",
+								"spendTime" : 3119,
+								"stackTraces" : ["dalvik.system.VMStack.getThreadStackTrace(Native Method)", "java.lang.Thread.getStackTrace(Thread.java:580)", "android.support.test.espresso.base.DefaultFailureHandler.getUserFriendlyError(DefaultFailureHandler.java:92)", "android.support.test.espresso.base.DefaultFailureHandler.handle(DefaultFailureHandler.java:56)", "android.support.test.espresso.ViewInteraction.runSynchronouslyOnUiThread(ViewInteraction.java:184)", "android.support.test.espresso.ViewInteraction.doPerform(ViewInteraction.java:115)", "android.support.test.espresso.ViewInteraction.perform(ViewInteraction.java:87)", "com.trubuzz.trubuzz.shell.AdViewInteraction.perform(AdViewInteraction.java:44)", "com.trubuzz.trubuzz.shell.AdViewInteraction.perform(AdViewInteraction.java:49)", "com.trubuzz.trubuzz.test.SignUpTest.invalid_sign_up_with_email(SignUpTest.java:85)", "java.lang.reflect.Method.invoke(Native Method)", "org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)", "org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)", "org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)", "junitparams.internal.InvokeParameterisedMethod.evaluate(InvokeParameterisedMethod.java:235)", "org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)", "org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)", "android.support.test.internal.statement.UiThreadStatement.evaluate(UiThreadStatement.java:55)", "android.support.test.rule.ActivityTestRule$ActivityStatement.evaluate(ActivityTestRule.java:270)", "org.junit.rules.TestWatcher$1.evaluate(TestWatcher.java:55)", "org.junit.rules.RunRules.evaluate(RunRules.java:20)", "junitparams.internal.ParameterisedTestMethodRunner.runMethodInvoker(ParameterisedTestMethodRunner.java:47)", "junitparams.internal.ParameterisedTestMethodRunner.runTestMethod(ParameterisedTestMethodRunner.java:40)", "junitparams.internal.ParameterisedTestClassRunner.runParameterisedTest(ParameterisedTestClassRunner.java:146)", "junitparams.JUnitParamsRunner.runChild(JUnitParamsRunner.java:417)", "junitparams.JUnitParamsRunner.runChild(JUnitParamsRunner.java:386)", "org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)", "org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)", "org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)", "org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)", "org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)", "org.junit.rules.TestWatcher$1.evaluate(TestWatcher.java:55)", "org.junit.rules.RunRules.evaluate(RunRules.java:20)", "org.junit.runners.ParentRunner.run(ParentRunner.java:363)", "org.junit.runners.Suite.runChild(Suite.java:128)", "org.junit.runners.Suite.runChild(Suite.java:27)", "org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)", "org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)", "org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)", "org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)", "org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)", "org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)", "org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)", "org.junit.runners.ParentRunner.run(ParentRunner.java:363)", "org.junit.runners.Suite.runChild(Suite.java:128)", "org.junit.runners.Suite.runChild(Suite.java:27)", "org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)", "org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)", "org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)", "org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)", "org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)", "org.junit.runners.ParentRunner.run(ParentRunner.java:363)", "org.junit.runners.Suite.runChild(Suite.java:128)", "org.junit.runners.Suite.runChild(Suite.java:27)", "org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)", "org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)", "org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)", "org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)", "org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)", "org.junit.runners.ParentRunner.run(ParentRunner.java:363)", "org.junit.runner.JUnitCore.run(JUnitCore.java:137)", "org.junit.runner.JUnitCore.run(JUnitCore.java:115)", "android.support.test.internal.runner.TestExecutor.execute(TestExecutor.java:59)", "android.support.test.runner.AndroidJUnitRunner.onStart(AndroidJUnitRunner.java:262)", "android.app.Instrumentation$InstrumentationThread.run(Instrumentation.java:1879)"],
+								"testResult" : "FAILED",
+								"useData" : {
+									"pwdConfirm" : "aA12345",
+									"email" : "espressoTest001@abc.com",
+									"pwd" : "aA123456",
+									"acceptTerms" : true,
+									"except" : "确认密码输入不一致"
+								}
+							}, {
+								"caseName" : "invalid_sign_up_with_phone",
+								"spendTime" : 4503,
+								"testResult" : "SUCCEEDED",
+								"useData" : {
+									"pwd" : "aA123456",
+									"acceptTerms" : true,
+									"except" : "确认密码输入不一致",
+									"phoneNumber" : "11199990001"
+								}
+							}
+						],
+						"testClassName" : "com.trubuzz.trubuzz.test.SignUpTest"
+					}
+				]
+			}
+		],
+		"spendTime" : 0
+	},
+	"testDate" : 1477643387600
+}

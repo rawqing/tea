@@ -1,0 +1,105 @@
+{
+	"deviceDesc" : {
+		"cpu_abi" : "x86_64",
+		"device" : "generic_x86_64",
+		"model" : "Android SDK built for x86_64",
+		"product" : "sdk_google_phone_x86_64",
+		"release" : "5.1.1",
+		"sdk_version" : 22,
+		"serial" : "unknown"
+	},
+	"reportName" : "聚财道 app 2.0 Android 自动化测试报告",
+	"spendTime" : 404883,
+	"suiteBean" : {
+		"childSuites" : [{
+				"spendTime" : 404637,
+				"suiteClassName" : "class com.trubuzz.trubuzz.suite.TradeSuite",
+				"suiteName" : "trade test ",
+				"testClasses" : [{
+						"spendTime" : 404636,
+						"status_count" : {
+							"SKIPPED" : 0,
+							"SUCCEEDED" : 1,
+							"FAILED" : 3
+						},
+						"testCases" : [{
+								"caseName" : "us_cash_ordering",
+								"compareImageNames" : [],
+								"spendTime" : 35106,
+								"testResult" : "SUCCEEDED",
+								"useData" : {
+									"amount" : "2000",
+									"price" : "109",
+									"timeInForce" : "GFD",
+									"cashOrShares" : "amount",
+									"stockType" : "US",
+									"limitOrMarket" : "limit",
+									"position" : "BULL",
+									"symbol" : "AMZN"
+								}
+							}, {
+								"caseName" : "us_cash_ordering",
+								"compareImageNames" : [],
+								"errorMsg" : "'not with text: is \"\"' doesn't match the selected view.\nExpected: not with text: is \"\"\n     Got: \"AppCompatTextView{id=2131755281, res-name=price, visibility=VISIBLE, width=1398, height=169, has-focus=false, has-focusable=false, has-window-focus=true, is-clickable=false, is-enabled=true, is-focused=false, is-focusable=false, is-layout-requested=false, is-selected=false, root-is-layout-requested=false, has-input-connection=false, x=0.0, y=17.0, text=, input-type=0, ime-target=false, has-links=false}\"\n",
+								"imageName" : "jcd_ps_us_cash_ordering_170605_160724631.png",
+								"localizedMessage" : "'not with text: is \"\"' doesn't match the selected view.\nExpected: not with text: is \"\"\n     Got: \"AppCompatTextView{id=2131755281, res-name=price, visibility=VISIBLE, width=1398, height=169, has-focus=false, has-focusable=false, has-window-focus=true, is-clickable=false, is-enabled=true, is-focused=false, is-focusable=false, is-layout-requested=false, is-selected=false, root-is-layout-requested=false, has-input-connection=false, x=0.0, y=17.0, text=, input-type=0, ime-target=false, has-links=false}\"\n",
+								"spendTime" : 74446,
+								"stackTraces" : ["dalvik.system.VMStack.getThreadStackTrace(Native Method)", "java.lang.Thread.getStackTrace(Thread.java:580)", "android.support.test.espresso.base.DefaultFailureHandler.getUserFriendlyError(DefaultFailureHandler.java:92)", "android.support.test.espresso.base.DefaultFailureHandler.handle(DefaultFailureHandler.java:56)", "android.support.test.espresso.ViewInteraction.runSynchronouslyOnUiThread(ViewInteraction.java:184)", "android.support.test.espresso.ViewInteraction.check(ViewInteraction.java:158)", "com.trubuzz.trubuzz.shell.AdViewInteraction.check(AdViewInteraction.java:129)", "com.trubuzz.trubuzz.shell.AdViewInteraction.check(AdViewInteraction.java:139)", "com.trubuzz.trubuzz.test.trade.TradeAction.click_order_button_with(TradeAction.java:103)", "com.trubuzz.trubuzz.test.trade.TradeAction.into_ordering_page(TradeAction.java:461)", "com.trubuzz.trubuzz.test.trade.TradeUSTest.us_cash_ordering(TradeUSTest.java:101)", "java.lang.reflect.Method.invoke(Native Method)", "java.lang.reflect.Method.invoke(Method.java:372)", "org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)", "org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)", "org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)", "junitparams.internal.InvokeParameterisedMethod.evaluate(InvokeParameterisedMethod.java:234)", "org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)", "android.support.test.internal.statement.UiThreadStatement.evaluate(UiThreadStatement.java:55)", "android.support.test.rule.ActivityTestRule$ActivityStatement.evaluate(ActivityTestRule.java:270)", "org.junit.rules.TestWatcher$1.evaluate(TestWatcher.java:55)", "org.junit.rules.RunRules.evaluate(RunRules.java:20)", "junitparams.internal.ParameterisedTestMethodRunner.runMethodInvoker(ParameterisedTestMethodRunner.java:47)", "junitparams.internal.ParameterisedTestMethodRunner.runTestMethod(ParameterisedTestMethodRunner.java:40)", "junitparams.internal.ParameterisedTestClassRunner.runParameterisedTest(ParameterisedTestClassRunner.java:146)", "junitparams.JUnitParamsRunner.runChild(JUnitParamsRunner.java:421)", "junitparams.JUnitParamsRunner.runChild(JUnitParamsRunner.java:388)", "org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)", "org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)", "org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)", "org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)", "org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)", "org.junit.rules.TestWatcher$1.evaluate(TestWatcher.java:55)", "org.junit.rules.RunRules.evaluate(RunRules.java:20)", "org.junit.runners.ParentRunner.run(ParentRunner.java:363)", "org.junit.runners.Suite.runChild(Suite.java:128)", "org.junit.runners.Suite.runChild(Suite.java:27)", "org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)", "org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)", "org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)", "org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)", "org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)", "org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)", "org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)", "org.junit.runners.ParentRunner.run(ParentRunner.java:363)", "org.junit.runners.Suite.runChild(Suite.java:128)", "org.junit.runners.Suite.runChild(Suite.java:27)", "org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)", "org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)", "org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)", "org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)", "org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)", "org.junit.runners.ParentRunner.run(ParentRunner.java:363)", "org.junit.runner.JUnitCore.run(JUnitCore.java:137)", "org.junit.runner.JUnitCore.run(JUnitCore.java:115)", "android.support.test.internal.runner.TestExecutor.execute(TestExecutor.java:59)", "android.support.test.runner.AndroidJUnitRunner.onStart(AndroidJUnitRunner.java:262)", "android.app.Instrumentation$InstrumentationThread.run(Instrumentation.java:1853)"],
+								"testResult" : "FAILED",
+								"useData" : {
+									"amount" : "2000",
+									"timeInForce" : "IOC",
+									"cashOrShares" : "amount",
+									"stockType" : "US",
+									"limitOrMarket" : "market",
+									"position" : "BEAR",
+									"symbol" : "BORN"
+								}
+							}, {
+								"caseName" : "us_cash_ordering",
+								"compareImageNames" : [],
+								"errorMsg" : "'not with text: is \"\"' doesn't match the selected view.\nExpected: not with text: is \"\"\n     Got: \"AppCompatTextView{id=2131755281, res-name=price, visibility=VISIBLE, width=1398, height=169, has-focus=false, has-focusable=false, has-window-focus=true, is-clickable=false, is-enabled=true, is-focused=false, is-focusable=false, is-layout-requested=false, is-selected=false, root-is-layout-requested=false, has-input-connection=false, x=0.0, y=17.0, text=, input-type=0, ime-target=false, has-links=false}\"\n",
+								"imageName" : "jcd_ps_us_cash_ordering_170605_160935416.png",
+								"localizedMessage" : "'not with text: is \"\"' doesn't match the selected view.\nExpected: not with text: is \"\"\n     Got: \"AppCompatTextView{id=2131755281, res-name=price, visibility=VISIBLE, width=1398, height=169, has-focus=false, has-focusable=false, has-window-focus=true, is-clickable=false, is-enabled=true, is-focused=false, is-focusable=false, is-layout-requested=false, is-selected=false, root-is-layout-requested=false, has-input-connection=false, x=0.0, y=17.0, text=, input-type=0, ime-target=false, has-links=false}\"\n",
+								"spendTime" : 130703,
+								"stackTraces" : ["dalvik.system.VMStack.getThreadStackTrace(Native Method)", "java.lang.Thread.getStackTrace(Thread.java:580)", "android.support.test.espresso.base.DefaultFailureHandler.getUserFriendlyError(DefaultFailureHandler.java:92)", "android.support.test.espresso.base.DefaultFailureHandler.handle(DefaultFailureHandler.java:56)", "android.support.test.espresso.ViewInteraction.runSynchronouslyOnUiThread(ViewInteraction.java:184)", "android.support.test.espresso.ViewInteraction.check(ViewInteraction.java:158)", "com.trubuzz.trubuzz.shell.AdViewInteraction.check(AdViewInteraction.java:129)", "com.trubuzz.trubuzz.shell.AdViewInteraction.check(AdViewInteraction.java:139)", "com.trubuzz.trubuzz.test.trade.TradeAction.click_order_button_with(TradeAction.java:103)", "com.trubuzz.trubuzz.test.trade.TradeAction.into_ordering_page(TradeAction.java:461)", "com.trubuzz.trubuzz.test.trade.TradeUSTest.us_cash_ordering(TradeUSTest.java:101)", "java.lang.reflect.Method.invoke(Native Method)", "java.lang.reflect.Method.invoke(Method.java:372)", "org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)", "org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)", "org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)", "junitparams.internal.InvokeParameterisedMethod.evaluate(InvokeParameterisedMethod.java:234)", "org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)", "android.support.test.internal.statement.UiThreadStatement.evaluate(UiThreadStatement.java:55)", "android.support.test.rule.ActivityTestRule$ActivityStatement.evaluate(ActivityTestRule.java:270)", "org.junit.rules.TestWatcher$1.evaluate(TestWatcher.java:55)", "org.junit.rules.RunRules.evaluate(RunRules.java:20)", "junitparams.internal.ParameterisedTestMethodRunner.runMethodInvoker(ParameterisedTestMethodRunner.java:47)", "junitparams.internal.ParameterisedTestMethodRunner.runTestMethod(ParameterisedTestMethodRunner.java:40)", "junitparams.internal.ParameterisedTestClassRunner.runParameterisedTest(ParameterisedTestClassRunner.java:146)", "junitparams.JUnitParamsRunner.runChild(JUnitParamsRunner.java:421)", "junitparams.JUnitParamsRunner.runChild(JUnitParamsRunner.java:388)", "org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)", "org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)", "org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)", "org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)", "org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)", "org.junit.rules.TestWatcher$1.evaluate(TestWatcher.java:55)", "org.junit.rules.RunRules.evaluate(RunRules.java:20)", "org.junit.runners.ParentRunner.run(ParentRunner.java:363)", "org.junit.runners.Suite.runChild(Suite.java:128)", "org.junit.runners.Suite.runChild(Suite.java:27)", "org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)", "org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)", "org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)", "org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)", "org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)", "org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)", "org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:27)", "org.junit.runners.ParentRunner.run(ParentRunner.java:363)", "org.junit.runners.Suite.runChild(Suite.java:128)", "org.junit.runners.Suite.runChild(Suite.java:27)", "org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)", "org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)", "org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)", "org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)", "org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)", "org.junit.runners.ParentRunner.run(ParentRunner.java:363)", "org.junit.runner.JUnitCore.run(JUnitCore.java:137)", "org.junit.runner.JUnitCore.run(JUnitCore.java:115)", "android.support.test.internal.runner.TestExecutor.execute(TestExecutor.java:59)", "android.support.test.runner.AndroidJUnitRunner.onStart(AndroidJUnitRunner.java:262)", "android.app.Instrumentation$InstrumentationThread.run(Instrumentation.java:1853)"],
+								"testResult" : "FAILED",
+								"useData" : {
+									"amount" : "10",
+									"price" : "1.5",
+									"timeInForce" : "IOC",
+									"cashOrShares" : "volume",
+									"stockType" : "US",
+									"limitOrMarket" : "market",
+									"position" : "BEAR",
+									"symbol" : "BORN"
+								}
+							}, {
+								"caseName" : "us_cash_ordering",
+								"compareImageNames" : [],
+								"errorMsg" : "Waited for the root of the view hierarchy to have window focus and not be requesting layout for over 10 seconds. If you specified a non default root matcher, it may be picking a root that never takes focus. Otherwise, something is seriously wrong. Selected Root:\nRoot{application-window-token=android.view.ViewRootImpl$W@3c3e7bbe, window-token=android.view.ViewRootImpl$W@3c3e7bbe, has-window-focus=false, layout-params-type=1, layout-params-string=WM.LayoutParams{(0,0)(fillxfill) ty=1 fl=#81810100 wanim=0x1030466 surfaceInsets=Rect(0, 0 - 0, 0) needsMenuKey=2}, decor-view-string=DecorView{id=-1, visibility=INVISIBLE, width=1440, height=2560, has-focus=true, has-focusable=false, has-window-focus=false, is-clickable=false, is-enabled=true, is-focused=false, is-focusable=false, is-layout-requested=false, is-selected=false, root-is-layout-requested=false, has-input-connection=false, x=0.0, y=0.0, child-count=3}}\n. All Roots:\nRoot{application-window-token=android.view.ViewRootImpl$W@2d03e279, window-token=android.view.ViewRootImpl$W@2d03e279, has-window-focus=true, layout-params-type=1, layout-params-string=WM.LayoutParams{(0,0)(fillxfill) ty=1 fl=#81810100 wanim=0x1030466 surfaceInsets=Rect(0, 0 - 0, 0) needsMenuKey=2}, decor-view-string=DecorView{id=-1, visibility=VISIBLE, width=1440, height=2560, has-focus=true, has-focusable=true, has-window-focus=true, is-clickable=false, is-enabled=true, is-focused=false, is-focusable=false, is-layout-requested=false, is-selected=false, root-is-layout-requested=false, has-input-connection=false, x=0.0, y=0.0, child-count=3}}\nRoot{application-window-token=android.view.ViewRootImpl$W@3c3e7bbe, window-token=android.view.ViewRootImpl$W@3c3e7bbe, has-window-focus=false, layout-params-type=1, layout-params-string=WM.LayoutParams{(0,0)(fillxfill) ty=1 fl=#81810100 wanim=0x1030466 surfaceInsets=Rect(0, 0 - 0, 0) needsMenuKey=2}, decor-view-string=DecorView{id=-1, visibility=INVISIBLE, width=1440, height=2560, has-focus=true, has-focusable=false, has-window-focus=false, is-clickable=false, is-enabled=true, is-focused=false, is-focusable=false, is-layout-requested=false, is-selected=false, root-is-layout-requested=false, has-input-connection=false, x=0.0, y=0.0, child-count=3}}\nRoot{application-window-token=android.view.ViewRootImpl$W@2342c41f, window-token=android.view.ViewRootImpl$W@2342c41f, has-window-focus=false, layout-params-type=1, layout-params-string=WM.LayoutParams{(0,0)(fillxfill) ty=1 fl=#81810100 wanim=0x1030466 surfaceInsets=Rect(0, 0 - 0, 0) needsMenuKey=2}, decor-view-string=DecorView{id=-1, visibility=INVISIBLE, width=1440, height=2560, has-focus=true, has-focusable=false, has-window-focus=false, is-clickable=false, is-enabled=true, is-focused=false, is-focusable=false, is-layout-requested=true, is-selected=false, root-is-layout-requested=true, has-input-connection=false, x=0.0, y=0.0, child-count=3}}",
+								"imageName" : "jcd_ps_us_cash_ordering_170605_161218123.png",
+								"localizedMessage" : "Waited for the root of the view hierarchy to have window focus and not be requesting layout for over 10 seconds. If you specified a non default root matcher, it may be picking a root that never takes focus. Otherwise, something is seriously wrong. Selected Root:\nRoot{application-window-token=android.view.ViewRootImpl$W@3c3e7bbe, window-token=android.view.ViewRootImpl$W@3c3e7bbe, has-window-focus=false, layout-params-type=1, layout-params-string=WM.LayoutParams{(0,0)(fillxfill) ty=1 fl=#81810100 wanim=0x1030466 surfaceInsets=Rect(0, 0 - 0, 0) needsMenuKey=2}, decor-view-string=DecorView{id=-1, visibility=INVISIBLE, width=1440, height=2560, has-focus=true, has-focusable=false, has-window-focus=false, is-clickable=false, is-enabled=true, is-focused=false, is-focusable=false, is-layout-requested=false, is-selected=false, root-is-layout-requested=false, has-input-connection=false, x=0.0, y=0.0, child-count=3}}\n. All Roots:\nRoot{application-window-token=android.view.ViewRootImpl$W@2d03e279, window-token=android.view.ViewRootImpl$W@2d03e279, has-window-focus=true, layout-params-type=1, layout-params-string=WM.LayoutParams{(0,0)(fillxfill) ty=1 fl=#81810100 wanim=0x1030466 surfaceInsets=Rect(0, 0 - 0, 0) needsMenuKey=2}, decor-view-string=DecorView{id=-1, visibility=VISIBLE, width=1440, height=2560, has-focus=true, has-focusable=true, has-window-focus=true, is-clickable=false, is-enabled=true, is-focused=false, is-focusable=false, is-layout-requested=false, is-selected=false, root-is-layout-requested=false, has-input-connection=false, x=0.0, y=0.0, child-count=3}}\nRoot{application-window-token=android.view.ViewRootImpl$W@3c3e7bbe, window-token=android.view.ViewRootImpl$W@3c3e7bbe, has-window-focus=false, layout-params-type=1, layout-params-string=WM.LayoutParams{(0,0)(fillxfill) ty=1 fl=#81810100 wanim=0x1030466 surfaceInsets=Rect(0, 0 - 0, 0) needsMenuKey=2}, decor-view-string=DecorView{id=-1, visibility=INVISIBLE, width=1440, height=2560, has-focus=true, has-focusable=false, has-window-focus=false, is-clickable=false, is-enabled=true, is-focused=false, is-focusable=false, is-layout-requested=false, is-selected=false, root-is-layout-requested=false, has-input-connection=false, x=0.0, y=0.0, child-count=3}}\nRoot{application-window-token=android.view.ViewRootImpl$W@2342c41f, window-token=android.view.ViewRootImpl$W@2342c41f, has-window-focus=false, layout-params-type=1, layout-params-string=WM.LayoutParams{(0,0)(fillxfill) ty=1 fl=#81810100 wanim=0x1030466 surfaceInsets=Rect(0, 0 - 0, 0) needsMenuKey=2}, decor-view-string=DecorView{id=-1, visibility=INVISIBLE, width=1440, height=2560, has-focus=true, has-focusable=false, has-window-focus=false, is-clickable=false, is-enabled=true, is-focused=false, is-focusable=false, is-layout-requested=true, is-selected=false, root-is-layout-requested=true, has-input-connection=false, x=0.0, y=0.0, child-count=3}}",
+								"spendTime" : 162808,
+								"stackTraces" : ["android.support.test.espresso.base.RootViewPicker.get(RootViewPicker.java:99)", "android.support.test.espresso.ViewInteractionModule.provideRootView(ViewInteractionModule.java:69)", "android.support.test.espresso.ViewInteractionModule_ProvideRootViewFactory.get(ViewInteractionModule_ProvideRootViewFactory.java:23)", "android.support.test.espresso.ViewInteractionModule_ProvideRootViewFactory.get(ViewInteractionModule_ProvideRootViewFactory.java:9)", "android.support.test.espresso.base.ViewFinderImpl.getView(ViewFinderImpl.java:68)", "android.support.test.espresso.ViewInteraction$2.run(ViewInteraction.java:166)", "java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:422)", "java.util.concurrent.FutureTask.run(FutureTask.java:237)", "android.os.Handler.handleCallback(Handler.java:739)", "android.os.Handler.dispatchMessage(Handler.java:95)", "android.os.Looper.loop(Looper.java:135)", "android.app.ActivityThread.main(ActivityThread.java:5254)", "java.lang.reflect.Method.invoke(Native Method)", "java.lang.reflect.Method.invoke(Method.java:372)", "com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:903)", "com.android.internal.os.ZygoteInit.main(ZygoteInit.java:698)"],
+								"testResult" : "FAILED",
+								"useData" : {
+									"amount" : "20",
+									"timeInForce" : "GFD",
+									"cashOrShares" : "volume",
+									"stockType" : "US",
+									"limitOrMarket" : "market",
+									"position" : "BULL",
+									"symbol" : "BABA"
+								}
+							}
+						],
+						"testClassName" : "com.trubuzz.trubuzz.test.trade.TradeUSTest"
+					}
+				]
+			}
+		],
+		"spendTime" : 0
+	},
+	"testDate" : 1496649934300
+}

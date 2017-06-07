@@ -19,8 +19,12 @@ class FileRW {
         return f.getAbsolutePath()
     }
 
-    def createTempDir(){
-        File file = new File(Common.TEMP_DIR );
+    def createDir(String path){
+        File file = new File(path);
+        return createDir(file)
+    }
+    def createDir(File file){
+
         if(!file.isDirectory()){
             println("目录不存在！将进行创建");
             file.mkdir()
@@ -30,6 +34,6 @@ class FileRW {
 
     def createTempFilePath(fileName){
         def time = new Date().getTime()
-        return createTempDir() + File.separator + time + fileName
+        return createDir(Common.TEMP_DIR) + File.separator + time + fileName
     }
 }

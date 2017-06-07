@@ -69,11 +69,13 @@
             <li class="sub-menu">
                 <a href="javascript:;" >
                     <i class=" fa fa-bar-chart-o"></i>
-                    <span>Charts</span>
+                    <span>测试报告</span>
                 </a>
                 <ul class="sub">
-                    <li><a  href="morris.html">Morris</a></li>
-                    <li><a  href="chartjs.html">Chartjs</a></li>
+                    <li><a  href="morris.html">手工测试报告</a></li>
+                    <li><a  href="/autotestReport">自动化测试报告</a></li>
+                    <li><a  href="chartjs.html">接口测试报告</a></li>
+                    <li><a  href="chartjs.html">性能测试报告</a></li>
                 </ul>
             </li>
 
