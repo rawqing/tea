@@ -13,20 +13,29 @@ import java.util.regex.Pattern
 class AutotestReportController {
     FileRW fr = new FileRW()
     DecimalFormat df = new DecimalFormat("#.00")
+    def currentJson = null
+    def currentJsonName = ""
 
     def index() { }
 
+    def showClass(){
+        String dirPath = request.getSession().getServletContext().getRealPath("/") + Common.android_report_dir
+        String fileName = params.fileName
+        String className = params.className
+        println fileName + " "+ className
+
+        def json = getJson(dirPath , fileName)
+        def classes = json.suiteBean.childSuites.testClasses
+        def clz = getTestClass(classes, className)
+        def data = []
+
+        return [deviceDesc:json.deviceDesc ,reportName:json.reportName ,data: data]
+    }
     def showDetails(){
         String dirPath = request.getSession().getServletContext().getRealPath("/") + Common.android_report_dir
         String name = params.fileName
-        File file = new File(dirPath + name)
-        if (!file.exists()) {
-            render name+"not exists"
-        }
-        def jsonLoad = "{}"
-        jsonLoad = file.text
+        def json = getJson(dirPath , name)
         def data = []
-        def json = new JsonSlurper().parseText(jsonLoad)
         def suites = json.suiteBean.childSuites
         for (def suite : suites) {
             def suiteName = suite.suiteName
@@ -57,7 +66,7 @@ class AutotestReportController {
 
             data.add([suiteName:suiteName ,classes:classes ,total:total])
         }
-        return [deviceDesc:json.deviceDesc ,reportName:json.reportName ,data: data]
+        return [fileName: name, deviceDesc:json.deviceDesc ,reportName:json.reportName ,data: data]
     }
     def android() {
         String dirPath = request.getSession().getServletContext().getRealPath("/") + File.separator + Common.android_report_dir
@@ -92,22 +101,51 @@ class AutotestReportController {
         }
         render(bad)
     }
-    def loadJson(){
-
-//        render 123
-    }
     def ios(){}
 
     def web(){}
 
-    private def spitFileName(String name) {
+    private spitFileName(String name) {
         def f = name.split('\\.')
-        println f.length
         String fname = f[0]
         def sl = fname.split("_")
         long time = Long.parseLong(sl[sl.length-1])
         Date date = new Date(time)
         def sd = date.format("yyyy-MM-dd hh:mm:ss")
         return sd
+    }
+
+    private getJson(String path ,String name) {
+        if (name.equals(currentJsonName)) {
+            return this.currentJson
+        }else{
+            return loadJson(path ,name)
+        }
+    }
+    private loadJson(String path ,String name) {
+        println "load json : ${path+name}"
+        this.currentJson = null
+        this.currentJsonName = ""
+        File file = new File(path + name)
+        if (!file.exists()) {
+            render path +" not exists"
+            return null
+        }
+        def jsonLoad = "{}"
+        jsonLoad = file.text
+
+        def json = new JsonSlurper().parseText(jsonLoad)
+        this.currentJson = json
+        this.currentJsonName = name
+        return json
+    }
+
+    private getTestClass(classes ,String className) {
+        for (def clz : classes) {
+            if(className.equals(clz.testClassName)){
+                return clz
+            }
+        }
+        return null
     }
 }

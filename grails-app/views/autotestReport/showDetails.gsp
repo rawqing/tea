@@ -41,5 +41,20 @@
             </table>
         </g:each>
     </div>
+<p id="hidden_fileName" hidden="hidden">${fileName}</p>
+<script type="text/javascript">
+$(function () {
+    $('a.test_class').click(function () {
+        var cName = this.text;
+        var fName = $('#hidden_fileName').text();
+        console.log(cName);
+        console.log(fName);
+        $('#report_details').load("${createLink(action: "showClass")}?fileName="+fName + "&className="+cName);
+    });
+
+
+});
+
+</script>
 </body>
 </html>

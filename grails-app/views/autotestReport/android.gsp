@@ -12,7 +12,7 @@
                 <ul>
                 <g:each in="${data}">
                     <li class="report_li">
-                        <a name="${it.fileName}">${it.strDate}</a>
+                        <a class="file_date" name="${it.fileName}">${it.strDate}</a>
                         %{--<g:link action="showDetails" params="${[fileName:it.fileName]}">${it.strDate}</g:link>--}%
                         <div class="test_suites">
                             <g:each var="su" in="${it.json.suiteBean.childSuites}">
@@ -59,12 +59,17 @@
                 }
             });
     };
-    $('.report_li > a').click(function () {
-       console.log(this.name);
+    $('.report_li > a.file_date').click(function () {
        var fName = this.name;
-        $('#report_details').load("${createLink(action: "showDetails")}?fileName="+fName);
+       console.log(fName);
+       $('#report_details').load("${createLink(action: "showDetails")}?fileName="+fName);
     });
-
+    $('a.test_class').click(function () {
+        var cName = this.text;
+        var fName = $(this).parent().prev('.file_date').attr("name");
+        console.log(fName);
+        $('#report_details').load("${createLink(action: "showClass")}?fileName="+fName + "&className="+cName);
+    });
     $('#test').click(function () {
 //        $('#report_details').html("<h1>hello</h1>");
         $('#report_details').load("showDetails?fileName=jcd_json_report_170605_161219226.json");
