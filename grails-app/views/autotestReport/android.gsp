@@ -2,7 +2,7 @@
 <html lang="en" class="no-js" xmlns="">
 <head>
     <meta name="layout" content="simple"/>
-
+    <asset:stylesheet src="autotestReport/style.css"/>
 </head>
 <body>
     <div class="row">
@@ -29,10 +29,8 @@
             </div>
         </div>
         <div class="col-lg-9 ds">
-
-            <a id = "test">test</a>
             <div id="report_details">
-                <g:uploadForm action="upload" method="post" >
+                <g:uploadForm action="upload" method="post" enctype="multipart/form-data">
                     请选择文件 :<input type="file" id="files" name="files" multiple/>
                     <input type="submit" value="上传">
                     <p>
@@ -69,10 +67,6 @@
         var fName = $(this).parent().prev('.file_date').attr("name");
         console.log(fName);
         $('#report_details').load("${createLink(action: "showClass")}?fileName="+fName + "&className="+cName);
-    });
-    $('#test').click(function () {
-//        $('#report_details').html("<h1>hello</h1>");
-        $('#report_details').load("showDetails?fileName=jcd_json_report_170605_161219226.json");
     });
 });
 

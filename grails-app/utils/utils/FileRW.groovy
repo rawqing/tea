@@ -14,11 +14,14 @@ class FileRW {
      * @return
      */
     def writeTempFile(uploadedFile){
-        File f = new File(createTempFilePath(uploadedFile.originalFilename))
+        return saveFile(uploadedFile ,createTempFilePath(uploadedFile.originalFilename))
+    }
+
+    def saveFile(uploadedFile ,String path) {
+        File f = new File(path)
         uploadedFile.transferTo(f)
         return f.getAbsolutePath()
     }
-
     def createDir(String path){
         File file = new File(path);
         return createDir(file)

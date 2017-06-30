@@ -134,5 +134,5 @@ grails:
         failOnError: true
     controllers:
         upload:
-        maxFileSize: 26214400
-        maxRequestSize: 26214400
+            maxFileSize: 262144000
+            maxRequestSize: 262144000
