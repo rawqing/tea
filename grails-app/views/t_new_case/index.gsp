@@ -49,10 +49,8 @@
             </div>
 
             <div id="product_select">
-                <select>
-                    <option value="" disabled>- 请选择所属产品 -</option>
+                <g:select name="pName" from="${productsName}"/>
 
-                </select>
             </div>
             <p><label><input type="checkbox" name="autosave" id="autosave" checked="checked" autocomplete="off"> Autosave</label></p>
             <p>请选一个产品</p>
@@ -76,17 +74,9 @@
 
 <script>
     jQuery().ready(function () {
-        var products = <%= products %>,
-            sel = jQuery('#product_select'),
+        var sel = jQuery('#product_select'),
             selectedProduct = "";
 
-        sel.find('select').append(function () {
-            var selects ="";
-            for(var i=0;i< products.length;i++){
-                selects += "<option value='"+products[i]+"'>"+products[i]+"</option>";
-            }
-            return selects;
-        });
         jQuery('select').comboSelect();
 
         var container = jQuery("#edit_case"),
@@ -141,9 +131,6 @@
         updateHandsontableWithModule(sel.find('select'));
 
 
-
-
-        var hint = ["m1","hello"];
         /**
          * 更新handsontable设置
          */

@@ -18,6 +18,10 @@ class AutotestReportController {
 
     def index() { }
 
+    /**
+     * 展示TestClass下所有case的结果统计
+     * @return
+     */
     def showClass(){
         String dirPath = request.getSession().getServletContext().getRealPath("/") + Common.android_report_dir
         String fileName = params.fileName
@@ -31,6 +35,10 @@ class AutotestReportController {
         println("clz : ${clz as JSON} ")
         return [deviceDesc:json.deviceDesc ,className:className ,data: clz ,cases:cases]
     }
+    /**
+     * 展示报告详情
+     * @return
+     */
     def showDetails(){
         String dirPath = request.getSession().getServletContext().getRealPath("/") + Common.android_report_dir
         String name = params.fileName

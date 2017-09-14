@@ -42,21 +42,21 @@
     </div>
 <asset:javascript src="widget/extension.js"/>
 <script type="text/javascript">
-    $(function () {
+$(function () {
 
-        var drawRight = function (name) {
-            $.ajax({
-                type: "POST",
-                url:"<g:createLink action="loadJson"/>",
-                data:{"fileName":name} ,
-                async: false,
-                dataType:"json",
-                success:function (data) {
-                    $('#report_details').html("1");
+        %{--var drawRight = function (name) {--}%
+            %{--$.ajax({--}%
+                %{--type: "POST",--}%
+                %{--url:"<g:createLink action="loadJson"/>",--}%
+                %{--data:{"fileName":name} ,--}%
+                %{--async: false,--}%
+                %{--dataType:"json",--}%
+                %{--success:function (data) {--}%
+                    %{--$('#report_details').html("1");--}%
 
-                }
-            });
-    };
+                %{--}--}%
+            %{--});--}%
+    %{--};--}%
     $('.report_li > a.file_date').click(function () {
        var fName = this.name;
        console.log(fName);
