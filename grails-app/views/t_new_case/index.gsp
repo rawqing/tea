@@ -1,6 +1,6 @@
 <%@ page import="tea.T_case" %>
 <!doctype html>
-<html xmlns="http://www.w3.org/1999/html">
+<html xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta name="layout" content="my"/>
 
@@ -35,16 +35,19 @@
             <div>
                 <g:uploadForm action="upload" method="post">
                     请选择文件 :<input type="file" id="cases_file" name="cases_file"/>
+                    project name:<g:select name="pName" from="${productsName}"/>
                     <input type="submit" value="上传">
                 <p>
                 </g:uploadForm>
             </div>
             <div>
                 <g:form action="pushAll" method="post">
-                    project id :<input type="text" id="tpProjectId" name="tpProjectId" />
+                    project id :<input type="text" id="tpProjectId" name="tpProjectId" /><br>
+                    project name:<g:select name="pName" from="${productsName}"/>
                     <input type="submit" value="push">
                 </g:form>
             </div>
+
             <div id="product_select">
                 <select>
                     <option value="" disabled>- 请选择所属产品 -</option>

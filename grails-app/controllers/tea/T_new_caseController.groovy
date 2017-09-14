@@ -24,11 +24,13 @@ class T_new_caseController {
     def moduleService
     def productService
     def versioningService
-    def productName = "聚财道"
+//    def productName = "聚财道"
+//    def productName = "金斗云1.0"
 
     def index() {
         [title:t_caseService.caseTitle as JSON ,
          products:productService.getEnabledProductNames() as JSON,
+         productsName:productService.getEnabledProductNames(),
          nullable:t_caseService.nullableColumn as JSON
         ]
     }
@@ -81,7 +83,7 @@ class T_new_caseController {
         def allData = eh.getAllCases()
         def cases = []
         for(def data : allData){
-            cases.add(t_caseService.createCase(data ,productName))
+            cases.add(t_caseService.createCase(data ,params.pName))
         }
         t_caseService.saveAllCases(cases)
         eh.close()
@@ -101,7 +103,8 @@ class T_new_caseController {
     }
     def pushAll(){
         def tpProjectId = params.tpProjectId
-        def pName = productName
+//        def pName = productName
+        def pName = params.pName
         int n = 0
         def product = productService.getEnabledProductByName(pName)
         if(tpProjectId && tpProjectId.isInteger()){

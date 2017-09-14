@@ -109,7 +109,8 @@ class ExcelHandle {
             }
             //校验一行中不能为空的数据
             for(int j=0;j<row.size() ; j++){
-                if (!(j in Conf.nullableColumns)) {
+                boolean  b = j in Conf.nullableColumns
+                if (!(b)) {
                     if(!row[j]){
                         println("row : ${row} 第 ${j+1} 列数据为空 ,将不再继续读取 !")
                         return allData
